@@ -282,6 +282,14 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 
 			$has_variation_gallery_images = count( $variation_gallery_images ) > 0;
 
+			// Unless explicitly requested, mimics the default behaviour of WooCommerce.
+			// The product image becomes the first image of the product gallery.
+			// Code Suggested by: Patrick Polloni
+			if ( ! wc_string_to_bool( woo_variation_gallery()->get_option( 'remove_featured_image', 'no' ) ) ) {
+				 array_unshift( $product_gallery_images, $product_image_id );
+			}
+
+
 			if ( $has_variation_gallery_images ) {
 				$gallery_images = $this->get_gallery_image_ids( $variation_id );
 			} else {

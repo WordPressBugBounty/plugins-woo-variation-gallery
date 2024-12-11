@@ -602,7 +602,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'default' => 'no',
 					'desc'    => esc_html__( 'Show Variation Gallery image with default gallery image', 'woo-variation-gallery' ),
 					'id'      => 'include_default_gallery',
-					'is_new'=>true
+					// 'is_new'=>true
 				),
 
 				array(
