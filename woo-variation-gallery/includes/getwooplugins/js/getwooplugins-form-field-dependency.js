@@ -19,69 +19,71 @@
         return class {
 
             DEFAULTS = {
-                attribute : 'data-gwp_dependency',
+                attribute: 'data-gwp_dependency',
             }
 
-            constructor(element, options, name) {
-                this.name     = name
+            constructor (element, options, name) {
+                this.name = name
                 this.$element = $(element)
                 this.settings = $.extend(true, {}, this.DEFAULTS, options)
-                this.init();
-                this.action();
+                this.init()
+                this.action()
             }
 
-            init() {
-                this.$element.addClass('has-dependency-data');
+            init () {
+                this.$element.addClass('has-dependency-data')
 
                 let attribute = this.settings.attribute.trim()
 
                 let conditionString = this.$element.attr(attribute).replace(/'/g, '"')
 
-                this.conditions = JSON.parse(conditionString);
+                this.conditions = JSON.parse(conditionString)
 
-                let success = this.check();
-                this.showHide(success);
+                let success = this.check()
+                this.showHide(success)
             }
 
-            showHide(success) {
+            showHide (success) {
                 if (success) {
+                    this.$element.removeAttr('inert')
+
                     this.$element.removeClass('dependency-show').addClass('dependency-show')
-                    return true;
-                }
-                else {
+                    return true
+                } else {
+                    this.$element.attr('inert', '')
                     this.$element.removeClass('dependency-show')
-                    return false;
+                    return false
                 }
             }
 
-            check() {
+            check () {
                 return this.conditions.every((conditionObj) => {
 
-                    let selectors = Object.keys(conditionObj);
+                    let selectors = Object.keys(conditionObj)
 
                     return selectors.every((selector) => {
 
-                        let condition = conditionObj[selector];
+                        let condition = conditionObj[selector]
 
                         return this.decision(selector, condition)
                     })
                 })
             }
 
-            action() {
+            action () {
                 this.conditions.forEach((rules) => {
 
                     for (const [selector, rule] of Object.entries(rules)) {
                         // @TODO: Some SelectBox like select2 doesn't trigger input event
                         $(document.body).on('input.dependency change.dependency', selector, (event) => {
-                            let success = this.check();
-                            this.showHide(success);
+                            let success = this.check()
+                            this.showHide(success)
                         })
                     }
                 })
             }
 
-            getValue(selector) {
+            getValue (selector) {
 
                 let values = []
 
@@ -89,7 +91,7 @@
 
                     let inputType = $(selector).prop('type').toLowerCase()
 
-                    let currentSelector = selector;
+                    let currentSelector = selector
 
                     if (['checkbox', 'radio'].includes(inputType)) {
                         currentSelector = `${selector}:checked`
@@ -100,46 +102,46 @@
                     }
 
                     $(currentSelector).each((index, element) => {
-                        let value = $(element).val().trim();
+                        let value = $(element).val().trim()
                         values.push(value)
                     })
                 }
 
-                return values.filter(value => value !== '');
+                return values.filter(value => value !== '')
             }
 
-            decision(selector, condition) {
+            decision (selector, condition) {
 
-                let type         = condition['type'];
+                let type = condition['type']
                 let currentValue = this.getValue(selector)
 
-                let checkValue = (typeof condition['value'] === 'undefined') ? false : condition['value'];
+                let checkValue = (typeof condition['value'] === 'undefined') ? false : condition['value']
 
-                let minValue = (typeof condition['min'] === 'undefined') ? false : parseInt(condition['min']);
-                let maxValue = (typeof condition['max'] === 'undefined') ? false : parseInt(condition['max']);
+                let minValue = (typeof condition['min'] === 'undefined') ? false : parseInt(condition['min'])
+                let maxValue = (typeof condition['max'] === 'undefined') ? false : parseInt(condition['max'])
 
-                let allowEmpty = (typeof condition['empty'] === 'undefined') ? false : condition['empty'];
-                let isEmpty    = (!allowEmpty && currentValue.length < 1)
+                let allowEmpty = (typeof condition['empty'] === 'undefined') ? false : condition['empty']
+                let isEmpty = (!allowEmpty && currentValue.length < 1)
 
-                let likeSelector      = (typeof condition['like'] === 'undefined') ? false : condition['like'];
+                let likeSelector = (typeof condition['like'] === 'undefined') ? false : condition['like']
                 let likeSelectorValue = this.getValue(likeSelector)
 
-                let regExpPattern  = (typeof condition['pattern'] === 'undefined') ? false : condition['pattern'];
-                let regExpModifier = (typeof condition['modifier'] === 'undefined') ? 'gi' : condition['modifier'];
-                let sign           = (typeof condition['sign'] === 'undefined') ? false : condition['sign'];
-                let strict         = (typeof condition['strict'] === 'undefined') ? false : condition['strict'];
+                let regExpPattern = (typeof condition['pattern'] === 'undefined') ? false : condition['pattern']
+                let regExpModifier = (typeof condition['modifier'] === 'undefined') ? 'gi' : condition['modifier']
+                let sign = (typeof condition['sign'] === 'undefined') ? false : condition['sign']
+                let strict = (typeof condition['strict'] === 'undefined') ? false : condition['strict']
 
-                let emptyTypes    = ['empty', 'blank']
+                let emptyTypes = ['empty', 'blank']
                 let notEmptyTypes = ['!empty', 'notEmpty', 'not-empty', 'notempty']
 
-                let equalTypes    = ['equal', '=', '==', '===']
+                let equalTypes = ['equal', '=', '==', '===']
                 let notEqualTypes = ['!equal', '!=', '!==', '!===', 'notEqual', 'not-equal', 'notequal']
 
                 let regularExpressionTypes = ['regexp', 'exp', 'expression', 'match']
 
                 // if empty return true
                 if (emptyTypes.includes(type)) {
-                    return (currentValue.length < 1);
+                    return (currentValue.length < 1)
                 }
 
                 // if not empty return true
@@ -161,8 +163,7 @@
                             return likeSelectorValue.every((value) => {
                                 return currentValue.includes(value)
                             })
-                        }
-                        else {
+                        } else {
                             return likeSelectorValue.some((value) => {
                                 return currentValue.includes(value)
                             })
@@ -174,30 +175,28 @@
 
                         if (checkValue && Array.isArray(checkValue)) {
                             return checkValue.every((value) => {
-                                return currentValue.includes(value);
+                                return currentValue.includes(value)
                             })
                         }
 
                         if (checkValue && !Array.isArray(checkValue)) {
-                            return currentValue.includes(checkValue);
+                            return currentValue.includes(checkValue)
                         }
-                    }
-
-                    else {
+                    } else {
 
                         if (checkValue && Array.isArray(checkValue)) {
                             return checkValue.some((value) => {
-                                return currentValue.includes(value);
+                                return currentValue.includes(value)
                             })
                         }
 
                         if (checkValue && !Array.isArray(checkValue)) {
 
                             /*return currentValue.find(value => {
-                                return value.toLowerCase() === checkValue.toLowerCase();
+                              return value.toLowerCase() === checkValue.toLowerCase();
                             });*/
 
-                            return currentValue.includes(checkValue);
+                            return currentValue.includes(checkValue)
                         }
                     }
                 }
@@ -216,8 +215,7 @@
                             return likeSelectorValue.every((value) => {
                                 return !currentValue.includes(value)
                             })
-                        }
-                        else {
+                        } else {
                             return likeSelectorValue.some((value) => {
                                 return !currentValue.includes(value)
                             })
@@ -229,25 +227,24 @@
 
                         if (checkValue && Array.isArray(checkValue)) {
                             return checkValue.every((value) => {
-                                return !currentValue.includes(value);
+                                return !currentValue.includes(value)
                             })
                         }
 
                         if (checkValue && !Array.isArray(checkValue)) {
-                            return !currentValue.includes(checkValue);
+                            return !currentValue.includes(checkValue)
                         }
 
-                    }
-                    else {
+                    } else {
 
                         if (checkValue && Array.isArray(checkValue)) {
                             return checkValue.some((value) => {
-                                return !currentValue.includes(value);
+                                return !currentValue.includes(value)
                             })
                         }
 
                         if (checkValue && !Array.isArray(checkValue)) {
-                            return !currentValue.includes(checkValue);
+                            return !currentValue.includes(checkValue)
                         }
                     }
                 }
@@ -273,25 +270,25 @@
                     }
 
                     if (checkValue && Array.isArray(checkValue)) {
-                        minValue = parseInt(checkValue[0]);
-                        maxValue = (typeof checkValue[1] === 'undefined') ? false : parseInt(checkValue[1]);
+                        minValue = parseInt(checkValue[0])
+                        maxValue = (typeof checkValue[1] === 'undefined') ? false : parseInt(checkValue[1])
                     }
 
                     if (checkValue && !Array.isArray(checkValue)) {
-                        minValue = parseInt(checkValue);
-                        maxValue = false;
+                        minValue = parseInt(checkValue)
+                        maxValue = false
                     }
 
                     return currentValue.every((value) => {
                         if (!maxValue) {
-                            return value.length >= minValue;
+                            return value.length >= minValue
                         }
 
                         if (!minValue) {
-                            return value.length <= maxValue;
+                            return value.length <= maxValue
                         }
 
-                        return value.length >= minValue && value.length <= maxValue;
+                        return value.length >= minValue && value.length <= maxValue
 
                     })
                 }
@@ -304,20 +301,20 @@
                     }
 
                     if (checkValue && Array.isArray(checkValue)) {
-                        minValue = parseInt(checkValue[0]);
-                        maxValue = (typeof checkValue[1] === 'undefined') ? false : parseInt(checkValue[1]);
+                        minValue = parseInt(checkValue[0])
+                        maxValue = (typeof checkValue[1] === 'undefined') ? false : parseInt(checkValue[1])
                     }
 
                     return currentValue.every((value) => {
                         if (!maxValue) {
-                            return parseInt(value) > minValue;
+                            return parseInt(value) > minValue
                         }
 
                         if (!minValue) {
-                            return parseInt(value) < maxValue;
+                            return parseInt(value) < maxValue
                         }
 
-                        return parseInt(value) > minValue && parseInt(value) < maxValue;
+                        return parseInt(value) > minValue && parseInt(value) < maxValue
 
                     })
                 }
@@ -334,34 +331,34 @@
                     switch (sign) {
                         case '<':
                             return currentValue.every((value) => {
-                                return parseInt(value) < checkValue;
+                                return parseInt(value) < checkValue
                             })
-                            break;
+                            break
 
                         case '<=':
                             return currentValue.every((value) => {
-                                return parseInt(value) <= checkValue;
+                                return parseInt(value) <= checkValue
                             })
-                            break;
+                            break
 
                         case '>':
                             return currentValue.every((value) => {
-                                return parseInt(value) > checkValue;
+                                return parseInt(value) > checkValue
                             })
-                            break;
+                            break
 
                         case '>=':
                             return currentValue.every((value) => {
-                                return parseInt(value) >= checkValue;
+                                return parseInt(value) >= checkValue
                             })
-                            break;
+                            break
 
                         case '=':
                         case '==':
                             return currentValue.every((value) => {
-                                return parseInt(value) === checkValue;
+                                return parseInt(value) === checkValue
                             })
-                            break;
+                            break
                     }
 
                 }
@@ -370,7 +367,7 @@
 
             }
 
-            destroy() {
+            destroy () {
                 this.$element.removeData(this.name)
             }
         }
@@ -385,7 +382,7 @@
                 return this.each((index, element) => {
 
                     let $element = $(element)
-                    let data     = $element.data(PluginName)
+                    let data = $element.data(PluginName)
 
                     if (!data) {
                         data = new ClassName($element, $.extend({}, options), PluginName)
@@ -421,4 +418,4 @@
 
     jQueryPlugin('GWPFormFieldDependency', Plugin)
 
-})(window);
+})(window)

@@ -2,11 +2,11 @@
 Contributors: EmranAhmed, getwooplugins
 Tags: woocommerce variation image gallery, additional variation image gallery, product variation image gallery, product variation image, variation images gallery, additional image, additional variation image, WooCommerce variation product thumbnail gallery
 Requires PHP: 7.4
-Stable tag: 1.3.26
+Stable tag: 1.3.27
 Requires at least: 5.7
 Tested up to: 6.7
 WC requires at least: 5.8
-WC tested up to: 9.4
+WC tested up to: 9.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -153,9 +153,9 @@ Don't hesitate to contact our support if you haven't found what you are looking 
 ## 🏆 Customers' Feedback For Variation Images Gallery Plugin ##
 
 [meloz](https://wordpress.org/support/topic/great-product-and-awesome-support-8/): 
-> "I have been using this plugin for awhile now and was working exactly how I wanted it.
+> "I have been using this plugin for a while now and was working exactly how I wanted it."
 
->Then an update came through for my theme and it stopped showing the variation images when changing the selection. I googled for ages and looked everywhere how to fix it.
+>Then an update came through for my theme, and it stopped showing the variation images when changing the selection. I googled for ages and looked everywhere how to fix it.
 
 
 >I then asked support and Hakik very kindly and quickly investigated the issue and gave me some code to add to my website and it is now working again.
@@ -163,14 +163,14 @@ Don't hesitate to contact our support if you haven't found what you are looking 
 >Thanks team, you rock!'
 
 [Riaan Aggenbag](https://wordpress.org/support/topic/dont-believe-the-haters/): 
-> 'Really good support from \Tanvirul when I ran into some CSS issues. 
+> 'Really good support from Tanvirul when I ran into some CSS issues.
 
 >Thanks ya’ll.'
 
 [Elzette Roelofse](https://wordpress.org/support/topic/works-beautifully-136/): 
 > 'Perfect combination with their Additional Variation Images for WooCommerce plugin.
 
->Great support too!'
+> Great support too!'
 
 = PREMIUM FEATURES OF ADDITIONAL VARIATION IMAGES FOR WOOCOMMERCE =
 
@@ -376,6 +376,11 @@ Yes, it is.
 4. Adding Images on gallery
 
 == Changelog ==
+
+= 1.3.27 - 16-02-2025 =
+
+* Fix: Settings table broken issue.
+* Add: WC 9.6+ compatibility.
 
 = 1.3.26 - 11-12-2024 =
 
