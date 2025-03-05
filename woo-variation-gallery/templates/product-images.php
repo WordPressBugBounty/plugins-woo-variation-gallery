@@ -12,7 +12,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 9.0.0
+ * @version 9.7.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -42,6 +42,7 @@ if ( ! $has_post_thumbnail && count( $attachment_ids ) > 0 ) {
 	$has_post_thumbnail = true;
 }
 
+// ProductType::VARIABLE
 if ( 'variable' === $product_type && $default_variation_id > 0 ) {
 	$product_variation = woo_variation_gallery()->get_frontend()->get_available_variation( $product_id, $default_variation_id );
 
@@ -138,9 +139,7 @@ $attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_id
 
 $loading_gallery_class = wc_string_to_bool( woo_variation_gallery()->get_option( 'preloader_disable', 'no' ) ) ? '' : 'loading-gallery';
 $zoom_icon_markup      = apply_filters( 'woo_variation_gallery_zoom_icon_html', '<span class="dashicons dashicons-search"></span>', $product );
-?>
 
-<?php
 do_action( 'woo_variation_product_gallery_start', $product ); ?>
 	<div data-product_id="<?php
 	echo esc_attr( $product_id ) ?>" data-variation_id="<?php
@@ -220,5 +219,4 @@ do_action( 'woo_variation_product_gallery_start', $product ); ?>
 			</div> <!-- .woo-variation-gallery-container -->
 		</div> <!-- .woo-variation-gallery-wrapper -->
 	</div> <!-- .woo-variation-product-gallery -->
-<?php
-do_action( 'woo_variation_product_gallery_end', $product ); ?>
+<?php do_action( 'woo_variation_product_gallery_end', $product );

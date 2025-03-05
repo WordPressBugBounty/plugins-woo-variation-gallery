@@ -12,7 +12,7 @@
 	 *
 	 * @see         https://docs.woocommerce.com/document/template-structure/
 	 * @package     WooCommerce/Templates
-	 * @version     3.5.1
+	 * @version     9.5.0
 	 */
 	
 	// Blank because we don't need thumbnails, but keep it
