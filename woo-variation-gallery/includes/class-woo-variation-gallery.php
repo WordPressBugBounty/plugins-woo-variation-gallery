@@ -32,7 +32,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery' ) ):
 		}
 
 		public function init() {
-
 			// instance
 
 			$this->get_frontend();
@@ -52,7 +51,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery' ) ):
 		}
 
 		public function get_inline_style( $styles = array() ) {
-
 			$generated = array();
 
 			foreach ( $styles as $property => $value ) {
@@ -67,10 +65,10 @@ if ( ! class_exists( 'Woo_Variation_Gallery' ) ):
 
 			if ( current_theme_supports( 'woo_variation_gallery' ) ) {
 				$theme_support = get_theme_support( 'woo_variation_gallery' );
-				$default       = isset( $theme_support[0][ $option ] ) ? $theme_support[0][ $option ] : $default;
+				$default       = $theme_support[0][ $option ] ?? $default;
 			}
 
-			return isset( $options[ $option ] ) ? $options[ $option ] : $default;
+			return $options[ $option ] ?? $default;
 		}
 
 		public function is_pro() {

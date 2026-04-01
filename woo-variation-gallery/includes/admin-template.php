@@ -6,11 +6,15 @@ defined( 'ABSPATH' ) or die( 'Keep Quit' );
  * @var $gallery_images
  * @var $variation_id
  */
-//print_r( $gallery_images);
+// print_r( $gallery_images);
+
+
+//$image = wp_get_attachment_image_src( 53 );
 
 foreach ( $gallery_images as $image_id ):
 
 	$image = wp_get_attachment_image_src( $image_id );
+
 	$input_name = sprintf( 'woo_variation_gallery[%d][]', $variation_id );
 	?>
 	<li class="image">

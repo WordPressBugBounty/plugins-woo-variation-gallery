@@ -62,6 +62,10 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 		public function gallery_admin_html( $loop, $variation_data, $variation ) {
 			$variation_id   = absint( $variation->ID );
 			$gallery_images = get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
+
+
+			// print_r( $gallery_images); die;
+
 			?>
 			<div data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="form-row form-row-full woo-variation-gallery-wrapper">
 				<div class="woo-variation-gallery-postbox">

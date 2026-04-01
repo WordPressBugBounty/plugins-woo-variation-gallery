@@ -2,7 +2,7 @@
  * Variation Gallery for WooCommerce
  *
  * Author: Emran Ahmed ( emran.bd.08@gmail.com )
- * Date: 3/5/2025, 2:39:49 PM
+ * Date: 4/1/2026, 4:58:37 PM
  * Released under the GPLv3 license.
  */
 /******/ (function() { // webpackBootstrap
@@ -583,6 +583,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: "showVariationImage",
         value: function showVariationImage(variation) {
           if (variation) {
+            console.log(variation);
             this.addLoadingClass();
             this.galleryInit(variation.variation_gallery_images || []);
           }

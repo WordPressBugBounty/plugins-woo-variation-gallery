@@ -63,12 +63,10 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 			if ( $this->is_current_tab() && isset( $_GET['reset'] ) ) { // WPCS: input var okay, CSRF ok.
 				GetWooPlugins_Admin_Settings::add_message( __( 'Gallery Settings reset.', 'woo-variation-gallery' ) );
 			}
-
 			// phpcs:enable
 		}
 
 		public function delete_old_option_data() {
-
 			delete_option( 'woo_variation_gallery_thumbnails_columns' );
 			delete_option( 'woo_variation_gallery_thumbnails_gap' );
 			delete_option( 'woo_variation_gallery_width' );
@@ -128,11 +126,9 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 		}
 
 		public function get_all_image_sizes() {
-
 			$image_subsizes = wp_get_registered_image_subsizes();
 
 			return apply_filters( 'woo_variation_gallery_get_all_image_sizes', array_reduce( array_keys( $image_subsizes ), function ( $carry, $item ) use ( $image_subsizes ) {
-
 				$title  = ucwords( str_ireplace( array( '-', '_' ), ' ', $item ) );
 				$width  = $image_subsizes[ $item ]['width'];
 				$height = $image_subsizes[ $item ]['height'];
@@ -155,9 +151,9 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 				'migration' => esc_html__( 'Migration', 'woo-variation-gallery' ),
 				'license'   => array(
 					'name' => esc_html__( 'License', 'woo-variation-gallery' ),
-					'url'  => false
+					'url'  => false,
 				),
-				'tutorial'  => esc_html__( 'Tutorials', 'woo-variation-gallery' )
+				'tutorial'  => esc_html__( 'Tutorials', 'woo-variation-gallery' ),
 			);
 
 			if ( current_user_can( 'install_plugins' ) ) {
@@ -171,7 +167,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 		}
 
 		protected function get_settings_for_default_section() {
-
 			$settings = array(
 
 				// Thumbnails Section Start
@@ -218,7 +213,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 				// Section End
 				array(
 					'type' => 'sectionend',
-					'id'   => 'thumbnail_options'
+					'id'   => 'thumbnail_options',
 				),
 
 				// Gallery Section Start
@@ -288,7 +283,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'    => 'checkbox',
 					'default' => 'no',
 					'desc'    => esc_html__( 'Clear float for small devices, tablets.', 'woo-variation-gallery' ),
-					'id'      => 'small_device_clear_float'
+					'id'      => 'small_device_clear_float',
 				),
 
 				// Extra Small Devices, Phones
@@ -315,7 +310,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'    => 'checkbox',
 					'default' => 'no',
 					'desc'    => esc_html__( 'Clear float for extra small devices, mobile.', 'woo-variation-gallery' ),
-					'id'      => 'extra_small_device_clear_float'
+					'id'      => 'extra_small_device_clear_float',
 				),
 
 				// Gallery Bottom GAP
@@ -341,7 +336,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'    => 'checkbox',
 					'default' => 'no',
 					'desc'    => esc_html__( 'Disable preloader on loading variation images', 'woo-variation-gallery' ),
-					'id'      => 'preloader_disable'
+					'id'      => 'preloader_disable',
 				),
 
 				// Preload Style
@@ -356,14 +351,14 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 						'fade' => esc_html__( 'Fade', 'woo-variation-gallery' ),
 						'blur' => esc_html__( 'Blur', 'woo-variation-gallery' ),
 						'gray' => esc_html__( 'Gray', 'woo-variation-gallery' ),
-					)
+					),
 				),
 
 
 				// End
 				array(
 					'type' => 'sectionend',
-					'id'   => 'main_options'
+					'id'   => 'main_options',
 				),
 			);
 
@@ -371,7 +366,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 		}
 
 		protected function get_settings_for_configure_section() {
-
 			$settings = array(
 
 				array(
@@ -386,7 +380,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'    => 'checkbox',
 					'default' => 'no',
 					'desc'    => esc_html__( 'Gallery Auto Slide / Auto Play', 'woo-variation-gallery' ),
-					'id'      => 'slider_autoplay'
+					'id'      => 'slider_autoplay',
 				),
 
 				array(
@@ -425,7 +419,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'    => 'checkbox',
 					'default' => 'no',
 					'desc'    => esc_html__( 'Gallery will change by fade not slide', 'woo-variation-gallery' ),
-					'id'      => 'slider_fade'
+					'id'      => 'slider_fade',
 				),
 
 				array(
@@ -433,7 +427,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'    => 'checkbox',
 					'default' => 'yes',
 					'desc'    => esc_html__( 'Show Gallery Slider Arrow', 'woo-variation-gallery' ),
-					'id'      => 'slider_arrow'
+					'id'      => 'slider_arrow',
 				),
 
 				array(
@@ -441,7 +435,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'    => 'checkbox',
 					'default' => 'yes',
 					'desc'    => esc_html__( 'Enable Gallery Image Zoom', 'woo-variation-gallery' ),
-					'id'      => 'zoom'
+					'id'      => 'zoom',
 				),
 
 				array(
@@ -449,7 +443,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'    => 'checkbox',
 					'default' => 'yes',
 					'desc'    => esc_html__( 'Enable Gallery Image Popup', 'woo-variation-gallery' ),
-					'id'      => 'lightbox'
+					'id'      => 'lightbox',
 				),
 
 				array(
@@ -457,7 +451,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'    => 'checkbox',
 					'default' => 'yes',
 					'desc'    => esc_html__( 'Enable Gallery Thumbnail Slide', 'woo-variation-gallery' ),
-					'id'      => 'thumbnail_slide'
+					'id'      => 'thumbnail_slide',
 				),
 
 				array(
@@ -465,7 +459,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'    => 'checkbox',
 					'default' => 'yes',
 					'desc'    => esc_html__( 'Show Gallery Thumbnail Arrow', 'woo-variation-gallery' ),
-					'id'      => 'thumbnail_arrow'
+					'id'      => 'thumbnail_arrow',
 				),
 
 				array(
@@ -516,7 +510,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 
 				array(
 					'type' => 'sectionend',
-					'id'   => 'configure_settings'
+					'id'   => 'configure_settings',
 				),
 			);
 
@@ -534,15 +528,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'id'    => 'advanced_options',
 				),
 
-				// Hide default featured image
-				array(
-					'title'   => esc_html__( 'Hide Main Product Image', 'woo-variation-gallery' ),
-					'type'    => 'checkbox',
-					'default' => 'no',
-					'desc'    => esc_html__( 'Remove main product image from gallery', 'woo-variation-gallery' ),
-					'id'      => 'remove_featured_image'
-				),
-
 				// Disable on Specific Product type
 				array(
 					'title'             => esc_html__( 'Disable on Product Type', 'woo-variation-gallery' ),
@@ -554,7 +539,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'id'                => 'disabled_product_type',
 					'custom_attributes' => array(
 						'data-placeholder' => esc_html__( 'Choose specific product type(s).', 'woo-variation-gallery' ),
-					)
+					),
 				),
 
 				// Thumbnails Image Width
@@ -584,7 +569,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'    => 'checkbox',
 					'default' => 'no',
 					'desc'    => esc_html__( 'Always Reset Gallery After Variation Select', 'woo-variation-gallery' ),
-					'id'      => 'reset_on_variation_change'
+					'id'      => 'reset_on_variation_change',
 				),
 
 				// Gallery Image Preload
@@ -593,21 +578,51 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'    => 'checkbox',
 					'default' => 'yes',
 					'desc'    => esc_html__( 'Variation Gallery Image Preload', 'woo-variation-gallery' ),
-					'id'      => 'image_preload'
+					'id'      => 'image_preload',
 				),
-				// Add Product Gallery on Variation Images
-				array(
-					'title'   => esc_html__( 'Show Default Gallery Image', 'woo-variation-gallery' ),
+
+				// Hide default featured image
+				/*array(
+					'title'   => esc_html__( 'Hide Main Product Image', 'woo-variation-gallery' ),
 					'type'    => 'checkbox',
 					'default' => 'no',
-					'desc'    => esc_html__( 'Show Variation Gallery image with default gallery image', 'woo-variation-gallery' ),
+					'desc'    => esc_html__( 'Remove main product image from gallery', 'woo-variation-gallery' ),
+					'id'      => 'remove_featured_image',
+				),*/
+
+
+				// Hide default gallery from
+				array(
+					'title'   => esc_html__( 'Product Image Visibility', 'woo-variation-gallery' ),
+					'type'    => 'select',
+					'options' => array(
+						'default'                     => esc_html__( 'Show in gallery', 'woo-variation-gallery' ),
+						'hide_from_product_gallery'   => esc_html__( 'Hide only from default gallery', 'woo-variation-gallery' ),
+						'hide_from_variation_gallery' => esc_html__( 'Hide only from variation gallery', 'woo-variation-gallery' ),
+						'hide_from_all_gallery'       => esc_html__( 'Hide from gallery', 'woo-variation-gallery' ),
+					),
+					'class'   => 'wc-enhanced-select',
+					'default' => wc_string_to_bool( woo_variation_gallery()->get_option( 'remove_featured_image', 'no' ) ) ? 'hide_from_all_gallery' : 'default',
+
+					'desc_tip' => esc_html__( 'Show or Hide Default Product Image with variation images.', 'woo-variation-gallery' ),
+					'id'       => 'product_image_visibility',
+					'is_new'   => true,
+				),
+
+
+				// Add Default Product Gallery on Variation Images
+				array(
+					'title'   => esc_html__( 'Product Gallery Visibility', 'woo-variation-gallery' ),
+					'type'    => 'checkbox',
+					'default' => 'no',
+					'desc'    => esc_html__( 'Show Product gallery image with Variation gallery image', 'woo-variation-gallery' ),
 					'id'      => 'include_default_gallery',
 					// 'is_new'=>true
 				),
 
 				array(
 					'type' => 'sectionend',
-					'id'   => 'advanced_options'
+					'id'   => 'advanced_options',
 				),
 			);
 

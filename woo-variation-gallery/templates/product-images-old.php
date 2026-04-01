@@ -23,9 +23,19 @@ global $product;
 
 $product_id = $product->get_id();
 
-$product_gallery_data = woo_variation_gallery()->get_frontend()->get_product_gallery_data( $product_id );
+$default_attributes = woo_variation_gallery()->get_frontend()->get_product_default_attributes( $product_id );
 
-$columns = absint( woo_variation_gallery()->get_option( 'thumbnails_columns', apply_filters( 'woo_variation_gallery_default_thumbnails_columns', 4, $product ) ) );
+$default_variation_id = woo_variation_gallery()->get_frontend()->get_product_default_variation_id( $product, $default_attributes );
+
+$product_type = $product->get_type();
+
+$columns = absint( woo_variation_gallery()->get_option( 'thumbnails_columns', apply_filters( 'woo_variation_gallery_default_thumbnails_columns', 4 ) ) );
+
+$post_thumbnail_id = $product->get_image_id();
+
+$attachment_ids = $product->get_gallery_image_ids();
+
+$has_post_thumbnail = has_post_thumbnail();
 
 
 // NAMING:
@@ -37,6 +47,114 @@ $columns = absint( woo_variation_gallery()->get_option( 'thumbnails_columns', ap
 // VARIATION IMAGE
 // - Variation image
 // - Variation gallery
+
+
+
+//
+// array(
+//     'product_type'=>'simple',
+//     'has_product_image'=>true,
+//     'has_product_gallery'=>true,
+//     'product_image'=>5,
+//     'gallery_images'=>[1,2,3],
+//);
+//
+
+
+// Logic
+// No Default Variation:
+// 1. Has Product Image and Has Product Gallery:
+// 		- Show Product Image
+// 		- Show Product Gallery
+// If Settings: Not to show product image. Show 1st gallery image as product image, if only one image, do not show any gallery.
+
+
+// 2. Has Product Image no Has Product Gallery:
+// 		- Show Product Image
+// 		- No Product Gallery
+// If Settings: Not to show product image. Show placeholder image.
+
+// 3. No Product Image and Has Product Gallery:
+// 		- Show Product Image from Gallery 1st, If only one image in gallery show as product image
+// 		- Show Product Gallery remove 1st. If only one gallery image then no gallery
+
+// 4. No Product Image and No Product Gallery:
+// 		- Show Placeholder as Product Image.
+// 		- No Product Gallery.
+
+
+// Has Default Variation:
+
+// 1. Has Variation Image and Has Variation Gallery:
+// 		- Show Variation Image
+// 		- Show Variation Gallery + Show Product Gallery
+// If Settings: Attach Product Gallery with Variation Gallery.
+
+// 2. Has Variation Image and No Variation Gallery:
+// 		- Show Variation Image
+// 		- Show Product Gallery
+// If Settings: Show Product Gallery if No Variation Gallery.
+
+
+// 2. No Variation Image and Has Variation Gallery:
+// 		- Show Variation Image from Gallery 1st, if only one image.
+// 		- Show Product Gallery remove 1st, If only one gallery image then no gallery.
+// If Settings: Show Product Gallery if No Variation Gallery.
+
+
+// 3. No Variation Image and No Variation Gallery:
+// 		- Show Product Image
+// 		- Show Product Gallery
+// If Settings: Not to show product image. Show placeholder image.
+// If Settings: Show Product Gallery if No Variation Gallery.
+
+
+// 4. Has Product Image No Product Gallery:
+// 		- Show Product Image
+// 		- No Product Gallery
+// If Settings: Not to show product image. Show placeholder image.
+
+
+
+// 6. No Product Image and Has Product Gallery:
+// 		- Show Product Image from Product Gallery 1st, If only one gallery image then show as product image.
+// 		- Show Product Gallery remove 1st. If only one gallery image then no gallery
+
+// 4. No Product Image and No Product Gallery:
+// 		- Show Placeholder as Product Image.
+// 		- No Product Gallery.
+
+
+
+
+
+// No main image but gallery
+if ( ! $has_post_thumbnail && count( $attachment_ids ) > 0 ) {
+	$post_thumbnail_id = $attachment_ids[0];
+	array_shift( $attachment_ids );
+	$has_post_thumbnail = true;
+}
+
+// ProductType::VARIABLE
+if ( $product->is_type( ProductType::VARIABLE ) && $default_variation_id > 0 ) {
+	$product_variation = woo_variation_gallery()->get_frontend()->get_available_variation( $product_id, $default_variation_id );
+
+	if ( isset( $product_variation['image_id'] ) ) {
+		$post_thumbnail_id  = $product_variation['image_id'];
+		$has_post_thumbnail = true;
+	}
+
+	if ( isset( $product_variation['variation_gallery_images'] ) ) {
+		$attachment_ids = wp_list_pluck( $product_variation['variation_gallery_images'], 'image_id' );
+		array_shift( $attachment_ids );
+	}
+}
+
+$has_gallery_thumbnail = ( $has_post_thumbnail && ( count( $attachment_ids ) > 0 ) );
+
+$only_has_post_thumbnail = ( $has_post_thumbnail && ( count( $attachment_ids ) === 0 ) );
+
+// $wrapper = sanitize_text_field( get_option( 'woo_variation_gallery_and_variation_wrapper', apply_filters( 'woo_variation_gallery_and_variation_default_wrapper', '.product' ) ) )
 
 $slider_js_options = array(
 	'slidesToShow'   => 1,
@@ -104,23 +222,16 @@ $inline_style = apply_filters( 'woo_variation_product_gallery_inline_style', arr
 $wrapper_classes = apply_filters( 'woo_variation_gallery_product_wrapper_classes', array(
 	'woo-variation-product-gallery',
 	'woo-variation-product-gallery-thumbnail-columns-' . absint( $columns ),
-	$product_gallery_data['has_product_image'] ? 'woo-variation-gallery-has-product-thumbnail' : '',
-	$product_gallery_data['has_product_image'] ? '' : 'woo-variation-gallery-no-product-thumbnail',
+	$has_gallery_thumbnail ? 'woo-variation-gallery-has-product-thumbnail' : '',
+	$has_gallery_thumbnail ? '' : 'woo-variation-gallery-no-product-thumbnail',
 	wc_string_to_bool( woo_variation_gallery()->get_option( 'thumbnail_slide', 'yes' ) ) ? 'woo-variation-gallery-enabled-thumbnail-slider' : '',
 ) );
 
-// $post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
-// $attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
+$post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
+$attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
 
 $loading_gallery_class = wc_string_to_bool( woo_variation_gallery()->get_option( 'preloader_disable', 'no' ) ) ? '' : 'loading-gallery';
 $zoom_icon_markup      = apply_filters( 'woo_variation_gallery_zoom_icon_html', '<span class="dashicons dashicons-search"></span>', $product );
-
-$default_variation_id = $product_gallery_data['variation_id'];
-$product_type         = $product_gallery_data['product_type'];
-$has_product_image    = $product_gallery_data['has_product_image'];
-$has_product_gallery  = $product_gallery_data['has_product_gallery'];
-$gallery_images       = $product_gallery_data['images'];
-
 
 do_action( 'woo_variation_product_gallery_start', $product ); ?>
 	<div data-product_id="<?php
@@ -134,36 +245,44 @@ do_action( 'woo_variation_product_gallery_start', $product ); ?>
 		echo esc_attr( $gallery_thumbnail_position_small_device ) ?> woo-variation-gallery-product-type-<?php
 		echo esc_attr( $product_type ) ?>">
 
-			<div class="woo-variation-gallery-container preload-style-<?php
-			echo esc_attr( woo_variation_gallery()->get_option( 'preload_style', 'blur' ) ) ?>">
+			<div class="woo-variation-gallery-container preload-style-<?php echo esc_attr( woo_variation_gallery()->get_option( 'preload_style', 'blur' ) ) ?>">
 
 				<div class="woo-variation-gallery-slider-wrapper">
 
-					<?php
-					do_action( 'woo_variation_product_gallery_slider_start', $product ); ?>
+					<?php do_action( 'woo_variation_product_gallery_slider_start', $product ); ?>
 
 					<?php
-					if ( $has_product_image && wc_string_to_bool( woo_variation_gallery()->get_option( 'lightbox', 'yes' ) ) ): ?>
+					if ( $has_post_thumbnail && wc_string_to_bool( woo_variation_gallery()->get_option( 'lightbox', 'yes' ) ) ): ?>
 						<a href="#" class="woo-variation-gallery-trigger woo-variation-gallery-trigger-position-<?php
 						echo esc_attr( woo_variation_gallery()->get_option( 'zoom_position', 'top-right' ) ) ?>">
-							<?php
-							echo wp_kses_post( $zoom_icon_markup ); ?>
+							<?php echo wp_kses_post( $zoom_icon_markup ); ?>
 						</a>
-					<?php
-					endif; ?>
+					<?php endif; ?>
 
 					<div class="woo-variation-gallery-slider" data-slick='<?php
 					echo wc_esc_json( wp_json_encode( $gallery_slider_js_options ) ); // WPCS: XSS ok. ?>'>
 						<?php
 						// Main  Image
-						if ( $has_product_image ) {
-							foreach ( $gallery_images as $gallery_image ) {
-								echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->get_product_gallery_images_html( $gallery_image ), $product_gallery_data );
-							}
+						if ( $has_post_thumbnail ) {
+							echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->get_gallery_image_html( $product, $post_thumbnail_id, array(
+								'is_main_thumbnail'  => true,
+								'has_only_thumbnail' => $only_has_post_thumbnail,
+							) ), $post_thumbnail_id );
 						} else {
 							echo sprintf( '<div class="wvg-gallery-image wvg-gallery-image-placeholder"><div><div class="wvg-single-gallery-image-container"><img src="%s" alt="%s" class="wp-post-image" /></div></div></div>',
 								esc_url( wc_placeholder_img_src() ),
 								esc_html__( 'Awaiting product image', 'woocommerce' ) );
+						}
+
+
+						// Gallery Image
+						if ( $has_gallery_thumbnail ) {
+							foreach ( $attachment_ids as $attachment_id ) :
+								echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->get_gallery_image_html( $product, $attachment_id, array(
+									'is_main_thumbnail'  => true,
+									'has_only_thumbnail' => $only_has_post_thumbnail,
+								) ), $attachment_id );
+							endforeach;
 						}
 						?>
 					</div>
@@ -177,10 +296,14 @@ do_action( 'woo_variation_product_gallery_start', $product ); ?>
 					echo esc_attr( $columns ) ?>" data-slick='<?php
 					echo wc_esc_json( wp_json_encode( $thumbnail_slider_js_options ) ); // WPCS: XSS ok. ?>'>
 						<?php
-						if ( $has_product_gallery ) {
+						if ( $has_gallery_thumbnail ) {
+							// Main Image
+
+							echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->get_gallery_image_html( $product, $post_thumbnail_id, array( 'is_main_thumbnail' => false ) ), $post_thumbnail_id );
+
 							// Gallery Image
-							foreach ( $gallery_images as $gallery_image ) :
-								echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->get_product_gallery_thumbnail_html( $gallery_image ), $product_gallery_data );
+							foreach ( $attachment_ids as $key => $attachment_id ) :
+								echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->get_gallery_image_html( $product, $attachment_id, array( 'is_main_thumbnail' => false ) ), $attachment_id );
 							endforeach;
 						}
 						?>
@@ -189,5 +312,4 @@ do_action( 'woo_variation_product_gallery_start', $product ); ?>
 			</div> <!-- .woo-variation-gallery-container -->
 		</div> <!-- .woo-variation-gallery-wrapper -->
 	</div> <!-- .woo-variation-product-gallery -->
-<?php
-do_action( 'woo_variation_product_gallery_end', $product );
+<?php do_action( 'woo_variation_product_gallery_end', $product );
