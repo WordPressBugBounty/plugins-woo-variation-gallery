@@ -2,11 +2,11 @@
 Contributors: EmranAhmed, getwooplugins
 Tags: woocommerce variation image gallery, additional variation image gallery, product variation image gallery, product variation image, variation images gallery, additional image, additional variation image, WooCommerce variation product thumbnail gallery
 Requires PHP: 7.4
-Stable tag: 1.3.29
+Stable tag: 1.3.30
 Requires at least: 5.7
 Tested up to: 6.9
 WC requires at least: 5.8
-WC tested up to: 10.6
+WC tested up to: 10.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -376,6 +376,11 @@ Yes, it is.
 4. Adding Images on gallery
 
 == Changelog ==
+
+= 1.3.30 - 21-04-2026 =
+
+* Add: WC 10.7+ compatibility.
+* Add: Placeholder fallback Setting.
 
 = 1.3.29 - 01-04-2026 =
 

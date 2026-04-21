@@ -70,7 +70,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 			<div data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="form-row form-row-full woo-variation-gallery-wrapper">
 				<div class="woo-variation-gallery-postbox">
 					<div class="postbox-header">
-						<h2><?php esc_html_e( 'Variation Product Gallery', 'woo-variation-gallery' ) ?></h2>
+						<h2><?php esc_html_e( 'Variation Gallery', 'woo-variation-gallery' ) ?></h2>
 						<button type="button" class="handle-div" aria-expanded="true">
 							<span class="toggle-indicator" aria-hidden="true"></span>
 						</button>

@@ -275,20 +275,19 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			return array_map( array( $this, 'wpml_object_id' ), $images );
 		}
 
-		public function get_available_variation_gallery( $available_variation, $variationProductObject, $variation ) {
+		public function get_available_variation_gallery( $available_variation, $product, $variation ) {
 			// Product Data.
-			$product_id       = absint( $variationProductObject->get_id() );
-			$product_image_id = absint( $variationProductObject->get_image_id( 'edit' ) );
+			$product_id       = absint( $product->get_id() );
+			$product_image_id = absint( $product->get_image_id( 'edit' ) );
 
 			$product_feature_image_id = $product_image_id;
-			$product_gallery_images   = array_map( 'absint', $variationProductObject->get_gallery_image_ids( 'edit' ) );
+			$product_gallery_images   = array_map( 'absint', $product->get_gallery_image_ids( 'edit' ) );
 
 			if ( $product_image_id > 0 ) {
 				array_unshift( $product_gallery_images, $product_image_id );
 			}
 
 			$has_product_gallery_images = count( $product_gallery_images ) > 0;
-
 
 			// Variation data.
 			$variation_id             = absint( $variation->get_id() );
@@ -297,7 +296,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			if ( $variation_image_id > 0 ) {
 				array_unshift( $variation_gallery_images, $variation_image_id );
 			}
-
 
 			$has_variation_gallery_images = count( $variation_gallery_images ) > 0;
 
@@ -315,7 +313,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			$gallery_images = array_filter( $gallery_images, static function ( $image_id ) {
 				return $image_id > 0;
 			} );
-
 
 			$available_variation['variation_gallery_images'] = array();
 
@@ -337,11 +334,22 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 				} );
 			}
 
-			// @TODO: Setting For Show default gallery if no variation image is available or show placeholder.
-			if ( ! $has_variation_gallery_images ) {
+			$show_placeholder_image = wc_string_to_bool( woo_variation_gallery()->get_option( 'show_placeholder_image', 'no' ) );
+			$placeholder_image_id   = absint( get_option( 'woocommerce_placeholder_image', 0 ) );
+
+			// No variation gallery available and show placeholder image enabled.
+			if ( ! $has_variation_gallery_images && $show_placeholder_image ) {
 				$gallery_images   = array();
-				$gallery_images[] = absint( get_option( 'woocommerce_placeholder_image', 0 ) );
+				$gallery_images[] = $placeholder_image_id;
 			}
+
+			// No Gallery Image Available, not in default or variation.
+			if ( count( $gallery_images ) < 1 ) {
+				$gallery_images   = array();
+				$gallery_images[] = $placeholder_image_id;
+			}
+
+			$gallery_images = apply_filters( 'woo_variation_gallery_available_variation_gallery_images', $gallery_images, $product, $variation );
 
 			foreach ( $gallery_images as $variation_gallery_image_id ) {
 				$available_variation['variation_gallery_images'][] = $this->get_product_attachment_props( $variation_gallery_image_id );
@@ -803,6 +811,8 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			}
 
 			// @TODO: Setting For Show default gallery if no variation image is available or show placeholder.
+			// $show_placeholder_image = wc_string_to_bool( woo_variation_gallery()->get_option( 'show_placeholder_image', 'no' ) );
+
 			if ( ! $has_images ) {
 				$placeholder_image_id = absint( get_option( 'woocommerce_placeholder_image', 0 ) );
 				$images[]             = apply_filters( 'woo_variation_gallery_get_default_gallery_placeholder_image', $this->get_product_attachment_props( $placeholder_image_id, $product_id ), $product_id );

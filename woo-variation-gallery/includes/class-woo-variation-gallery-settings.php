@@ -590,6 +590,15 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'id'      => 'remove_featured_image',
 				),*/
 
+				array(
+					'title'   => esc_html__( 'Show Placeholder Image', 'woo-variation-gallery' ),
+					'type'    => 'checkbox',
+					'default' => 'no',
+					'desc'    => esc_html__( 'Show placeholder if gallery is not assigned in a variation', 'woo-variation-gallery' ),
+					'id'      => 'show_placeholder_image',
+					'is_new'   => true,
+				),
+
 
 				// Hide default gallery from
 				array(
@@ -606,7 +615,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 
 					'desc_tip' => esc_html__( 'Show or Hide Default Product Image with variation images.', 'woo-variation-gallery' ),
 					'id'       => 'product_image_visibility',
-					'is_new'   => true,
+					// 'is_new'   => true,
 				),
 
 
