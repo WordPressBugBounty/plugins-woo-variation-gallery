@@ -65,7 +65,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 		public function get_product_default_attributes( $product_id ) {
 			$product = wc_get_product( $product_id );
 
-			if ( ! $product->is_type( ProductType::VARIABLE ) ) {
+			if ( ! $product->is_type( $this->get_variable_product_type() ) ) {
 				return array();
 			}
 
@@ -358,6 +358,9 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			return apply_filters( 'woo_variation_gallery_available_variation_gallery', $available_variation, $variation, $product_id );
 		}
 
+		public function get_variable_product_type() {
+			return class_exists( ProductType::class ) ? ProductType::VARIABLE : 'variable';
+		}
 
 		public function get_product_gallery_data( $product_id, $variation_id = 0 ) {
 			$product = wc_get_product( $product_id );
@@ -380,7 +383,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			}
 
 			// NON Variation Products.
-			if ( ! $product->is_type( ProductType::VARIABLE ) ) {
+			if ( ! $product->is_type( $this->get_variable_product_type() ) ) {
 				$options['images']              = array_unique( $gallery_image_ids );
 				$options['has_product_image']   = count( $options['images'] ) > 0;
 				$options['has_product_gallery'] = count( $options['images'] ) > 1;
