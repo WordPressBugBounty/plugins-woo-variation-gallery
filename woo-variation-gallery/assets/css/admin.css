@@ -2,7 +2,7 @@
  * Variation Gallery for WooCommerce
  *
  * Author: Emran Ahmed ( emran.bd.08@gmail.com )
- * Date: 5/19/2026, 7:40:28 PM
+ * Date: 7/8/2026, 7:43:27 PM
  * Released under the GPLv3 license.
  */
 .rtl .woo-variation-gallery-images li {
@@ -142,6 +142,9 @@
 }
 .woo-variation-gallery-wrapper .woo-variation-gallery-images li:hover .delete {
   display: block;
+}
+.woo-variation-gallery-wrapper .woo-variation-gallery-images li:hover .delete:hover {
+  color: #a00;
 }
 .woo-variation-gallery-wrapper .add-woo-variation-gallery-image,
 .woo-variation-gallery-wrapper .woo-variation-gallery-pro-button {

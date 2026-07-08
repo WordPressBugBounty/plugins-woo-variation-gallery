@@ -3,6 +3,7 @@
 defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
 use Automattic\WooCommerce\Enums\ProductType;
+use Automattic\WooCommerce\Utilities\FeaturesUtil;
 
 if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 
@@ -263,14 +264,13 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			return apply_filters( 'wpml_object_id', $object_id, $type, true, $current_language );
 		}
 
-		public function get_gallery_image_ids( $variation_id ) {
+		public function get_gallery_image_ids( $variation_id ): array {
 			$images_as_string = get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
+			$images           = wp_parse_id_list( $images_as_string );
 
-			if ( empty( $images_as_string ) ) {
-				return array();
+			if ( FeaturesUtil::feature_is_enabled( 'variation_gallery' ) ) {
+				return wc_get_product( $variation_id )->get_gallery_image_ids();
 			}
-
-			$images = array_map( 'absint', $images_as_string );
 
 			return array_map( array( $this, 'wpml_object_id' ), $images );
 		}
@@ -293,6 +293,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			$variation_id             = absint( $variation->get_id() );
 			$variation_image_id       = absint( $variation->get_image_id( 'edit' ) );
 			$variation_gallery_images = $this->get_gallery_image_ids( $variation_id );
+
 			if ( $variation_image_id > 0 ) {
 				array_unshift( $variation_gallery_images, $variation_image_id );
 			}

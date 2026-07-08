@@ -12,12 +12,10 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 9.7.0
+ * @version 10.5.0
  */
 
 defined( 'ABSPATH' ) || exit;
-
-use Automattic\WooCommerce\Enums\ProductType;
 
 global $product;
 
@@ -25,7 +23,8 @@ $product_id = $product->get_id();
 
 $product_gallery_data = woo_variation_gallery()->get_frontend()->get_product_gallery_data( $product_id );
 
-$columns = absint( woo_variation_gallery()->get_option( 'thumbnails_columns', apply_filters( 'woo_variation_gallery_default_thumbnails_columns', 4, $product ) ) );
+$wc_columns           = apply_filters( 'woocommerce_product_thumbnails_columns', 4 );
+$columns = absint( woo_variation_gallery()->get_option( 'thumbnails_columns', apply_filters( 'woo_variation_gallery_default_thumbnails_columns', absint( $wc_columns), $product ) ) );
 
 
 // NAMING:
@@ -109,9 +108,6 @@ $wrapper_classes = apply_filters( 'woo_variation_gallery_product_wrapper_classes
 	wc_string_to_bool( woo_variation_gallery()->get_option( 'thumbnail_slide', 'yes' ) ) ? 'woo-variation-gallery-enabled-thumbnail-slider' : '',
 ) );
 
-// $post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
-// $attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
-
 $loading_gallery_class = wc_string_to_bool( woo_variation_gallery()->get_option( 'preloader_disable', 'no' ) ) ? '' : 'loading-gallery';
 $zoom_icon_markup      = apply_filters( 'woo_variation_gallery_zoom_icon_html', '<span class="dashicons dashicons-search"></span>', $product );
 
@@ -134,8 +130,7 @@ do_action( 'woo_variation_product_gallery_start', $product ); ?>
 		echo esc_attr( $gallery_thumbnail_position_small_device ) ?> woo-variation-gallery-product-type-<?php
 		echo esc_attr( $product_type ) ?>">
 
-			<div class="woo-variation-gallery-container preload-style-<?php
-			echo esc_attr( woo_variation_gallery()->get_option( 'preload_style', 'blur' ) ) ?>">
+			<div class="woo-variation-gallery-container preload-style-<?php echo esc_attr( woo_variation_gallery()->get_option( 'preload_style', 'blur' ) ) ?>">
 
 				<div class="woo-variation-gallery-slider-wrapper">
 
@@ -173,9 +168,7 @@ do_action( 'woo_variation_product_gallery_start', $product ); ?>
 				</div> <!-- .woo-variation-gallery-slider-wrapper -->
 
 				<div class="woo-variation-gallery-thumbnail-wrapper">
-					<div class="woo-variation-gallery-thumbnail-slider woo-variation-gallery-thumbnail-columns-<?php
-					echo esc_attr( $columns ) ?>" data-slick='<?php
-					echo wc_esc_json( wp_json_encode( $thumbnail_slider_js_options ) ); // WPCS: XSS ok. ?>'>
+					<div class="woo-variation-gallery-thumbnail-slider woo-variation-gallery-thumbnail-columns-<?php echo esc_attr( $columns ) ?>" data-slick='<?php echo wc_esc_json( wp_json_encode( $thumbnail_slider_js_options ) ); // WPCS: XSS ok. ?>'>
 						<?php
 						if ( $has_product_gallery ) {
 							// Gallery Image

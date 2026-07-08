@@ -1,4 +1,5 @@
 <?php
+
 defined( 'ABSPATH' ) or die( 'Keep Quit' );
 
 if ( ! class_exists( 'Woo_Variation_Gallery_REST_API', false ) ):
@@ -22,13 +23,10 @@ if ( ! class_exists( 'Woo_Variation_Gallery_REST_API', false ) ):
 		}
 
 		public function includes() {
-
 		}
 
 		public function hooks() {
-
 			add_action( 'rest_api_init', array( $this, 'register_woo_variation_gallery_images_field' ) );
-
 			/*add_filter( 'woocommerce_rest_prepare_product_variation_object', array(
 				$this,
 				'rest_api_response'
@@ -36,12 +34,10 @@ if ( ! class_exists( 'Woo_Variation_Gallery_REST_API', false ) ):
 		}
 
 		public function init() {
-
 		}
 
 		// Start
 		public function register_woo_variation_gallery_images_field() {
-
 			register_rest_field( 'product_variation', 'woo_variation_gallery_images', array(
 				'get_callback'    => array( $this, 'get_additional_response' ),
 				'update_callback' => array( $this, 'update_additional_response' ),
@@ -50,15 +46,14 @@ if ( ! class_exists( 'Woo_Variation_Gallery_REST_API', false ) ):
 		}
 
 		public function get_additional_response( $object, $field_name, $request ) {
-
 			$product_id       = absint( $request->get_param( 'product_id' ) );
 			$variation_id     = absint( $object['id'] );
-			$variation_images = (array) get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
+			$variation_images = get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
+			$variation_images = wp_parse_id_list( $variation_images );
 
 			$data = array();
 
 			foreach ( $variation_images as $attachment_id ) {
-
 				$image_info = $this->rest_get_image_data( $attachment_id );
 				if ( is_array( $image_info ) ) {
 					$data[] = $image_info;
@@ -80,7 +75,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_REST_API', false ) ):
 		}
 
 		public function rest_get_image_data( $attachment_id ) {
-
 			$attachment_post = get_post( $attachment_id );
 			if ( is_null( $attachment_post ) ) {
 				return false;
@@ -106,7 +100,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_REST_API', false ) ):
 				'alt'               => sanitize_text_field( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ),
 				'has_video'         => $has_video,
 				'video_src'         => $has_video ? $video_url : '',
-				'embed_url'         => $has_video ? woo_variation_gallery()->get_frontend()->get_embed_url( $video_url ) : ''
+				'embed_url'         => $has_video ? woo_variation_gallery()->get_frontend()->get_embed_url( $video_url ) : '',
 			);
 
 			return apply_filters( 'woo_variation_gallery_images_rest_get_image', $attachment_data, $attachment_id );
@@ -117,7 +111,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_REST_API', false ) ):
 		// curl https://example.com/wp-json/wc/v3/products/<product_id>/variations/<id> -u consumer_key:consumer_secret
 		// @TODO: "woocommerce_rest_pre_insert_{$this->post_type}_object"
 		public function rest_api_response( $response, $object ) {
-
 			if ( empty( $response->data ) ) {
 				return $response;
 			}
@@ -128,7 +121,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_REST_API', false ) ):
 			$variation_images                               = (array) get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
 			$response->data['woo_variation_gallery_images'] = array();
 			foreach ( $variation_images as $attachment_id ) {
-
 				$image_info = $this->rest_get_image_data( $attachment_id );
 				if ( is_array( $image_info ) ) {
 					array_push( $response->data['woo_variation_gallery_images'], $image_info );

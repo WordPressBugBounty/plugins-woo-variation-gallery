@@ -2,12 +2,14 @@
 
 defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
+use Automattic\WooCommerce\Utilities\FeaturesUtil;
+
 if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 
 	class Woo_Variation_Gallery_Backend {
 
 		protected static $_instance = null;
-		protected $admin_menu;
+		protected        $admin_menu;
 
 		public static function instance() {
 			if ( is_null( self::$_instance ) ) {
@@ -60,17 +62,20 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 		}
 
 		public function gallery_admin_html( $loop, $variation_data, $variation ) {
+			if ( FeaturesUtil::feature_is_enabled( 'variation_gallery' ) ) {
+				return;
+			}
+
 			$variation_id   = absint( $variation->ID );
 			$gallery_images = get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
-
-
-			// print_r( $gallery_images); die;
-
+			$gallery_images = wp_parse_id_list( $gallery_images );
 			?>
-			<div data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="form-row form-row-full woo-variation-gallery-wrapper">
+			<div data-product_variation_id="<?php
+			echo esc_attr( $variation_id ) ?>" class="form-row form-row-full woo-variation-gallery-wrapper">
 				<div class="woo-variation-gallery-postbox">
 					<div class="postbox-header">
-						<h2><?php esc_html_e( 'Variation Gallery', 'woo-variation-gallery' ) ?></h2>
+						<h2><?php
+							esc_html_e( 'Variation Gallery', 'woo-variation-gallery' ) ?></h2>
 						<button type="button" class="handle-div" aria-expanded="true">
 							<span class="toggle-indicator" aria-hidden="true"></span>
 						</button>
@@ -87,10 +92,17 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 							</ul>
 						</div>
 						<div class="add-woo-variation-gallery-image-wrapper hide-if-no-js">
-							<a href="#" data-product_variation_loop="<?php echo absint( $loop ) ?>" data-product_variation_id="<?php echo esc_attr( $variation_id ) ?>" class="button-primary add-woo-variation-gallery-image"><?php esc_html_e( 'Add Variation Gallery Image', 'woo-variation-gallery' ) ?></a>
-							<?php if ( ! woo_variation_gallery()->is_pro() ): ?>
-								<a target="_blank" href="<?php echo esc_url( woo_variation_gallery()->get_backend()->get_pro_link() ) ?>" style="display: none" class="button woo-variation-gallery-pro-button"><?php esc_html_e( 'Upgrade to pro to add more images and videos', 'woo-variation-gallery' ) ?></a>
-							<?php endif; ?>
+							<a href="#" data-product_variation_loop="<?php
+							echo absint( $loop ) ?>" data-product_variation_id="<?php
+							echo esc_attr( $variation_id ) ?>" class="button-primary add-woo-variation-gallery-image"><?php
+								esc_html_e( 'Add Variation Gallery Image', 'woo-variation-gallery' ) ?></a>
+							<?php
+							if ( ! woo_variation_gallery()->is_pro() ): ?>
+								<a target="_blank" href="<?php
+								echo esc_url( woo_variation_gallery()->get_backend()->get_pro_link() ) ?>" style="display: none" class="button woo-variation-gallery-pro-button"><?php
+									esc_html_e( 'Upgrade to pro to add more images and videos', 'woo-variation-gallery' ) ?></a>
+							<?php
+							endif; ?>
 						</div>
 					</div>
 				</div>
@@ -98,13 +110,15 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 			<?php
 		}
 
-		public function save_product_variation( $variation_id, $loop ) {
+		public function save_product_variation( $variation_id, $loop ): void {
+			if ( FeaturesUtil::feature_is_enabled( 'variation_gallery' ) ) {
+				return;
+			}
 
 			if ( isset( $_POST['woo_variation_gallery'] ) ) {
-
 				if ( isset( $_POST['woo_variation_gallery'][ $variation_id ] ) ) {
+					$gallery_image_ids = wp_parse_id_list( wp_unslash( $_POST['woo_variation_gallery'][ $variation_id ] ) );
 
-					$gallery_image_ids = array_map( 'absint', $_POST['woo_variation_gallery'][ $variation_id ] );
 					update_post_meta( $variation_id, 'woo_variation_gallery_images', $gallery_image_ids );
 				} else {
 					delete_post_meta( $variation_id, 'woo_variation_gallery_images' );
@@ -125,14 +139,12 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 		}
 
 		public function init_settings( $settings ) {
-
 			$settings[] = $this->load_settings();
 
 			return $settings;
 		}
 
 		public function admin_enqueue_scripts() {
-
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
 			wp_enqueue_media();
@@ -142,18 +154,22 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 			wp_enqueue_script( 'woo-variation-gallery-admin', esc_url( woo_variation_gallery()->assets_url( "/js/admin{$suffix}.js" ) ), array(
 				'jquery',
 				'jquery-ui-sortable',
-				'wp-util'
+				'wp-util',
 			), woo_variation_gallery()->assets_version( "/js/admin{$suffix}.js" ), true );
 
 			wp_localize_script( 'woo-variation-gallery-admin', 'woo_variation_gallery_admin', array(
 				'choose_image' => esc_html__( 'Choose Image', 'woo-variation-gallery' ),
-				'add_image'    => esc_html__( 'Add Images', 'woo-variation-gallery' )
+				'add_image'    => esc_html__( 'Add Images', 'woo-variation-gallery' ),
 			) );
 
 			do_action( 'woo_variation_gallery_admin_enqueue_scripts', $this );
 		}
 
 		public function admin_template_js() {
+			if ( FeaturesUtil::feature_is_enabled( 'variation_gallery' ) ) {
+				return;
+			}
+
 			ob_start();
 			require_once dirname( __FILE__ ) . '/admin-template-js.php';
 			$data = ob_get_clean();
@@ -161,7 +177,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 		}
 
 		public function get_pro_link() {
-
 			$affiliate_id = apply_filters( 'gwp_affiliate_id', 0 );
 
 			$link_args = array();
@@ -176,8 +191,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 		}
 
 		public function plugin_row_meta( $links, $file ) {
-
-
 			if ( woo_variation_gallery()->plugin_basename() !== $file ) {
 				return $links;
 			}
@@ -191,11 +204,9 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 			$row_meta['support'] = sprintf( '<a target="_blank" href="%1$s">%2$s</a>', esc_url( $report_url ), esc_html__( 'Help &amp; Support', 'woo-variation-gallery' ) );
 
 			return array_merge( $links, $row_meta );
-
 		}
 
 		public function plugin_action_links( $links ) {
-
 			$action_links = array(
 				'settings' => '<a href="' . esc_url( $this->get_admin_menu()->get_settings_link( 'woo_variation_gallery' ) ) . '" aria-label="' . esc_attr__( 'View Gallery Settings', 'woo-variation-gallery' ) . '">' . esc_html__( 'Settings', 'woo-variation-gallery' ) . '</a>',
 			);
@@ -209,7 +220,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 			}
 
 			return array_merge( $action_links, $links, $pro_links );
-
 		}
 
 		public function remove_option() {
@@ -222,7 +232,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 		}
 
 		public function activate_redirect() {
-
 			if ( wc_string_to_bool( get_option( 'woo_variation_gallery_do_activate_redirect', 'no' ) ) && ! woo_variation_gallery()->is_pro() ) {
 				delete_option( 'woo_variation_gallery_do_activate_redirect' );
 
