@@ -2,7 +2,7 @@
  * Variation Gallery for WooCommerce
  *
  * Author: Emran Ahmed ( emran.bd.08@gmail.com )
- * Date: 7/8/2026, 7:43:27 PM
+ * Date: 9/6/2026, 6:55:51 PM
  * Released under the GPLv3 license.
  */
 .rtl .woo-variation-gallery-images li {
@@ -13,6 +13,11 @@
   right: auto !important;
 }
 
+.woo-variation-gallery-wrapper.notice {
+  background-color: #fef8ee !important;
+  border: none;
+  border-left: 4px solid #c3c4c7 !important;
+}
 .woo-variation-gallery-wrapper .woo-variation-gallery-inside {
   border-top: 1px solid #c3c4c7;
 }

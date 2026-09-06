@@ -2,832 +2,430 @@
 Contributors: EmranAhmed, getwooplugins, storepress
 Tags: woocommerce variation image gallery, additional variation image gallery, product variation image gallery, extra product variation image, variation images gallery
 Requires PHP: 7.4
-Stable tag: 1.3.32
+Stable tag: 1.3.33
 Requires at least: 5.7
-Tested up to: 7.0
+Tested up to: 7.1
 WC requires at least: 5.8
-WC tested up to: 10.9
-License: GPLv3
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+WC tested up to: 11.1
+License: GPL-2.0-or-later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Allows adding multiple images per variation to let your store customers to see different sets of images when product variations are switched.
+Turn each product variation's photos into a fully controllable gallery — thumbnail layout, slider, zoom, and mobile sizing, no theme hacks.
 
 == Description ==
 
-=== How To Install Additional Variation Images for WooCommerce Plugin ===
+= Show the Right Images for Every Variation =
+
+Different variations deserve different images. Additional Variation Images Gallery for WooCommerce lets you create a separate image gallery for each product variation, so customers can see exactly what they’re buying.
+
+Add multiple images to your variations and give customers a better way to explore colors, styles, sizes, and other variations. With flexible gallery controls, responsive layouts, zoom, lightbox, sliders, and more, you can create the experience that fits your store - without touching code.
 
 [youtube https://www.youtube.com/watch?v=BoLzP2KGh_k]
 
-Do you want multiple images for WooCommerce product attribute variation to drive sales and conversion? The Additional Variation Images Gallery for WooCommerce is an incredible option to pick.
+= More Control Over Your Variation Gallery =
 
-WooCommerce offers an option to insert only one image per product variation. It means there is no option to add more than a single variation image when it is essential to show additional product images to boost sales.
+Your variation gallery should look good and work well across every device - not just display a list of images.
 
-To unlock this limitation, the WooCommerce Additional Variation Images Gallery plugin. <strong>It allows to upload multiple images for each product variation. </strong>
+With Additional Variation Images Gallery for WooCommerce, you can control how customers browse and interact with your variation images. Adjust thumbnail placement, slider behavior, zoom, lightbox, mobile sizing, and other gallery settings directly from your WooCommerce setup. No custom code or theme modifications required.
 
-So, with the help of this <strong>additional variation images plugin for WooCommerce</strong>, it's possible to show different sets of images to visitors when they switch product variations like Color, Style, and size simultaneously. 
+== Key Features ==
 
-If you are looking for a plugin to insert multiple images per variation for WooCommerce variable product, you are in the right place. The plugin is well-documented and optimized to support major WooCommerce themes in the market.
+🥇 **Multiple Images per Variation**
 
-## Key Feature Comes with WooCommerce Additional Variation Images Gallery Plugin ##
+Add multiple images to any WooCommerce variation, whether it’s a color, size, style, or another attribute. When a customer selects a variation, its images automatically appear in the gallery, helping customers see exactly what that variation looks like.
 
-👉 **Display multiple images per product variation.**
+Create a complete visual experience for every variation without relying on custom code or theme modifications.
 
-By default, WooCommerce allows inserting only one photo per product variation. This variation images gallery plugin will enable you to insert various pictures in variable product variations. 
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#upload-images-in-the-variation-gallery)
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#upload-images-in-the-variation-gallery)
-<hr />
+🥇 **Bulk Image Upload**
 
-👉 **Adjust Variation Gallery Width For Desktop, Tablet, Mobile**
+Select and add multiple images from the WordPress Media Library at once instead of adding them one by one. This makes creating variation galleries much faster, especially when a product has many variations and each one needs several images.
 
-It offers options to adjust the variation images gallery width for Desktop, Tablet, and Mobile Phones to tailor your variation gallery to all available viewing devices. 
+Spend less time building galleries manually and more time managing your store.
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#variation-video-width-adjustment)
-<hr />
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#upload-images-in-the-variation-gallery)
 
-👉 **Move Gallery Thumbnails to Left, Right, and Bottom**
+🥇 **Responsive Gallery Width**
 
-WooCommerce initially shows the gallery thumbnail in the bottom position. By installing the WooCommerce Extra Variation Images Gallery plugin, you can move them to the left and right positions. 
+Set the gallery width separately for desktop, tablet, and mobile devices. This gives you more control over how the gallery fits on different screen sizes, so it looks balanced and works well whether your customers are browsing from a computer, tablet, or phone.
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#left-right-bottom-gallery-thumbnail-position)
-<hr />
+Create a gallery that fits your product page perfectly on every device.
 
-👉 **Enable Thumbnail Slider**
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#variation-video-width-adjustment)
 
-WooCommerce shows the product gallery thumbnails in the grid style. It will show one after another. We programmed the WooCommerce Variation Multiple Images Gallery plugin to convert the grid into a thumbnail slider.
+🥇 **Flexible Thumbnail Position**
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#enable-slider-for-woocommerce-product-images-gallery)
-<hr />
+Choose where your gallery thumbnails appear - left, right, or bottom of the main image. This gives you more freedom to match the gallery with your product images and overall store layout.
 
-👉 **Product Feature Image Auto slider**
+Place thumbnails where they look best and make it easier for customers to browse through variation images.
 
-WooCommerce different images for variations plugin enables auto slider for product feature images. It means customers don't want to press the arrow to check product photos one by one.
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#left-right-bottom-gallery-thumbnail-position)
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#product-feature-image-auto-slider)
-<hr />
+🥇 **Thumbnail Slider**
 
-👉 **Define Product Image Slider Speed**
+Turn your variation thumbnails into a slider when you have multiple images. Instead of letting thumbnails wrap onto additional rows, customers can simply slide through them without making the gallery unnecessarily tall.
 
-Slider speed helps customers to see the product images quickly. To fulfill this requirement, additional variation images for WooCommerce plugin have the option to increase or decrease the sliding time according to project requirements. 
+Keep your product gallery clean and compact, even when a variation has many images.
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#slider-or-fade-for-thumbnails-gallery)
-<hr />
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#enable-slider-for-woocommerce-product-images-gallery)
 
-👉 **Slider or Fade Choose what you need**
+🥇 **Automatic Image Slideshow & Speed Control**
 
-There are two options combined to present product images smartly. Either you can enable the sliding option or the fading one. 
+Let the main product image automatically move through the gallery without requiring customers to click the navigation arrows. This gives customers a quick way to see more of the product as they browse.
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#define-thumbnail-item-number-gaps)
-<hr />
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#product-feature-image-auto-slider)
 
-👉 **Define Thumbnail Item Number & Gaps**
+🥇 **Slide or Fade Transitions**
 
-Generally, you see the four images in the product thumbnail slider initially. You can set the number from 2 to 8. Besides that, you can define the gap between each thumbnail item. 
+Choose between a smooth sliding effect or a simple fade when gallery images change. Pick the transition that best matches the look and feel of your store.
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#define-thumbnail-item-number-gaps)
-<hr />
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#slider-or-fade-for-thumbnails-gallery)
 
-👉 **Arrow control for Product Image and Thumbnails Slider**
+🥇 **Custom Thumbnail Count and Spacing**
 
-Product feature images and thumbnail sliders come with arrows to navigate the variation images. It is possible to disable arrows for both sliders.
+Choose how many thumbnails appear at once, from 2 to 8, and adjust the space between them. This makes it easier to create a gallery that fits neatly into your product page layout.
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#gallery-slider-thumbnail-arrow-control)
-<hr />
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#define-thumbnail-item-number-gaps)
 
-👉 **Product Featured Image Zoom**
+🥇 **Customizable Navigation Arrows**
 
-Zoom allows the customers to see the images magnifying the details. It boots product conversion. We keep the option enabled, and you can disable it anytime. 
+Show or hide navigation arrows for both the main image and thumbnail sliders. Turn them off for a cleaner look or when your theme already provides its own navigation controls.
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#product-image-zoom-display-position)
-<hr />
- 
-👉 **Popup Icon Display Position For Product Featured Image**
-To allow users to see the product featured image closely, it has an option to open the product image in a lightbox. So, an icon is enabled on the feature product image to trigger the lightbox. You can move the icon top left corner, top right corner, bottom left corner and bottom right corner. 
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#gallery-slider-thumbnail-arrow-control)
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#product-image-zoom-display-position)
-<hr />
+🥇 **Product Image Zoom**
 
-👉 **Variation Image Shorting Option**
+Let customers zoom in on the main product image to see details more closely, such as fabric texture, stitching, or product finishes. Zoom is enabled by default and can be turned off whenever you prefer.
 
-WooCommerce Additional Variation Images Gallery plugin comes with a design that saves development time. You can reorder your variation uploaded images according to your need. 
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#product-image-zoom-display-position)
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#variation-image-sorting)
-<hr />
+🥇 **Lightbox Image Viewer**
 
-👉 **Preloader Settings For Product Image Gallery**
+Open the main product image in a larger lightbox when customers click it. You can also choose where the lightbox icon appears - top-left, top-right, bottom-left, or bottom-right- so it fits naturally with your product images.
 
- Preloader is an excellent option when it comes to deal loading images. With our Multiple Images Variation For WooCommerce plugin, you can select preloader style or disable the preloader altogether. 
- 
- [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#set-gallery-preloader)
-<hr />
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#product-image-zoom-display-position)
 
-👉 **Hide Featured Image**
+🥇 **Drag-and-Drop Image Sorting**
 
-Sometimes, hiding the featured image from the product image gallery is essential. So, we added the option to hide the featured images for the variation images gallery plugin. 
+Reorder variation gallery images by simply dragging them into the sequence you want. Easily change the image order without removing and uploading the images again.
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#disable-product-gallery-for-selected-product-type)
-<hr />
+https://getwooplugins.com/wp-content/uploads/2021/12/image4.gif
 
-👉 **Disable Gallery For the Selected Product Type.** 
+🥇 **Gallery Preloader**
 
-WooCommerce comes with four product types. Simple, Variable, Grouped, and External/Affiliate. Additional Variation Image gallery loads the plugin script for all available product types. You can disable the images gallery plugin script for your desired product type. 
+Show a preloader while gallery images are loading to give customers a smoother experience. Choose from available preloader styles or disable it completely if you prefer the images to appear as soon as they are ready.
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#disable-product-gallery-for-selected-product-type)
-<hr />
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#set-gallery-preloader)
 
-👉 **Supports Unlimited WooCommerce Theme** 
+🥇 **Hide the Default Featured Image**
 
-WooCommerce Additional Variation Images plugin has excellent theme compatibility and supports all the major WoCommerce themes in the market.
+Choose whether to show or hide WooCommerce's default featured image when a variation gallery is displayed. Hide it when you want customers to see only the images assigned specifically to the selected variation.
 
-👉 **Migrate From Other WooCommerce Additional Variation Plugins**
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#hide-gallery-featured-image)
 
-Migrating from other Variation Images Gallery Plugin to ours is easy. We have added an option for quick migration. 
+🥇 **Disable the Gallery for Specific Product Types**
 
-👉 **Automatic Plugin Updates**
+Choose which WooCommerce product types should use the variation gallery. You can disable the gallery for product types where you don't need it, helping avoid loading unnecessary gallery scripts on those product pages.
 
-The Variation Product Gallery plugin is regularly updated to add new features. We ensure seamless integration with top WordPress plugins and themes. Our developers are ready to fix any issue as soon as they find problems. 
+↗️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#disable-product-gallery-for-selected-product-type)
 
-👉 **Exclusive Technical Support**
+🥇 **WooCommerce REST API Support**
 
-Don't hesitate to contact our support if you haven't found what you are looking for. We have a team of Support Engineers ready to provide incredible support. You can ask questions in the support forum, open a support ticket, or contact us through our live chat system.
+Variation gallery images are available through the WooCommerce REST API, making them accessible to headless stores and custom integrations that use WooCommerce product data.
 
-## 🏆 Customers' Feedback For Variation Images Gallery Plugin ##
+🥇 **Easy Migration From Other Gallery Plugins**
 
-[meloz](https://wordpress.org/support/topic/great-product-and-awesome-support-8/): 
-> "I have been using this plugin for a while now and was working exactly how I wanted it."
+Switching from another variation gallery plugin doesn’t mean rebuilding your galleries from scratch. The built-in migration tool can import existing variation image data from supported gallery plugins, making the transition much easier.
 
->Then an update came through for my theme, and it stopped showing the variation images when changing the selection. I googled for ages and looked everywhere how to fix it.
+https://getwooplugins.com/wp-content/uploads/2021/12/image7.jpg
 
+🥇 **Compatible With Popular WooCommerce Themes**
 
->I then asked support and Hakik very kindly and quickly investigated the issue and gave me some code to add to my website and it is now working again.
+Use the plugin with popular WooCommerce themes, including Flatsome, OceanWP, Astra, Divi, Avada, Storefront, BeTheme, Shopkeeper, and more. It’s designed to work smoothly with different themes while giving you the flexibility to make small CSS adjustments when needed.
 
->Thanks team, you rock!'
+↗️ [Compatibility Resources Links](https://getwooplugins.com/sites-built-with-woocommerce-variation-gallery/)
 
-[Riaan Aggenbag](https://wordpress.org/support/topic/dont-believe-the-haters/): 
-> 'Really good support from Tanvirul when I ran into some CSS issues.
+👑 **Unlimited Images per Variation (Premium)**
 
->Thanks ya’ll.'
+Add as many images as each variation needs with the Premium version. Show different angles, close-up details, lifestyle photos, and more to give customers a better understanding of the variation they’re viewing.
 
-[Elzette Roelofse](https://wordpress.org/support/topic/works-beautifully-136/): 
-> 'Perfect combination with their Additional Variation Images for WooCommerce plugin.
+✅️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#upload-images-in-the-variation-gallery)
 
-> Great support too!'
+👑 **Video in Variation Galleries (Premium)**
 
-= PREMIUM FEATURES OF ADDITIONAL VARIATION IMAGES FOR WOOCOMMERCE =
-
-[Live Demo](https://bit.ly/live-demo-gallery-org) | [Upgrade to PRO](http://bit.ly/variation-image-gl-pro) | [Documentation](http://bit.ly/wvariation-image-gallery-doc) | [Support](https://getwooplugins.com/tickets/?utm_source=wordpress.org&utm_medium=README&utm_campaign=woo-variation-gallery)
-
-=== How To Insert Videos on Additional Variation Image Gallery (Pro Feature) ===
+Add videos alongside images in your variation galleries with the Premium version. You can use YouTube, Vimeo, or self-hosted videos to show your products in action, helping customers get a better feel for the product without leaving the page.
 
 [youtube https://www.youtube.com/watch?v=wopbjNkJNEc]
 
-👉  **Add Unlimited Images For Each WooCommerce Product Variation**
+✅️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#upload-youtube-video-in-the-product-variation-gallery)
 
-The free version of this plugin allows showing two extra photos per product variation. However, the advanced version of the WooCommerce Variable Product Gallery plugin adds an option to insert unlimited images for the product variation images gallery.
+👑 **Add Video To WooCommerce Simple Product Gallery (Premium)**
 
-  [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#upload-images-in-the-variation-gallery)
-<hr />
+Besides the variable product, it’s possible to insert YouTube, Vimeo, and self-hosted videos in the WooCommerce simple product images gallery.
 
-👉  **Add Video To WooCommerce Variable Product Gallery** 
+✅️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#show-video-in-simple-product-gallery-woocommerce-default-gallery)
 
-With the Variation Image Gallery plugin, you can woocommerce video in product gallery. So, you can easily upload <strong>YouTube</strong>, <strong>Vimeo</strong>, and <strong>self-hosted</strong> videos directly into the variable product gallery. 
+👑 **Add Video to WooCommerce Grouped Product Galleries (Premium)**
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#upload-youtube-video-in-the-product-variation-gallery)
-<hr />
-👉  **Add Video To WooCommerce Simple Product Gallery**
+Add YouTube, Vimeo, or self-hosted videos to WooCommerce Grouped Product galleries. With Premium, you can showcase product videos alongside gallery images, giving customers a better way to explore the products.
 
-Besides the variable product, it's possible to insert <strong>YouTube</strong>, <strong>Vimeo</strong>, and <strong>self-hosted</strong> videos in the WooCommerce simple product images gallery. 
+✅️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#upload-videos-in-grouped-product-image-gallery)
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#show-video-in-simple-product-gallery-woocommerce-default-gallery)
-<hr />
+👑 **Add Video To WooCommerce External/Affiliate Product Gallery (Premium)**
 
-👉  **Add Video To WooCommerce Group Product Gallery**
+External products take users to the sourced website. If you want to engage customers and add a video to the WooCommerce product gallery for external/affiliate products, you are allowed to insert YouTube, Vimeo, and self-hosted videos easily.
 
-If you want to show  <strong>YouTube</strong>, <strong>Vimeo</strong>, and <strong>self-hosted</strong> videos in the grouped products, with multiple images gallery plugin would get an easy option. 
+✅️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#upload-videos-in-external-affiliate-product-image-gallery)
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#upload-videos-in-grouped-product-image-gallery)
-<hr />
+👑 **Featured Video for Variable Products (Premium)**
 
-👉  **Add Video To WooCommerce External/Affiliate Product Gallery** 
+Show a featured video in the main product image area of your variable products, without requiring customers to select a variation first. Add a YouTube, Vimeo, or self-hosted video to introduce the product and highlight its key features right from the start.
 
-External products take users to the sourced website. If you want to engage customers and add a video to the WooCommerce product gallery for external/affiliate products, you are allowed to insert <strong>YouTube</strong>, <strong>Vimeo</strong>, and <strong>self-hosted</strong> videos easily. 
+✅️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#add-featured-video-in-variable-product)
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#upload-videos-in-external-affiliate-product-image-gallery)
-<hr />
+👑 **Featured Video for Simple Products (Premium)**
 
-👉  **Add WooCommerce Featured Video For Variable Product**
+Add a featured video to your WooCommerce Simple Products and showcase your product in a more engaging way. Premium supports YouTube, Vimeo, and self-hosted videos, allowing you to highlight product details directly in the main product media area.
 
-WooCommerce feature video for variable products will be visible to end-users without changing any variation. If you want to show a video in the WooCommerce feature image area, you can show <strong>YouTube</strong>, <strong>Vimeo</strong>, and <strong>self-hosted</strong> with ease. 
+✅️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#add-featured-video-in-simple-product)
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#add-featured-video-in-variable-product)
-<hr />
+👑 **Add WooCommerce Product Featured Video For Grouped Product (Premium)**
 
-👉  **Add WooCommerce Featured Video For Simple Product**
+The grouped product comes grouped with a couple of products. If you need to show extra details for the grouped product, you can easily show details with YouTube, Vimeo, and self-hosted video.
 
-If you want a WooCommerce featured video for the simple product type, we added control to  Additional variation image gallery plugin. It will help you to showcase easily product details with <strong>YouTube</strong>, <strong>Vimeo</strong>, and <strong>self-hosted</strong> video. 
+✅️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#add-featured-video-in-grouped-product)
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#add-featured-video-in-simple-product)
-<hr />
+👑 **Featured Video for External/Affiliate Products (Premium)**
 
-👉  **Add WooCommerce Product Featured Video For Grouped Product**
+Give customers more product information before they visit the external website. Add a YouTube, Vimeo, or self-hosted video as the featured product video to demonstrate the product, explain its features, or highlight important details.
 
-The grouped product comes grouped with a couple of products. If you need to show extra details for the grouped product, you can easily show details with <strong>YouTube</strong>, <strong>Vimeo</strong>, and <strong>self-hosted</strong> video. 
+✅️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#add-featured-video-in-external-affiliate-product)
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#add-featured-video-in-grouped-product)
-<hr />
+👑 **Video Width and Height Control (Premium)**
 
-👉  **Add WooCommerce Product Featured Video For External/Affiliate Product**
+Set the dimensions of your product videos to better fit your gallery layout. This gives you more control over how videos appear on the product page and helps avoid unwanted empty or black areas around the video.
 
-The video expresses more words than images. With variation images gallery plugin, you can present more product insights with <strong>YouTube</strong>, <strong>Vimeo</strong>, and <strong>self-hosted</strong> video. 
+✅️ [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#variation-video-width-adjustment)
 
-[Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#add-featured-video-in-external-affiliate-product)
-<hr />
+🏆 **Free vs Premium** 🏆
 
-## 🏆 Customers' Feedback For Variation Images Gallery Plugin ##
+Everything listed above without a "(*Premium*)" tag is included in the free version available on WordPress.org. Premium is a paid upgrade sold directly through getwooplugins.com.
 
-[martamagnetti](https://wordpress.org/support/topic/best-support-ever-132/): 
-> 'Great plugin, but most of all 10 stars to the incredible support service.'
+📌 Premium adds:
 
-[check07](https://wordpress.org/support/users/check07/): 
-> 'This plugin just give me the best presentation of my image gallery.
-> – Easy to add additional images
-> – Wonderful load of galleries
-> – Easy integration with my theme
-> Thank you guys!
+💎 Unlimited images per variation (free is limited to a couple of extra images per variation)
+💎 YouTube, Vimeo, and self-hosted video in the variation gallery
+💎 Video on simple, grouped, and external/affiliate product galleries
+💎 Featured video per product type
+💎 Video width and height control
 
->Great support too!'
+Premium is available with yearly plans (Starter, Business, and Developer) as well as lifetime license options. Pricing depends on the number of sites covered by the license.
 
-[lwhemesath65](https://wordpress.org/support/topic/love-the-stuff/): 
-> 'I got the free version and it works perfectly fine. I had a question and support answered right away. That’s awesome. 
->I wish all plugin vendors would have such a high standard.'
+[View Premium Plans & Pricing](https://getwooplugins.com/plugins/woocommerce-variation-gallery/?utm_source=wordpress.org&utm_medium=README&utm_campaign=woo-variation-gallery)
 
-= Sites Built With Additional Variation Images for WooCommerce Plugin =
-<blockquote>
-<ul>
-<li><a target="_blank" href="http://j.mp/variation-gallery-demo"> Built With: Flatsome Theme | Niche: Clothing Store.</a> </li>
+🫵*Who Is This Plugin For?*
 
-<li><a target="_blank" href="http://j.mp/variation-gallery-demo"> Built With: Divi Theme | Niche: Automobile Wheels Store.</a> </li>
+Additional Variation Images Gallery for WooCommerce is ideal for stores where different variations need different images. It works especially well for products such as clothing in different colors, furniture in different finishes, phone cases in different patterns, and many other products where customers need to see more than one image of each variation.
 
-<li><a target="_blank" href="http://j.mp/variation-gallery-demo"> Built With: Avada Theme | Niche: Motorcycle Helmet Store. </a></li>
+It’s also a great choice if you’ve been relying on custom code to create variation galleries and want an easier way to manage them without maintaining code through WooCommerce and theme updates.
 
-<li><a target="_blank" href="http://j.mp/variation-gallery-demo"> Built With: Avada WooCommerce Theme | Niche: Ladies Purse Bag Store.</a> </li>
+👥💬 *Documentation & Support*
 
-<li><a target="_blank" href="http://j.mp/variation-gallery-demo"> Built With: Shopkeeper WooCommerce Theme | Niche: Sandal Store. </a></li>
+Find detailed setup guides and instructions for every feature in our plugin documentation. If you need help or something isn’t working as expected, our support team is ready to assist you.
 
-<li><a target="_blank" href="http://j.mp/variation-gallery-demo"> Built With: Aurum WooCommerce Theme | Niche: Mobile Case Store. </a></li>
+[View Plugin Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery) | [Get Support](https://getwooplugins.com/tickets/?utm_source=wordpress.org&utm_medium=README&utm_campaign=woo-variation-gallery)
 
-</ul>
-</blockquote>
+Every Premium purchase includes one year of support and updates.
 
+= Sites Built With This Plugin =
 
-= Compatible WooCommerce Plugin =
+* [Flatsome Theme — Clothing Store](http://j.mp/variation-gallery-demo)
+* [Shopkeeper WooCommerce Theme — Sandal Store](http://j.mp/variation-gallery-demo)
+* [Divi Theme — Automobile Wheels Store](http://j.mp/variation-gallery-demo)
+* [Avada Theme — Motorcycle Helmet Store](http://j.mp/variation-gallery-demo)
+* [Avada WooCommerce Theme — Ladies Purse Bag Store](http://j.mp/variation-gallery-demo)
+* [Aurum WooCommerce Theme — Mobile Case Store](http://j.mp/variation-gallery-demo)
 
-<blockquote>
+= Compatible WooCommerce Plugins =
 
-<ul>
-<li><a target="_blank" href="http://bit.ly/wvg-org-item-page">Variation Swatches For WooCommerce</a></li>
-</ul>
-<ul>
-<li><a target="_blank" href="http://bit.ly/swatches-link-to-duplicator-readme">Variation Duplicator For WoooCommerce</a></li>
-</ul>
-<ul>
-<li><a target="_blank" href="https://wordpress.org/plugins/woo-cart-redirect-to-checkout-page">Add to Cart Redirect for WooCommerce</a></li>
-</ul>
+* [Variation Swatches For WooCommerce](https://wordpress.org/plugins/woo-variation-swatches/)
+* [Variation Duplicator For WooCommerce](https://wordpress.org/plugins/variation-duplicator-for-woocommerce/)
+* [Add to Cart Redirect for WooCommerce](https://wordpress.org/plugins/woo-cart-redirect-to-checkout-page)
 
-</blockquote>
+= Community & Feature Requests =
 
-= Forum and Feature Request =
+Have a question, found a bug, or have an idea for a new feature? Join our community to get help, share feedback, and suggest improvements.
 
-<blockquote>
-<h4>Pro Version</h4>
-<ul>
-<li><a target="_blank" href="https://getwooplugins.com/plugins/woocommerce-variation-gallery?utm_source=wordpress.org&utm_medium=README&utm_campaign=woo-variation-gallery">Pro Version</a></li>
-</ul>
-<ul>
-<li><a target="_blank" href="http://bit.ly/wvariation-image-gallery-doc">Documentation</a></li>
-</ul>
-<h4>For Quick Support, feature request and bug reporting</h4>
-<ul>
-<li><a target="_blank" href="http://bit.ly/getwoopluginsgroup">Join Our Facebook Group</a></li>
-</ul>
-<h4>For more information</h4>
-<ul>
-<li><a target="_blank" href="https://getwooplugins.com/?utm_source=wordpress.org&utm_medium=README&utm_campaign=woo-variation-swatches">Visit Our Official Website</a></li>
-</ul>
-</blockquote>
+[Join the GetWooPlugins Facebook Group](https://www.facebook.com/groups/GetWooPlugins/?utm_source=wordpress.org&utm_medium=README&utm_campaign=woo-variation-gallery)
 
-= Featured on Popular Blog Sites =
+[Visit the GetWooPlugins Website](https://getwooplugins.com/?utm_source=wordpress.org&utm_medium=README&utm_campaign=woo-variation-gallery)
 
-<blockquote>
+== External services ==
 
-<ul>
-<li><a target="_blank" href="https://wpcred.com">wpcred.com</a></li>
-</ul>
-<ul>
-<li><a target="_blank" href="https://storepress.com">storepress.com</a></li>
-</ul>
+This plugin can embed video from YouTube and Vimeo inside the product gallery. This is a **Premium** feature and is **off by default** - nothing is sent to YouTube or Vimeo unless you add a YouTube or Vimeo video URL to a product or variation yourself.
 
-</blockquote>
+**What is sent, and when:** once a store owner adds a YouTube or Vimeo URL to a product or variation, that video is embedded on the corresponding product page using YouTube's or Vimeo's own embed player.
 
+When a shopper views that page and the video loads or plays, their browser connects directly to YouTube (a Google LLC service) or Vimeo (Vimeo, Inc.), which may receive the shopper's IP address, browser/device information, and viewing activity, governed entirely by YouTube's or Vimeo's own terms and privacy policy - not this plugin's.
+
+**What is not sent:** this plugin does not send any customer, order, or store data to YouTube or Vimeo. It only stores the video URL you provide, in your own WordPress database.
+
+* [YouTube Terms of Service](https://www.youtube.com/t/terms)
+* [Google Privacy Policy](https://policies.google.com/privacy)
+* [Vimeo Terms of Service](https://vimeo.com/terms)
+* [Vimeo Privacy Policy](https://vimeo.com/privacy)
+
+Self-hosted videos, uploaded directly to your WordPress Media Library, do not connect to any third-party service.
 
 == Installation ==
 
-### Automatic Install From WordPress Dashboard
+= Automatic Install From the WordPress Dashboard =
 
-1. Login to your admin panel
-2. Navigate to Plugins -> Add New
-3. Search **Additional Variation Images Gallery for WooCommerce**
-4. Click install and activate respectively.
+1. Log in to your admin panel.
+2. Navigate to Plugins → Add New.
+3. Search for **Additional Variation Images Gallery for WooCommerce**.
+4. Click Install, then Activate.
 
-### Manual Install From WordPress Dashboard
+= Manual Install From the WordPress Dashboard =
 
-If your server is not connected to the Internet, then you can use this method-
+If your server isn't connected to the internet, use this method instead:
 
-1. Download the plugin by clicking on the red button above. A ZIP file will be downloaded.
-2. Login to your site's admin panel and navigate to Plugins -> Add New -> Upload.
-3. Click choose file, select the plugin file and click install
+1. Download the plugin ZIP file from the WordPress.org plugin page.
+2. Log in to your site's admin panel and go to Plugins → Add New → Upload Plugin.
+3. Choose the ZIP file and click Install Now, then Activate.
 
-### Install Using FTP
+= Install Using FTP =
 
-If you are unable to use any of the methods due to internet connectivity and file permission issues, then you can use this method-
+If neither method above works due to connectivity or file permission issues:
 
-1. Download the plugin by clicking on the red button above. A ZIP file will be downloaded.
-2. Unzip the file.
-3. Launch your favorite FTP client. Such as FileZilla, FireFTP, CyberDuck etc. If you are a more advanced user, then you can use SSH too.
-4. Upload the folder to `wp-content/plugins/`
-5. Log in to your WordPress dashboard.
-6. Navigate to Plugins -> Installed
-7. Activate the plugin
+1. Download the plugin ZIP file and unzip it.
+2. Connect to your server with an FTP client (FileZilla, Cyberduck, or similar), or SSH if you're comfortable with it.
+3. Upload the unzipped folder to `wp-content/plugins/`.
+4. Log in to your WordPress dashboard, go to Plugins → Installed Plugins.
+5. Activate the plugin.
 
 == Frequently Asked Questions ==
 
-= Is it compatible with any kinds of WooCommerce Theme? =
+= Will this work with my WooCommerce theme? =
 
-Yes, it's compatible with any WooCommerce theme including OceanWP / Astra / Flatsome / Avada / Storefront / WR Nitro / Divi / BeTheme / Zerif Lite / Hestia / Shopisle and more. But sometimes it may require small css tweak.
+Yes, it's built to work with any WooCommerce theme, including OceanWP, Astra, Flatsome, Avada, Storefront, WP Nitro, Divi, BeTheme, Zerif Lite, Hestia, and Shopkeeper, among others. Heavily customized themes can occasionally need a small CSS tweak, since every theme styles its product gallery a little differently.
 
-= Does it work on MultiSite? =
+= Does this plugin slow down my store? =
 
-Yes, it is.
+The plugin only loads its scripts and styles on pages where a gallery can actually appear, and you can disable it entirely for product types you don't use it on (Simple, Grouped, or External/Affiliate) from the settings. That keeps the extra load limited to pages that need it.
+
+= How many extra images can I add per variation in the free version? =
+
+The free version supports a couple of extra images per variation beyond the default one. If a product needs a larger photo set per variation, the Premium version removes that limit and allows unlimited images per variation.
+
+= Can I add video to my product gallery? =
+
+Video (YouTube, Vimeo, or self-hosted) is a Premium feature. The free version handles images only. See the External Services section above for what happens when a video is embedded.
+
+= I switched a variation and the gallery didn't change. What's wrong? =
+
+This usually means that specific variation doesn't have its own gallery images set yet, so WooCommerce falls back to the product's default image. Open that variation in the Variations tab and confirm images have been added to its gallery field.
+
+= Can I move the thumbnails to the side instead of underneath the main image? =
+
+Yes. The settings include an option to position gallery thumbnails to the left, right, or bottom of the main image.
+
+= Does it work on a WordPress Multisite install? =
+
+Yes, the plugin works on Multisite installs the same way it works on a single-site install.
+
+= I'm migrating from another variation gallery plugin. Will I lose my existing images? =
+
+The plugin includes a migration option built to pull variation image data over from some other variation gallery plugins, so you shouldn't need to rebuild galleries from scratch. Back up your site before migrating, as with any plugin switch.
+
+= Does adding a YouTube or Vimeo video share my customers' data with Google or Vimeo? =
+
+No customer or order data is sent by this plugin. But once a video is embedded and a shopper's browser loads it, standard embed behavior applies: the shopper's browser connects to YouTube or Vimeo directly, which can receive their IP address and viewing activity under YouTube's or Vimeo's own privacy policy. See the External Services section above for details.
+
+= Can I turn this off for certain product types, like Simple products? =
+
+Yes. The settings let you disable the gallery plugin's script for any of WooCommerce's four product types: Simple, Variable, Grouped, or External/Affiliate.
+
+= Does this replace WooCommerce's default gallery, or conflict with the native variation gallery WooCommerce added in 10.9? =
+
+It works alongside WooCommerce's normal gallery and variation-switching behavior — this plugin adds a gallery field per variation and swaps in that variation's images when it's selected. If you're on WooCommerce 10.9 or later and have turned on the experimental "Variation gallery" setting (it's off by default), that setting can also store more than one image per variation, but it doesn't include a display or interaction layer — no thumbnail position, slider, zoom, lightbox, responsive sizing, or video — and it doesn't touch simple, grouped, or external/affiliate product galleries at all. This plugin adds all of that. If you plan to turn on WooCommerce's native setting as well, test on staging first and check with support before running both at once.
+
+= Is there a premium version, and what does it add? =
+
+Yes. [Premium](http://bit.ly/variation-image-gl-pro) removes the image limit per variation and adds video support (YouTube, Vimeo, self-hosted) across variable, simple, grouped, and external/affiliate products. See the Free vs Premium section above for the full list.
+
+= How to Migrate Additional Variation Images Gallery for WooCommerce Images to WooCommerce Variation Gallery? =
+
+
+From WooCommerce 11.1.0 (or higher), you can migrate your existing variation gallery images to the new WooCommerce default Variation Gallery.
+
+To successfully migrate your variation images, follow these steps:
+
+- Hover over the GetWooPlugins menu on your dashboard and click on Gallery Settings
+- Click on the Migration tab (GetWooPlugins → Gallery Settings → Migration)
+- Click on Start Migration ( It will start migrating in background )
+
+After a successful migration, WooCommerce's built-in Variation Gallery will manage your variation gallery images.
 
 == Screenshots ==
 
-1. Gallery Output
-2. Gallery Zoom Feature
-3. Gallery Settings
-4. Adding Images on gallery
+1. Gallery output on the storefront.
+2. Gallery zoom feature.
+3. Gallery settings panel.
+4. Adding images to a variation's gallery.
 
 == Changelog ==
 
-= 1.3.32 - 29-06-2026 =
+= 1.3.33 - 06-09-2026 =
+* Add: WP 7.1+ compatibility.
+* Add: WC 11.1+ compatibility.
+* Add: Migration option to default woocommerce variation gallery.
 
+= 1.3.32 - 29-06-2026 =
 * Add: WP 7.0+ compatibility.
 * Add: WC 10.9+ compatibility.
 
 = 1.3.31 - 19-05-2026 =
-
-* Fix: Fixed `WooCommerce\Enums\ProductType` no found issue.
+* Fix: Fixed `WooCommerce\Enums\ProductType` not found issue.
 
 = 1.3.30 - 21-04-2026 =
-
 * Add: WC 10.7+ compatibility.
-* Add: Placeholder fallback Setting.
+* Add: Placeholder fallback setting.
 
 = 1.3.29 - 01-04-2026 =
-
 * Add: WP 6.9+ compatibility.
 * Add: WC 10.6+ compatibility.
-* Add: Product Image Visibility Setting.
+* Add: Product image visibility setting.
 
 = 1.3.28 - 05-03-2025 =
-
-* Fix: CDN Image Load Issue on admin.
-* Update: Update Template version.
+* Fix: CDN image load issue on admin.
+* Update: Updated template version.
 * Add: WC 9.7+ compatibility.
 
 = 1.3.27 - 16-02-2025 =
-
 * Fix: Settings table broken issue.
 * Add: WC 9.6+ compatibility.
 
 = 1.3.26 - 11-12-2024 =
-
-* Fix: JS Issue on save settings.
-* Update: "Hide Main Product Image" settings.
+* Fix: JS issue on save settings.
+* Update: "Hide Main Product Image" setting.
 * Add: WP 6.7+ compatibility.
 * Add: WC 9.4+ compatibility.
 
 = 1.3.25 - 15-09-2024 =
-
 * Fix: Mobile issue on external videos.
 * Add: WooCommerce 9.3+ compatibility.
 
 = 1.3.24 - 25-08-2024 =
-
-* Fix: `get_current_screen` function issue for MultiVendor plugins.
+* Fix: `get_current_screen` function issue for multi-vendor plugins.
 * Add: WooCommerce 9.2+ compatibility.
 
-= 1.3.23 - 01-08-2024 =
+= Legacy history (2013–2024) =
 
-* Update: Gallery template file version.
-* Fix: Repeated image load.
-* Add: WordPress 6.6+ compatibility.
-* Add: WooCommerce 9.1+ compatibility.
-
-= 1.3.22 - 17-04-2024 =
-
-* Add: MultiVendorX Plugin Compatible.
-* Add: Filter `woo_variation_gallery_zoom_icon_html` to change zoom icon markup
-* Add: Option to include default gallery images with variation images.
-* Fix: admin screen issue.
-* Add: WordPress 6.5+ compatibility.
-* Add: WooCommerce 8.7+ compatibility.
-
-= 1.3.21 - 21-11-2023 =
-
-* Add: twentytwentyfour theme support.
-* Add: WordPress 6.4+ compatibility.
-* Add: WooCommerce 8.3+ compatibility.
-
-= 1.3.20 - 07-09-2023 =
-
-* Add: twentytwentythree theme support.
-* Add: WooCommerce 8.0+ compatibility.
-* Add: WordPress 6.3+ compatibility.
-
-= 1.3.19 - 18-06-2023 =
-
-* Add: WooCommerce 7.8+ compatibility.
-* Update: Additional Rest API Response
-* Update: Product image template version
-
-= 1.3.18 - 22-05-2023 =
-
-* Add: WooCommerce 7.7+ compatibility.
-* Fix: Safari browser issue during vimeo pause
-
-= 1.3.17 - 13-04-2023 =
-
-* Update: Improve Video Function to support YouTube shorts.
-* Add: WP 6.2+ compatibility.
-* ADD: Action `woo_variation_product_gallery_slider_start` added to slider markup start
-* ADD: Action `woo_variation_product_gallery_slider_end` added to slider markup end
-
-= 1.3.16 - 28-03-2023 =
-
-* Fix: Variation loading issue when no variation image available
-
-= 1.3.15 - 27-03-2023 =
-
-* Fix: PHP issue for PHP 8.* migration
-
-= 1.3.14 - 23-03-2023 =
-
-* Update: WooCommerce 7.5 Compatibility
-* Fix: PHP @putenv issue during migration
-* Update: Support WooCommerce High-Performance Order Storage
-* Fix: WPML Global Image translation issue.
-
-= 1.3.13 - 13-10-2022 =
-
-* Update: WooCommerce 7.1 Compatibility
-* Update: Gallery width based on thumbnail availability
-
-= 1.3.12 - 03-10-2022 =
-
-* Update: WordPress 6.1 and WooCommerce 7.0 Compatibility
-
-= 1.3.11 - 28-08-2022 =
-
-* Update: Settings Scripts
-
-= 1.3.10 - 23-08-2022 =
-
-* Fix: Settings Issue
-
-= 1.3.9 - 14-08-2022 =
-
-* Update: WooCommerce Compatibility
-
-= 1.3.8 - 31-07-2022 =
-
-* Update: Dependency Script
-
-= 1.3.7 - 20-07-2022 =
-
-* Update: Settings script
-
-= 1.3.6 - 08-07-2022 =
-
-* Update: Preloader option
-
-= 1.3.5 - 16-05-2022 =
-
-* Fix: Thumbnail RTL Issue
-
-= 1.3.4 - 13-05-2022 =
-
-* Update: Settings script Updated
-* Update: Migration Script
-
-= 1.3.3 - 26-05-2022 =
-
-* Update: Dependency script Updated
-* Update: WordPress Compatibility
-
-= 1.3.2 - 18-05-2022 =
-
-* Update: Settings Classes
-* Update: WooCommerce and WordPress Compatibility
-
-= 1.3.1 - 15-03-2022 =
-
-* Fixed: Product edit panel expand issue
-* Fixed: Flatsome theme
-
-= 1.3.0 - 25-02-2022 =
-
-* Update: Plugin structure and settings panel
-* Update: Add WordPress 5.9+ and WooCommerce 6.2+ Compatibility
-
-= 1.2.9 =
-
-* Add: Option to remove default featured image from gallery
-
-= 1.2.8 =
-
-* Update: trim imported url before import
-* Update: Add WordPress 5.8+ and WooCommerce 5.6+ Compatibility
-* Fix: variation duplicator `image_saved_from` issue.
-
-= 1.2.7 =
-
-* Add: Add filter for Export / Import
-* Update: Add WordPress 5.8+ and WooCommerce 5.6+ Compatibility
-
-= 1.2.6 =
-
-* Fix: PHP issue
-
-= 1.2.5 =
-
-* Add: Option to adjust gallery thumbnail image width.
-* Add: Filter `disable_woo_variation_gallery` to disable gallery on specific page or product(s)
-* Add: Option to disable gallery on specific product type
-* Update: Add WordPress 5.7+ and WooCommerce 5.2 Compatibility
-* Fix: Mesmerize CSS Issue
-
-= 1.2.4 =
-
-* Update: WordPress 5.7 and WooCommerce 5.1 Compatibility
-
-= 1.2.3 =
-
-* Add: Yith Banner plugin support
-* Add: Dokan Multivendor plugin support
-* Update: Change wrapper class to `woo_variation_gallery_product_wrapper_classes`
-* Add: Action added `woo_variation_product_gallery_start`
-* Add: Action added `woo_variation_product_gallery_end`
-
-= 1.2.2 =
-
-* Fix: Issue when Jetpack Photon is in use
-* Fix: Elementor Pro editor product image load
-* Add: Support for [Duplicate Variations for WooCommerce](https://wordpress.org/plugins/variation-duplicator-for-woocommerce/)
-
-= 1.2.1 =
-
-* Add: Migration option from other plugin
-
-= 1.2.0 =
-
-* Add: More Gallery Configure options
-* Add: CSS Clear fix option on mobile and table devices.
-
-= 1.1.43 =
-
-* Update: WP and WC Compatibility
-* Add: Fixed width and height
-* Add: Preloader disable option
-* Fix: Selected attribute value images by URL
-
-
-= 1.1.42 =
-
-* Update: WP and WC Compatibility
-* Fix: Empty gallery export PHP warning issue.
-
-= 1.1.41 =
-
-* Improve: Match variation change image
-
-= 1.1.40 =
-
-* Improve: Performance
-
-= 1.1.39 =
-
-* Improve: Gallery image attributes
-
-= 1.1.38 =
-
-* Fix: Gallery saving issue for WooCommerce 4.0 bug
-
-= 1.1.37 =
-
-* Add: Filter to modify featured image of gallery.
-* Fix: affiliate-wp backend conflict issue.
-
-= 1.1.36 =
-
-* Fix: Divi theme load issue.
-
-= 1.1.35 =
-
-* Update: Gallery
-
-= 1.1.34 =
-
-* Update: Change settings load priority to fix WooCommerce Anti Fraud plugin issue.
-
-= 1.1.33 =
-
-* Fix: Known Issues
-
-= 1.1.32 =
-
-* Add: Basel Theme Support
-* Add: Gallery data on WC REST API Response
-
-= 1.1.31 =
-
-* Update: WooCommerce template update
-
-= 1.1.30 =
-
-* Fix: WooCommerce REST Api issue
-
-= 1.1.29 =
-
-* Fix: Security update
-
-= 1.1.28 =
-
-* Fix: Source Map removed.
-
-= 1.1.27 =
-
-* Fix: Known Issue
-
-= 1.1.26 =
-
-* Add: Filter to override gallery template
-* Fix: WooCommerce disable notice
-
-= 1.1.25 =
-
-* Update: Readme and Support WooCommerce 3.6
-
-= 1.1.24 =
-
-* Update: Settings Panel
-* Add: Tutorial Section
-
-= 1.1.23 =
-
-* Add: Oxygen Theme Support
-
-= 1.1.22 =
-
-* Remove: CDN Load
-
-= 1.1.21 =
-
-* Add: Image Preload Settings
-
-= 1.1.20 =
-
-* Add: RTL Support
-* Fix: Known JS Issue
-
-= 1.1.19 =
-
-* Fix: ROYAL Theme Issue
-* Fix: Non image `srcset` issue
-
-= 1.1.18 =
-
-* Fix: Known JS Issue and Duplication
-
-= 1.1.17 =
-
-* Fix: Gallery Image loading ajax
-
-= 1.1.16 =
-
-* Fix: Bundle product disable
-* Add: Customizr theme support
-
-= 1.1.15 =
-
-* Fix Shopkeeper and Saha theme template duplication issue.
-* Add `wvg_product_images_template_include_once` filter added.
-
-= 1.1.14 =
-
-* Fix backend JS Issue
-* Add YITH quickview support
-
-= 1.1.13 =
-
-* Fix JS Issue
-
-= 1.1.12 =
-
-* Add: Flatsome Custom product support.
-
-= 1.1.11 =
-
-* Add: Customify theme support
-* Add: Suave theme support
-* Add: `disable_wvg_inline_style` filter and `disable_wvg_enqueue_scripts` filter to prevent script loading.
-
-= 1.1.10 =
-
-* Add: IE-11 Support
-
-= 1.1.9 =
-
-* Add: Elementor pro support
-* Add: Saha theme support
-* Add: Preloader style option added
-* Add: Gallery export-import added
-* Add: Gallery responsive width option
-
-= 1.1.8 =
-
-* Fix: Backend JS Small Image Issue
-* Add: Preload blur style
-
-= 1.1.7 =
-
-* Add: Preload variation images
-* Add: Reset gallery option on select variation
-
-= 1.1.6.1 =
-
-* Fix: Small JS Issue.
-
-= 1.1.6 =
-
-* Fix: Salient Theme fix and single product gallery.
-
-= 1.1.5 =
-
-* Fix: Lazy loading on slow net.
-
-= 1.1.4 =
-
-* Add: Thumbnails Gap option
-* Add: Support lots of theme default width
-
-= 1.1.3 =
-
-* Fix: Gallery Image loading issue
-
-= 1.1.2 =
-
-* Fix: Gallery Template Issue
-
-= 1.1.1 =
-
-* Fix: JS Issue
-
-= 1.1.0 =
-
-* Update: FlexSlider to Slick Slider
-* Add: More Options
-
-= 1.0.5 =
-
-* Fix: Frontend CSS Update
-
-= 1.0.4 =
-
-* Add: Theme Override option added
-
-= 1.0.3 =
-
-* Fix: Non Gallery image issue
-
-= 1.0.2 =
-
-* **Kalium** Theme compatibility
-
-= 1.0.1 =
-
-* Duplicate feed fixing
-
-= 1.0.0 =
-
-* Initial release
+Earlier versions (1.0.0 through 1.3.23) covered: the plugin's initial release and its move from FlexSlider to Slick Slider; the core feature set now in the free version — thumbnail gaps, preloader styles, image zoom, lightbox, sorting, gallery export/import, and RTL support; a full settings-panel and plugin-structure rewrite in version 1.3.0; WooCommerce REST API gallery data; High-Performance Order Storage compatibility; PHP 8 compatibility; WPML global image translation fixes; YouTube Shorts support for video; a migration tool for switching from other variation gallery plugins; and ongoing theme-compatibility additions for Basel, Oxygen, Customizr, Salient, Divi, Flatsome, Royal, Kalium, and other WooCommerce themes, alongside regular WordPress and WooCommerce version compatibility updates.
 
 == Upgrade Notice ==
+
+= 1.3.32 =
+Adds compatibility with WordPress 7.0 and WooCommerce 10.9. No action needed before updating.

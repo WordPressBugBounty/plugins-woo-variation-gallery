@@ -3,7 +3,6 @@
 defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
 use Automattic\WooCommerce\Enums\ProductType;
-use Automattic\WooCommerce\Utilities\FeaturesUtil;
 
 if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 
@@ -258,6 +257,22 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			return trim( $inline_css );
 		}
 
+		public function is_wc_enabled(): bool {
+			if ( version_compare( wc()->version, '11.1.0', '>=' ) ) {
+				return true;
+			}
+
+			if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+				$is_enabled = \Automattic\WooCommerce\Utilities\FeaturesUtil::feature_is_enabled( 'variation_gallery' );
+
+				if ( $is_enabled ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		public function wpml_object_id( $object_id, $type = 'post', $language = null ) {
 			$current_language = apply_filters( 'wpml_current_language', $language );
 
@@ -265,13 +280,15 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 		}
 
 		public function get_gallery_image_ids( $variation_id ): array {
-			$images_as_string = get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
-			$images           = wp_parse_id_list( $images_as_string );
-
-			if ( FeaturesUtil::feature_is_enabled( 'variation_gallery' ) ) {
+			// Comes from WooCommerce.
+			if ( $this->is_wc_enabled() ) {
 				return wc_get_product( $variation_id )->get_gallery_image_ids();
 			}
 
+			$images_as_string = get_post_meta( $variation_id, 'woo_variation_gallery_images', true );
+			$images           = wp_parse_id_list( $images_as_string );
+
+			// Comes from Gallery Plugin.
 			return array_map( array( $this, 'wpml_object_id' ), $images );
 		}
 
@@ -359,11 +376,11 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			return apply_filters( 'woo_variation_gallery_available_variation_gallery', $available_variation, $variation, $product_id );
 		}
 
-		public function get_variable_product_type() {
+		public function get_variable_product_type(): string {
 			return class_exists( ProductType::class ) ? ProductType::VARIABLE : 'variable';
 		}
 
-		public function get_product_gallery_data( $product_id, $variation_id = 0 ) {
+		public function get_product_gallery_data( $product_id, $variation_id = 0 ): array {
 			$product = wc_get_product( $product_id );
 
 			$options = array(
@@ -578,7 +595,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			return apply_filters( 'woo_variation_gallery_get_image_props', $props, $attachment_id, $product_id );
 		}
 
-		public function get_video_info( $url ) {
+		public function get_video_info( $url ): array {
 			$videos = array(
 				'type'      => false,
 				'id'        => 0,
@@ -650,20 +667,20 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			return apply_filters( 'woo_variation_gallery_get_embed_url', $video_info['embed_url'], $video_info );
 		}
 
-		public function get_product_gallery_images_html( $image_id ) {
+		public function get_product_gallery_images_html( $image_id ): string {
 			$image = $this->get_product_attachment_props( $image_id );
 
+			$has_video = isset( $image['video_link'] ) && '' !== trim( $image['video_link'] );
 
 			$classes = array( 'wvg-gallery-image' );
-			if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) ) {
+
+			if ( $has_video ) {
 				$classes[] = 'wvg-gallery-video-slider';
 			}
 
 			$classes = apply_filters( 'woo_variation_gallery_slider_image_html_class', $classes, $image_id, $image );
 
-
 			$template = '<div class="wvg-single-gallery-image-container"><img loading="lazy" width="%d" height="%d" src="%s" class="%s" alt="%s" title="%s" data-caption="%s" data-src="%s" data-large_image="%s" data-large_image_width="%d" data-large_image_height="%d" srcset="%s" sizes="%s" %s /></div>';
-
 
 			$inner_html = sprintf( $template,
 				esc_attr( $image['src_w'] ),
@@ -681,20 +698,17 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 				esc_attr( $image['sizes'] ),
 				$image['extra_params'] );
 
-
-			if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) && $image['video_embed_type'] === 'iframe' ) {
+			if ( $has_video && $image['video_embed_type'] === 'iframe' ) {
 				$template   = '<div class="wvg-single-gallery-iframe-container" style="--_video_ratio: %s"><iframe src="%s" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>';
 				$inner_html = sprintf( $template, $image['video_ratio'], $image['video_embed_url'] );
 			}
 
-			if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) && $image['video_embed_type'] === 'video' ) {
+			if ( $has_video && $image['video_embed_type'] === 'video' ) {
 				$template   = '<div class="wvg-single-gallery-video-container" style="--_video_ratio: %s"><video preload="auto" controls controlsList="nodownload" src="%s"></video></div>';
 				$inner_html = sprintf( $template, $image['video_ratio'], $image['video_link'] );
 			}
 
-
 			$inner_html = apply_filters( 'woo_variation_gallery_image_inner_html', $inner_html, $image, $template, $image_id );
-
 
 			return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
 		}
@@ -704,10 +718,12 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 
 			// If require thumbnail
 
+			$has_video = isset( $image['video_link'] ) && '' !== trim( $image['video_link'] );
+
 			$classes = array( 'wvg-gallery-thumbnail-image' );
 
-			if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) ) {
-				array_push( $classes, 'wvg-gallery-video-thumbnail' );
+			if ( $has_video ) {
+				$classes[] = 'wvg-gallery-video-thumbnail';
 			}
 
 			$classes = apply_filters( 'woo_variation_gallery_thumbnail_image_html_class', $classes, $image_id, $image );
@@ -729,13 +745,15 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 
 			$remove_featured_image = wc_string_to_bool( woo_variation_gallery()->get_option( 'remove_featured_image', 'no' ) );
 
-			if ( $remove_featured_image && absint( $attachment_id ) == absint( $post_thumbnail_id ) ) {
+			if ( $remove_featured_image && absint( $attachment_id ) === absint( $post_thumbnail_id ) ) {
 				return '';
 			}
 
+			$has_video = isset( $image['video_link'] ) && '' !== trim( $image['video_link'] );
+
 			$classes = array( 'wvg-gallery-image' );
-			if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) ) {
-				array_push( $classes, 'wvg-gallery-video-slider' );
+			if ( $has_video ) {
+				$classes[] = 'wvg-gallery-video-slider';
 			}
 			$classes = apply_filters( 'woo_variation_gallery_slider_image_html_class', $classes, $attachment_id, $image );
 
@@ -758,13 +776,15 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 				esc_attr( $image['sizes'] ),
 				$image['extra_params'] );
 
+			$has_video = isset( $image['video_link'] ) && '' !== trim( $image['video_link'] );
+
 			if ( ! $options['has_only_thumbnail'] ) {
-				if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) && $image['video_embed_type'] === 'iframe' ) {
+				if ( $has_video && $image['video_embed_type'] === 'iframe' ) {
 					$template   = '<div class="wvg-single-gallery-iframe-container" style="--_video_ratio: %s"><iframe src="%s" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>';
 					$inner_html = sprintf( $template, $image['video_ratio'], $image['video_embed_url'] );
 				}
 
-				if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) && $image['video_embed_type'] === 'video' ) {
+				if ( $has_video && $image['video_embed_type'] === 'video' ) {
 					$template   = '<div class="wvg-single-gallery-video-container" style="--_video_ratio: %s"><video preload="auto" controls controlsList="nodownload" src="%s"></video></div>';
 					$inner_html = sprintf( $template, $image['video_ratio'], $image['video_link'] );
 				}
@@ -776,8 +796,8 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			if ( ! $options['is_main_thumbnail'] ) {
 				$classes = array( 'wvg-gallery-thumbnail-image' );
 
-				if ( isset( $image['video_link'] ) && ! empty( $image['video_link'] ) ) {
-					array_push( $classes, 'wvg-gallery-video-thumbnail' );
+				if ( $has_video ) {
+					$classes[] = 'wvg-gallery-video-thumbnail';
 				}
 
 				$classes = apply_filters( 'woo_variation_gallery_thumbnail_image_html_class', $classes, $attachment_id, $image );

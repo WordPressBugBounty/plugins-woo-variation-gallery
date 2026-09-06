@@ -55,23 +55,23 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Migrate_Request', false ) ):
 		/**
 		 * Code to execute for each item in the queue
 		 *
-		 * @param mixed $item Queue item to iterate over.
+		 * @param array{variation_id: int, migrate_from: string} $item Queue item to iterate over.
 		 *
 		 * @return bool
 		 */
-		protected function task( $item ) {
 
-			if ( ! is_array( $item ) && ! isset( $item['variation_id'] ) ) {
+		protected function task( $item ) {
+			if ( ! is_array( $item ) || ! isset( $item['variation_id'] ) ) {
 				return false;
 			}
 
-			if ( ! $item['migrate_from'] ) {
+			if ( ! isset( $item['migrate_from'] ) ) {
 				return false;
 			}
 
 			$this->product_id = absint( $item['variation_id'] );
 			$product          = wc_get_product( $this->product_id );
-			$migrate_from     = sanitize_text_field( $item['migrate_from'] );
+			$migrate_from     = sanitize_key( $item['migrate_from'] );
 
 			if ( ! $product ) {
 				return false;
@@ -82,12 +82,22 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Migrate_Request', false ) ):
 
 			$wc_gallery_images_array = apply_filters( 'woo_variation_gallery_migrate_images', array(), $migrate_from, $this->product_id, $product );
 
-			if ( empty( $wc_gallery_images_array ) ) {
+			if ( 0 === count( $wc_gallery_images_array ) ) {
 				return false;
 			}
 
 			$log = wc_get_logger();
 			$log->info( sprintf( esc_html__( 'Migration for variation product ID: %s. From: %s', 'woo-variation-gallery' ), $this->product_id, $migrate_from ), array( 'source' => 'woo-variation-gallery' ) );
+
+			if ( 'from_default' === $migrate_from ) {
+				$gallery_image_ids = $product->get_gallery_image_ids();
+
+				$image_ids = array_unique( array_merge( array(), $gallery_image_ids, $wc_gallery_images_array ) );
+				$product->set_gallery_image_ids( $image_ids );
+				$product->save();
+
+				return false;
+			}
 
 			// Update the meta data
 			update_post_meta( $this->product_id, 'woo_variation_gallery_images', array_values( array_filter( $wc_gallery_images_array ) ) );
@@ -103,6 +113,9 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Migrate_Request', false ) ):
 		 */
 		protected function complete() {
 			parent::complete();
+
+			update_option( '_woo_variation_gallery_image_migrated', 'yes' );
+
 			$log = wc_get_logger();
 			$log->info( esc_html__( 'Migration completed of all variation product image', 'woo-variation-gallery' ), array( 'source' => 'woo-variation-gallery' ) );
 		}

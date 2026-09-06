@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Emran Ahmed <emran.bd.08@gmail.com>\n"
-"POT-Creation-Date: 2026-07-08 13:43+0000\n"
+"POT-Creation-Date: 2026-09-06 12:55+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -15,43 +15,51 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../includes/class-woo-variation-gallery-backend.php:78, ../includes/class-woo-variation-gallery-settings.php:20
+#: ../includes/class-woo-variation-gallery-backend.php:93
+msgid "Migrate"
+msgstr ""
+
+#: ../includes/class-woo-variation-gallery-backend.php:93
+msgid "Additional Variation Images Gallery for WooCommerce to WooCommerce Variation gallery"
+msgstr ""
+
+#: ../includes/class-woo-variation-gallery-backend.php:112, ../includes/class-woo-variation-gallery-settings.php:20
 msgid "Variation Gallery"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:98
+#: ../includes/class-woo-variation-gallery-backend.php:132
 msgid "Add Variation Gallery Image"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:103
+#: ../includes/class-woo-variation-gallery-backend.php:137
 msgid "Upgrade to pro to add more images and videos"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:161
+#: ../includes/class-woo-variation-gallery-backend.php:195
 msgid "Choose Image"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:162
+#: ../includes/class-woo-variation-gallery-backend.php:196
 msgid "Add Images"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:203
+#: ../includes/class-woo-variation-gallery-backend.php:237
 msgid "View documentation"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:204
+#: ../includes/class-woo-variation-gallery-backend.php:238
 msgid "Help &amp; Support"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:211
+#: ../includes/class-woo-variation-gallery-backend.php:245
 msgid "View Gallery Settings"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:211
+#: ../includes/class-woo-variation-gallery-backend.php:245
 msgid "Settings"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:215
+#: ../includes/class-woo-variation-gallery-backend.php:249
 msgid "Go Pro"
 msgstr ""
 
@@ -139,67 +147,75 @@ msgstr ""
 msgid "Migration for variation product ID: %s. From: %s"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate-request.php:107
+#: ../includes/class-woo-variation-gallery-migrate-request.php:120
 msgid "Migration completed of all variation product image"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate.php:42
-msgid "Migrate from \"WooCommerce Additional Variation Images\" plugin"
+#: ../includes/class-woo-variation-gallery-migrate.php:59
+msgid "Migrate to WooCommerce Variation gallery"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate.php:43, ../includes/class-woo-variation-gallery-migrate.php:50, ../includes/class-woo-variation-gallery-migrate.php:57, ../includes/class-woo-variation-gallery-migrate.php:64, ../includes/class-woo-variation-gallery-migrate.php:71
+#: ../includes/class-woo-variation-gallery-migrate.php:60, ../includes/class-woo-variation-gallery-migrate.php:70, ../includes/class-woo-variation-gallery-migrate.php:77, ../includes/class-woo-variation-gallery-migrate.php:84, ../includes/class-woo-variation-gallery-migrate.php:91, ../includes/class-woo-variation-gallery-migrate.php:98
 msgid "Start migration"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate.php:44
+#: ../includes/class-woo-variation-gallery-migrate.php:61
+msgid "This will migrate from \"Additional Variation Images Gallery for WooCommerce\" to \"WooCommerce Variation gallery\"."
+msgstr ""
+
+#: ../includes/class-woo-variation-gallery-migrate.php:69
+msgid "Migrate from \"WooCommerce Additional Variation Images\" plugin"
+msgstr ""
+
+#: ../includes/class-woo-variation-gallery-migrate.php:71
 msgid "This will migrate from \"WooCommerce Additional Variation Images\" to \"Additional Variation Images Gallery for WooCommerce\"."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate.php:49
+#: ../includes/class-woo-variation-gallery-migrate.php:76
 msgid "Migrate from \"WooThumbs for WooCommerce by Iconic\" plugin"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate.php:51
+#: ../includes/class-woo-variation-gallery-migrate.php:78
 msgid "This will migrate from \"WooThumbs for WooCommerce by Iconic\" to \"Additional Variation Images Gallery for WooCommerce\"."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate.php:56
+#: ../includes/class-woo-variation-gallery-migrate.php:83
 msgid "Migrate from \"Smart Variations Images for WooCommerce\" plugin"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate.php:58
+#: ../includes/class-woo-variation-gallery-migrate.php:85
 msgid "This will migrate from \"Smart Variations Images for WooCommerce\" to \"Additional Variation Images Gallery for WooCommerce\"."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate.php:63
+#: ../includes/class-woo-variation-gallery-migrate.php:90
 msgid "Migrate from \"Ajaxy Woocommerce Multiple Variation Image\" plugin"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate.php:65
+#: ../includes/class-woo-variation-gallery-migrate.php:92
 msgid "This will migrate from \"Ajaxy Woocommerce Multiple Variation Image\" to \"Additional Variation Images Gallery for WooCommerce\"."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate.php:70
+#: ../includes/class-woo-variation-gallery-migrate.php:97
 msgid "Migrate from \"Variation Images Gallery for WooCommerce by RadiusTheme\" plugin"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate.php:72
+#: ../includes/class-woo-variation-gallery-migrate.php:99
 msgid "This will migrate from \"Variation Images Gallery for WooCommerce by RadiusTheme\" to \"Additional Variation Images Gallery for WooCommerce\"."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate.php:82, ../includes/class-woo-variation-gallery-migrate.php:88, ../includes/class-woo-variation-gallery-migrate.php:94, ../includes/class-woo-variation-gallery-migrate.php:100, ../includes/class-woo-variation-gallery-migrate.php:106
+#: ../includes/class-woo-variation-gallery-migrate.php:109, ../includes/class-woo-variation-gallery-migrate.php:115, ../includes/class-woo-variation-gallery-migrate.php:121, ../includes/class-woo-variation-gallery-migrate.php:127, ../includes/class-woo-variation-gallery-migrate.php:133, ../includes/class-woo-variation-gallery-migrate.php:139
 msgid "Variation product migration has been scheduled to run in the background."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration.php:49
+#: ../includes/class-woo-variation-gallery-migration.php:46
 msgid "Cancelled migration job."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration.php:59
+#: ../includes/class-woo-variation-gallery-migration.php:57
 msgid "Cancel migration"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration.php:61, ../includes/class-woo-variation-gallery-migration.php:72
+#: ../includes/class-woo-variation-gallery-migration.php:59, ../includes/class-woo-variation-gallery-migration.php:70
 msgid "Variation Gallery Migration is running in the background. Depending on the amount of variation product in your store this may take a while."
 msgstr ""
 
@@ -716,5 +732,5 @@ msgid "WooCommerce"
 msgstr ""
 
 #: ../woo-variation-gallery.php:47
-msgid "<strong>Variation Gallery for WooCommerce</strong> is an add-on of "
+msgid "<strong>Additional Variation Images Gallery for WooCommerce</strong> is an add-on of "
 msgstr ""

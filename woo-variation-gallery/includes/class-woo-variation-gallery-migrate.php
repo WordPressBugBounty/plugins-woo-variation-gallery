@@ -32,11 +32,38 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Migrate', false ) ):
 			add_action( 'init', array( 'Woo_Variation_Gallery_Migration', 'init' ) );
 		}
 
-		public function init() {
+		public function is_wc_enabled(): bool {
+			if ( version_compare( wc()->version, '11.1.0', '>=' ) ) {
+				return true;
+			}
+
+			if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+				$is_enabled = \Automattic\WooCommerce\Utilities\FeaturesUtil::feature_is_enabled( 'variation_gallery' );
+
+				if ( $is_enabled ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public function init(): void {
 
 		}
 
 		public function add_migration_list( $tools = array() ) {
+
+			if ( $this->is_wc_enabled() ) {
+				$tools['__to_wc_gallery'] = array(
+					'name'     => esc_html__( 'Migrate to WooCommerce Variation gallery', 'woo-variation-gallery' ),
+					'button'   => esc_html__( 'Start migration', 'woo-variation-gallery' ),
+					'desc'     => esc_html__( 'This will migrate from "Additional Variation Images Gallery for WooCommerce" to "WooCommerce Variation gallery".', 'woo-variation-gallery' ),
+					'callback' => array( $this, 'to_wc_gallery_migration_queue' )
+				);
+
+				return $tools;
+			}
 
 			$tools['woo_variation_gallery_wc_avi_migrate'] = array(
 				'name'     => esc_html__( 'Migrate from "WooCommerce Additional Variation Images" plugin', 'woo-variation-gallery' ),
@@ -82,6 +109,12 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Migrate', false ) ):
 			return esc_html__( 'Variation product migration has been scheduled to run in the background.', 'woo-variation-gallery' );
 		}
 
+		public function to_wc_gallery_migration_queue() {
+			Woo_Variation_Gallery_Migration::queue_migration( 'from_default' );
+
+			return esc_html__( 'Variation product migration has been scheduled to run in the background.', 'woo-variation-gallery' );
+		}
+
 		public function woothumbs_migration_queue() {
 			Woo_Variation_Gallery_Migration::queue_migration( 'woothumbs' );
 
@@ -107,6 +140,11 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Migrate', false ) ):
 		}
 
 		public function migrate_images( $images, $migrate_from, $product_id ) {
+
+			if ( 'from_default' === $migrate_from ) {
+				$gallery_images = get_post_meta( $product_id, 'woo_variation_gallery_images', true );
+				$images = wp_parse_id_list( $gallery_images );
+			}
 
 			if ( 'woocommerce-additional-variation-images' === $migrate_from ) {
 				$wc_gallery_images = get_post_meta( $product_id, '_wc_additional_variation_images', true );

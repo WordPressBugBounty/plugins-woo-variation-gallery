@@ -2,8 +2,6 @@
 
 defined( 'ABSPATH' ) or die( 'Keep Silent' );
 
-use Automattic\WooCommerce\Utilities\FeaturesUtil;
-
 if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 
 	class Woo_Variation_Gallery_Backend {
@@ -61,8 +59,44 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 			Woo_Variation_Gallery_Deactivate_Feedback::instance();
 		}
 
+		public function is_wc_enabled(): bool {
+			if ( version_compare( wc()->version, '11.1.0', '>=' ) ) {
+				return true;
+			}
+
+			if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+				$is_enabled = \Automattic\WooCommerce\Utilities\FeaturesUtil::feature_is_enabled( 'variation_gallery' );
+
+				if ( $is_enabled ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		public function product_edit_migration_notice() {
+			if ( ! $this->is_wc_enabled() ) {
+				return;
+			}
+
+			$is_migrated = get_option( '_woo_variation_gallery_image_migrated', 'no' );
+			if ( ! wc_string_to_bool( $is_migrated ) ) {
+				$args = array(
+					'page'    => 'getwooplugins-settings',
+					'tab'     => 'woo_variation_gallery',
+					'section' => 'migration',
+				);
+
+				$migrate_link = add_query_arg( $args, admin_url( 'admin.php' ) );
+
+				echo sprintf( '<div class="woo-variation-gallery-wrapper notice notice-warning"><p><a target="_blank" href="%s">%s</a> %s</p></div>', esc_url( $migrate_link ), esc_html__( 'Migrate', 'woo-variation-gallery' ), esc_html__( 'Additional Variation Images Gallery for WooCommerce to WooCommerce Variation gallery', 'woo-variation-gallery' ) );
+			}
+		}
+
 		public function gallery_admin_html( $loop, $variation_data, $variation ) {
-			if ( FeaturesUtil::feature_is_enabled( 'variation_gallery' ) ) {
+			if ( $this->is_wc_enabled() ) {
+				$this->product_edit_migration_notice();
 				return;
 			}
 
@@ -111,7 +145,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 		}
 
 		public function save_product_variation( $variation_id, $loop ): void {
-			if ( FeaturesUtil::feature_is_enabled( 'variation_gallery' ) ) {
+			if ( $this->is_wc_enabled() ) {
 				return;
 			}
 
@@ -166,7 +200,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 		}
 
 		public function admin_template_js() {
-			if ( FeaturesUtil::feature_is_enabled( 'variation_gallery' ) ) {
+			if ( $this->is_wc_enabled() ) {
 				return;
 			}
 
