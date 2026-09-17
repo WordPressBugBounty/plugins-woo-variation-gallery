@@ -167,6 +167,9 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 		}
 
 		protected function get_settings_for_default_section() {
+
+			$default_css = 'width:80px;';
+
 			$settings = array(
 
 				// Thumbnails Section Start
@@ -182,7 +185,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'title'             => esc_html__( 'Thumbnails Item', 'woo-variation-gallery' ),
 					'type'              => 'number',
 					'default'           => absint( apply_filters( 'woo_variation_gallery_default_thumbnails_columns', 4 ) ),
-					'css'               => 'width:50px;',
+					'css'               => $default_css,
 					'desc_tip'          => esc_html__( 'Product Thumbnails Item Image', 'woo-variation-gallery' ),
 					'desc'              => sprintf( esc_html__( 'Product Thumbnails Item Image. Default value is: %d. Limit: 2-8.', 'woo-variation-gallery' ), absint( apply_filters( 'woo_variation_gallery_default_thumbnails_columns', 4 ) ) ),
 					'id'                => 'thumbnails_columns',
@@ -198,7 +201,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'title'             => esc_html__( 'Thumbnails Gap', 'woo-variation-gallery' ),
 					'type'              => 'number',
 					'default'           => absint( apply_filters( 'woo_variation_gallery_default_thumbnails_gap', 0 ) ),
-					'css'               => 'width:50px;',
+					'css'               => $default_css,
 					'suffix'            => 'px',
 					'desc_tip'          => esc_html__( 'Product Thumbnails Gap In Pixel', 'woo-variation-gallery' ),
 					'desc'              => sprintf( esc_html__( 'Product Thumbnails Gap In Pixel. Default value is: %d. Limit: 0-20.', 'woo-variation-gallery' ), apply_filters( 'woo_variation_gallery_default_thumbnails_gap', 0 ) ),
@@ -229,7 +232,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'title'             => esc_html__( 'Gallery Width', 'woo-variation-gallery' ),
 					'type'              => 'number',
 					'default'           => absint( apply_filters( 'woo_variation_gallery_default_width', 30 ) ),
-					'css'               => 'width:60px;',
+					'css'               => $default_css,
 					'suffix'            => '%',
 					'desc_tip'          => esc_html__( 'Slider gallery width in % for large devices.', 'woo-variation-gallery' ),
 					'desc'              => sprintf( __( 'Slider Gallery Width in %%. Default value is: %d. Limit: 10-100. Please check this <a target="_blank" href="%s">how to video to configure it.</a>', 'woo-variation-gallery' ), absint( apply_filters( 'woo_variation_gallery_default_width', 30 ) ), 'https://www.youtube.com/watch?v=IPRZnHy3nuQ&list=PLjkiDGg3ul_IX0tgkHNKtTyGhywFhU2J1&index=1' ),
@@ -246,7 +249,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'title'             => esc_html__( 'Gallery Width', 'woo-variation-gallery' ),
 					'type'              => 'number',
 					'default'           => absint( apply_filters( 'woo_variation_gallery_medium_device_width', 0 ) ),
-					'css'               => 'width:60px;',
+					'css'               => $default_css,
 					'prefix-icon'       => 'dashicons dashicons-desktop',
 					'suffix'            => 'px',
 					'desc_tip'          => esc_html__( 'Slider gallery width in px for medium devices, small desktop', 'woo-variation-gallery' ),
@@ -264,7 +267,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'title'             => esc_html__( 'Gallery Width', 'woo-variation-gallery' ),
 					'type'              => 'number',
 					'default'           => absint( apply_filters( 'woo_variation_gallery_small_device_width', 720 ) ),
-					'css'               => 'width:60px;',
+					'css'               => $default_css,
 					'prefix-icon'       => 'dashicons dashicons-tablet',
 					'suffix'            => 'px',
 					'desc_tip'          => esc_html__( 'Slider gallery width in px for small devices, tablets', 'woo-variation-gallery' ),
@@ -291,7 +294,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'title'             => esc_html__( 'Gallery Width', 'woo-variation-gallery' ),
 					'type'              => 'number',
 					'default'           => absint( apply_filters( 'woo_variation_gallery_extra_small_device_width', 320 ) ),
-					'css'               => 'width:60px;',
+					'css'               => $default_css,
 					'prefix-icon'       => 'dashicons dashicons-smartphone',
 					'suffix'            => 'px',
 					'desc_tip'          => esc_html__( 'Slider gallery width in px for extra small devices, phones', 'woo-variation-gallery' ),
@@ -318,7 +321,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'title'             => esc_html__( 'Gallery Bottom Gap', 'woo-variation-gallery' ),
 					'type'              => 'number',
 					'default'           => absint( apply_filters( 'woo_variation_gallery_default_margin', 30 ) ),
-					'css'               => 'width:60px;',
+					'css'               => $default_css,
 					'desc_tip'          => esc_html__( 'Slider gallery bottom margin in pixel', 'woo-variation-gallery' ),
 					'suffix'            => 'px',
 					'desc'              => sprintf( esc_html__( 'Slider gallery bottom margin in pixel. Default value is: %d. Limit: 10-100.', 'woo-variation-gallery' ), apply_filters( 'woo_variation_gallery_default_margin', 30 ) ),
@@ -366,6 +369,9 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 		}
 
 		protected function get_settings_for_configure_section() {
+
+			$default_css = 'width:80px;';
+
 			$settings = array(
 
 				array(
@@ -387,7 +393,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'title'             => esc_html__( 'Gallery Auto Play Speed', 'woo-variation-gallery' ),
 					'type'              => 'number',
 					'default'           => 5000,
-					'css'               => 'width:70px;',
+					'css'               => $default_css,
 					'suffix'            => 'milliseconds',
 					'desc'              => esc_html__( 'Slider gallery autoplay speed. Default is 5000 means 5 seconds', 'woo-variation-gallery' ),
 					'id'                => 'slider_autoplay_speed',
@@ -404,7 +410,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'              => 'number',
 					'default'           => 300,
 					'suffix'            => 'milliseconds',
-					'css'               => 'width:60px;',
+					'css'               => $default_css,
 					'desc'              => esc_html__( 'Gallery sliding speed. Default is 300 means 300 milliseconds', 'woo-variation-gallery' ),
 					'id'                => 'slide_speed',
 					'custom_attributes' => array(
@@ -420,6 +426,15 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'default' => 'no',
 					'desc'    => esc_html__( 'Gallery will change by fade not slide', 'woo-variation-gallery' ),
 					'id'      => 'slider_fade',
+				),
+
+				array(
+					'title'   => esc_html__( 'Show Video Poster', 'woo-variation-gallery' ),
+					'type'    => 'checkbox',
+					'default' => 'yes',
+					'desc'    => esc_html__( 'Show Image as Video Poster', 'woo-variation-gallery' ),
+					'id'      => 'show_video_poster',
+					'is_new'=>true,
 				),
 
 				array(
@@ -518,6 +533,9 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 		}
 
 		protected function get_settings_for_advanced_section() {
+
+			$default_css = 'width:80px;';
+
 			$settings = array(
 
 				array(
@@ -547,7 +565,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'title'             => esc_html__( 'Gallery Thumbnails Image Width', 'woo-variation-gallery' ),
 					'type'              => 'number',
 					'default'           => absint( wc_get_theme_support( 'gallery_thumbnail_image_width', 100 ) ),
-					'css'               => 'width:65px;',
+					'css'               => $default_css,
 					'suffix'            => 'px',
 					'desc_tip'          => esc_html__( 'Product Gallery Thumbnails Image Width In Pixel to fix blurry thumbnail image.', 'woo-variation-gallery' ),
 					'desc'              => sprintf( esc_html__( 'Product Gallery Thumbnails Image Width In Pixel to fix blurry thumbnail image. Default value is: %1$d. Limit: 80-300. %2$sRecommended: To Regenerate shop thumbnails after change this setting.%3$s', 'woo-variation-gallery' ),

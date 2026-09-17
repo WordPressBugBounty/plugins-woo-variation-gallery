@@ -2,7 +2,7 @@
  * Variation Gallery for WooCommerce
  *
  * Author: Emran Ahmed ( emran.bd.08@gmail.com )
- * Date: 9/6/2026, 6:55:51 PM
+ * Date: 9/17/2026, 4:26:19 PM
  * Released under the GPLv3 license.
  */
 /******/ (function() { // webpackBootstrap
@@ -483,7 +483,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         value: function initVariationImagePreload() {
           var _this8 = this;
 
-          //return;
           if (this.is_variation_product) {
             if (this.$element.imagesXHR) {
               this.$element.imagesXHR.abort();
@@ -516,8 +515,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }, {
         key: "imagePreload",
-        value: function imagePreload(images) {
-          for (var i = 0; i < images.length; i++) {
+        value: function imagePreload(variation_data) {
+          for (var i = 0; i < variation_data.length; i++) {
             try {
               // Note: this won't work when chrome devtool is open and 'disable cache' is enabled within the network panel
               var _img = new Image();
@@ -528,20 +527,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               var _thumbnail = new Image();
 
-              _img.src = images[i].src;
+              var data = variation_data[i].data;
+              var image = data.images;
+              var video = data.videos;
+              var has_video = data.has_video;
+              _img.src = image.src;
 
-              if (images[i].srcset) {
-                _img.srcset = images[i].srcset;
+              if (image.srcset.length > 0) {
+                _img.srcset = image.srcset;
               }
 
-              _gallery.src = images[i].gallery_thumbnail_src;
-              _full.src = images[i].full_src;
-              _thumbnail.src = images[i].archive_src;
-              var video_link = $.trim(images[i].video_link);
+              _full.src = image.full;
+              _thumbnail.src = image.thumbnail;
 
-              if (video_link && images[i].video_embed_type === 'video') {
+              if (has_video && video.url && video.type === 'video') {
                 var req = new XMLHttpRequest();
-                req.open('GET', video_link, true);
+                req.open('GET', video.url, true);
                 req.responseType = 'blob';
 
                 req.onload = function () {
@@ -560,20 +561,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 };
 
                 req.send();
-              } // Append Content
-
-              /*let _img_src    = images[i].src;
-              let _img_srcset = images[i].srcset;
-               let _gallery_src   = images[i].gallery_thumbnail_src;
-              let _full_src      = images[i].full_src;
-              let _thumbnail_src = images[i].archive_src;
-               let template = `<div style="display: none"><img aria-hidden="true" style="display: none" src="${_img_src}" /><img style="display: none" src="${_gallery_src}" /><img style="display: none" src="${_thumbnail_src}" /><img style="display: none" src="${_full_src}" /></div>`;
-               if (_img_srcset) {
-                  template = `<div style="display: none"><img aria-hidden="true" style="display: none" src="${_img_src}" srcset="${_img_srcset}" /><img style="display: none" src="${_gallery_src}" /><img style="display: none" src="${_thumbnail_src}" /><img style="display: none" src="${_full_src}" /></div>`;
               }
-               // let template = `<div style="display: none"><img aria-hidden="true" style="display: none" src="${_img_src}" srcset="${_img_srcset}" /><img style="display: none" src="${_gallery_src}" /><img style="display: none" src="${_thumbnail_src}" /><img style="display: none" src="${_full_src}" /></div>`;
-              $('body').append(template)*/
-
             } catch (e) {
               console.error(e);
             }
@@ -583,7 +571,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: "showVariationImage",
         value: function showVariationImage(variation) {
           if (variation) {
-            console.log(variation);
             this.addLoadingClass();
             this.galleryInit(variation.variation_gallery_images || []);
           }

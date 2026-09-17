@@ -1,13 +1,16 @@
 <?php
+
 defined( 'ABSPATH' ) or die( 'Keep Quit' );
 ?>
 
 <h2>
-	<?php esc_html_e( 'Gallery Migration', 'woo-variation-gallery' ) ?>
+	<?php
+	esc_html_e( 'Gallery Migration', 'woo-variation-gallery' ) ?>
 </h2>
 
 <div id="migration_settings">
-	<p><?php esc_html_e( 'Migrate gallery from other plugins. Migration process will run on background.', 'woo-variation-gallery' ) ?></p>
+	<p><?php
+		esc_html_e( 'Migrate gallery from other plugins. Migration process will run on background.', 'woo-variation-gallery' ) ?></p>
 </div>
 
 
@@ -20,16 +23,46 @@ defined( 'ABSPATH' ) or die( 'Keep Quit' );
 
 	foreach ( $migration_list as $action => $tool ): ?>
 
-		<tr class="<?php echo esc_attr( $action ) ?>">
+		<tr class="<?php
+		echo esc_attr( $action ) ?>">
 			<th>
-				<strong class="name"><?php echo esc_html( $tool['name'] ) ?></strong>
-				<p class="description"><?php echo wp_kses_post( $tool['desc'] ) ?></p>
+				<strong class="name"><?php
+					echo esc_html( $tool['name'] ) ?></strong>
+				<p class="description"><?php
+					echo wp_kses_post( $tool['desc'] ) ?></p>
 			</th>
 			<td class="run-tool">
-				<a onclick='return confirm("<?php printf( esc_html__( 'Are you sure you want to \n%s?', 'woo-variation-gallery' ), str_ireplace( '&quot;', '\"', esc_attr( $tool['name'] ) ) ) ?>");' href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=wc-status&tab=tools&action=' . $action ), 'debug_action' ) ); ?>" class="button button-large <?php echo esc_attr( $action ); ?>"><?php echo esc_html( $tool['button'] ); ?></a>
+				<?php
+				if ( isset( $tool['is_running'] ) && $tool['is_running'] ): ?>
+					<button disabled class="button button-large <?php
+					echo esc_attr( $action ); ?>">
+						<span id="progress-spinner" class="spinner is-active"></span>
+						<span data-is-running="<?php echo absint( $tool['is_running']) ?>"
+							  data-done-text="<?php esc_html_e( '% Done', 'woo-variation-gallery' ) ?>"
+							  id="migration-progress-text"
+							  class="text-content"><?php
+							echo sprintf( '%d%s', $tool['progress'], esc_html__( '% Done', 'woo-variation-gallery' ) ) ?></span>
+					</button>
+				<?php
+				else: ?>
+					<button data-started="<?php
+					esc_html_e( '0% Done', 'woo-variation-gallery' ) ?>" data-confirm-message="<?php
+					printf( esc_html__( 'Are you sure you want to %s?', 'woo-variation-gallery' ), str_ireplace( '&quot;', '\"', esc_attr( $tool['name'] ) ) ) ?>" data-action="<?php
+					echo esc_attr( $action ); ?>" class="woo-variation-gallery-migration-start button button-large <?php
+					echo esc_attr( $action ); ?>">
+						<span id="progress-spinner" style="display: none" class="spinner"></span>
+						<span data-is-running="<?php echo absint( $tool['is_running']) ?>"
+							  data-done-text="<?php esc_html_e( '% Done', 'woo-variation-gallery' ) ?>"
+							  id="migration-progress-text"
+							  class="text-content"><?php
+							echo esc_html( $tool['button'] ); ?></span>
+					</button>
+				<?php
+				endif; ?>
 			</td>
 		</tr>
-	<?php endforeach; ?>
+	<?php
+	endforeach; ?>
 	</tbody>
 </table>
 

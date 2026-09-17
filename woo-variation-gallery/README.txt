@@ -1,8 +1,8 @@
 === Additional Variation Images Gallery for WooCommerce ===
 Contributors: EmranAhmed, getwooplugins, storepress
-Tags: woocommerce variation image gallery, additional variation image gallery, product variation image gallery, extra product variation image, variation images gallery
+Tags: woocommerce variation image gallery, additional variation image gallery, product variation image gallery, extra variation image, variation images gallery
 Requires PHP: 7.4
-Stable tag: 1.3.33
+Stable tag: 1.4.0
 Requires at least: 5.7
 Tested up to: 7.1
 WC requires at least: 5.8
@@ -377,6 +377,11 @@ After a successful migration, WooCommerce's built-in Variation Gallery will mana
 
 == Changelog ==
 
+= 1.4.0 - 17-09-2026 =
+* Fix: Migration issues.
+* Fix: Imagify Plugin WebP Issue.
+* Update: Template Version
+
 = 1.3.33 - 06-09-2026 =
 * Add: WP 7.1+ compatibility.
 * Add: WC 11.1+ compatibility.
@@ -421,7 +426,7 @@ After a successful migration, WooCommerce's built-in Variation Gallery will mana
 * Fix: `get_current_screen` function issue for multi-vendor plugins.
 * Add: WooCommerce 9.2+ compatibility.
 
-= Legacy history (2013–2024) =
+= Legacy history (2023–2024) =
 
 Earlier versions (1.0.0 through 1.3.23) covered: the plugin's initial release and its move from FlexSlider to Slick Slider; the core feature set now in the free version — thumbnail gaps, preloader styles, image zoom, lightbox, sorting, gallery export/import, and RTL support; a full settings-panel and plugin-structure rewrite in version 1.3.0; WooCommerce REST API gallery data; High-Performance Order Storage compatibility; PHP 8 compatibility; WPML global image translation fixes; YouTube Shorts support for video; a migration tool for switching from other variation gallery plugins; and ongoing theme-compatibility additions for Basel, Oxygen, Customizr, Salient, Divi, Flatsome, Royal, Kalium, and other WooCommerce themes, alongside regular WordPress and WooCommerce version compatibility updates.
 

@@ -51,12 +51,37 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Compatibility' ) ) :
 			// MultiVendorX Compatibility.
 			add_action( 'mvx_frontend_product_after_variable_attributes', array( $this, 'after_variable_attributes' ), 10, 3 );
 			add_action( 'mvx_frontend_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
+
+			add_filter( 'woo_variation_gallery_get_image_props', array( $this, 'imagify_process_webp_content' ) );
 		}
 
 		protected function init() {
 		}
 
 		// Start
+
+		public function imagify_process_webp_content( $data ) {
+			if ( function_exists( 'get_imagify_option' ) ) {
+				$display_nextgen        = wc_string_to_bool( get_imagify_option( 'display_nextgen' ) );
+				$display_nextgen_method = 'picture' === sanitize_text_field( trim( get_imagify_option( 'display_nextgen_method' ) ) );
+
+
+				if ( $display_nextgen && $display_nextgen_method ) {
+					$data['image_html'] = apply_filters(
+						'imagify_process_webp_content',
+						$data['image_html']
+					);
+
+					$data['thumbnail_html'] = apply_filters(
+						'imagify_process_webp_content',
+						$data['thumbnail_html']
+					);
+				}
+			}
+
+			return $data;
+		}
 
 		public function is_multi_vendor_shop_compatible() {
 			if ( class_exists( 'WeDevs_Dokan' ) ) {

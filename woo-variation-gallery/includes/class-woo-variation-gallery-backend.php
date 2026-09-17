@@ -188,6 +188,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 			wp_enqueue_script( 'woo-variation-gallery-admin', esc_url( woo_variation_gallery()->assets_url( "/js/admin{$suffix}.js" ) ), array(
 				'jquery',
 				'jquery-ui-sortable',
+				'wp-api-fetch',
 				'wp-util',
 			), woo_variation_gallery()->assets_version( "/js/admin{$suffix}.js" ), true );
 

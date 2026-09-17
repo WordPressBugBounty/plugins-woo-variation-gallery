@@ -29,7 +29,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			require_once dirname( __FILE__ ) . '/class-woo-variation-gallery-compatibility.php';
 		}
 
-		protected function hooks() {
+		protected function hooks(): void {
 			add_filter( 'body_class', array( $this, 'body_class' ) );
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 			add_filter( 'woocommerce_post_class', array( $this, 'post_class' ), 25, 2 );
@@ -369,8 +369,10 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 
 			$gallery_images = apply_filters( 'woo_variation_gallery_available_variation_gallery_images', $gallery_images, $product, $variation );
 
-			foreach ( $gallery_images as $variation_gallery_image_id ) {
-				$available_variation['variation_gallery_images'][] = $this->get_product_attachment_props( $variation_gallery_image_id );
+			foreach ( $gallery_images as $gallery_image_index => $variation_gallery_image_id ) {
+				$data = $this->get_data_with_markup( $variation_gallery_image_id, $product_id, $gallery_image_index );
+
+				$available_variation['variation_gallery_images'][] = apply_filters( 'woo_variation_gallery_get_variation_gallery_image', $data );
 			}
 
 			return apply_filters( 'woo_variation_gallery_available_variation_gallery', $available_variation, $variation, $product_id );
@@ -463,138 +465,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 		// Copy of: wc_get_product_attachment_props( $attachment_id = null, $product = false )
 		//-------------------------------------------------------------------------------
 
-		public function get_product_attachment_props( $attachment_id, $product_id = false ) {
-			$props      = array(
-				'image_id'                => '',
-				'title'                   => '',
-				'caption'                 => '',
-				'url'                     => '',
-				'alt'                     => '',
-				'full_src'                => '',
-				'full_src_w'              => '',
-				'full_src_h'              => '',
-				'full_class'              => '',
-				//'full_srcset'           => '',
-				//'full_sizes'            => '',
-				'gallery_thumbnail_src'   => '',
-				'gallery_thumbnail_src_w' => '',
-				'gallery_thumbnail_src_h' => '',
-				'gallery_thumbnail_class' => '',
-				//'gallery_thumbnail_srcset' => '',
-				//'gallery_thumbnail_sizes'  => '',
-				'archive_src'             => '',
-				'archive_src_w'           => '',
-				'archive_src_h'           => '',
-				'archive_class'           => '',
-				//'archive_srcset'        => '',
-				//'archive_sizes'         => '',
-				'src'                     => '',
-				'class'                   => '',
-				'src_w'                   => '',
-				'src_h'                   => '',
-				'srcset'                  => '',
-				'sizes'                   => '',
-				'extra_params'            => '',
-			);
-			$attachment = get_post( $attachment_id );
-
-			if ( $attachment ) {
-				$props['image_id'] = $attachment_id;
-				$props['title']    = _wp_specialchars( get_post_field( 'post_title', $attachment_id ), ENT_QUOTES, 'UTF-8', true );
-				$props['caption']  = _wp_specialchars( get_post_field( 'post_excerpt', $attachment_id ), ENT_QUOTES, 'UTF-8', true );
-				$props['url']      = wp_get_attachment_url( $attachment_id );
-
-				// Alt text.
-				$alt_text = array(
-					trim( wp_strip_all_tags( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) ),
-					$props['caption'],
-					wp_strip_all_tags( $attachment->post_title ),
-				);
-
-				if ( $product_id ) {
-					$product    = wc_get_product( $product_id );
-					$alt_text[] = wp_strip_all_tags( get_the_title( $product->get_id() ) );
-				}
-
-				$alt_text     = array_filter( $alt_text );
-				$props['alt'] = $alt_text[0] ?? '';
-
-				// Large version.
-				$full_size           = apply_filters( 'woocommerce_gallery_full_size', apply_filters( 'woocommerce_product_thumbnails_large_size', 'full' ) );
-				$full_size_src       = wp_get_attachment_image_src( $attachment_id, $full_size );
-				$props['full_src']   = esc_url( $full_size_src[0] ?? '' );
-				$props['full_src_w'] = esc_attr( $full_size_src[1] ?? '' );
-				$props['full_src_h'] = esc_attr( $full_size_src[2] ?? '' );
-
-				$full_size_class = $full_size;
-				if ( is_array( $full_size_class ) ) {
-					$full_size_class = implode( 'x', $full_size_class );
-				}
-
-				$props['full_class'] = "attachment-$full_size_class size-$full_size_class";
-				//$props[ 'full_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $full_size );
-				//$props[ 'full_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $full_size );
-
-
-				// Gallery thumbnail.
-				$gallery_thumbnail                = wc_get_image_size( 'gallery_thumbnail' );
-				$gallery_thumbnail_size           = apply_filters( 'woocommerce_gallery_thumbnail_size', array(
-					$gallery_thumbnail['width'],
-					$gallery_thumbnail['height'],
-				) );
-				$gallery_thumbnail_src            = wp_get_attachment_image_src( $attachment_id, $gallery_thumbnail_size );
-				$props['gallery_thumbnail_src']   = esc_url( $gallery_thumbnail_src[0] ?? '' );
-				$props['gallery_thumbnail_src_w'] = esc_attr( $gallery_thumbnail_src[1] ?? '' );
-				$props['gallery_thumbnail_src_h'] = esc_attr( $gallery_thumbnail_src[2] ?? '' );
-
-				$gallery_thumbnail_class = $gallery_thumbnail_size;
-				if ( is_array( $gallery_thumbnail_class ) ) {
-					$gallery_thumbnail_class = implode( 'x', $gallery_thumbnail_class );
-				}
-
-				$props['gallery_thumbnail_class'] = "attachment-$gallery_thumbnail_class size-$gallery_thumbnail_class";
-				//$props[ 'gallery_thumbnail_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $gallery_thumbnail );
-				//$props[ 'gallery_thumbnail_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $gallery_thumbnail );
-
-
-				// Archive/Shop Page version.
-				$thumbnail_size         = apply_filters( 'woocommerce_thumbnail_size', 'woocommerce_thumbnail' );
-				$thumbnail_size_src     = wp_get_attachment_image_src( $attachment_id, $thumbnail_size );
-				$props['archive_src']   = esc_url( $thumbnail_size_src[0] ?? '' );
-				$props['archive_src_w'] = esc_attr( $thumbnail_size_src[1] ?? '' );
-				$props['archive_src_h'] = esc_attr( $thumbnail_size_src[2] ?? '' );
-
-				$archive_thumbnail_class = $thumbnail_size;
-				if ( is_array( $archive_thumbnail_class ) ) {
-					$archive_thumbnail_class = implode( 'x', $archive_thumbnail_class );
-				}
-
-				$props['archive_class'] = "attachment-$archive_thumbnail_class size-$archive_thumbnail_class";
-				//$props[ 'archive_srcset' ] = wp_get_attachment_image_srcset( $attachment_id, $thumbnail_size );
-				//$props[ 'archive_sizes' ]  = wp_get_attachment_image_sizes( $attachment_id, $thumbnail_size );
-
-
-				// Image source.
-				$image_size     = apply_filters( 'woocommerce_gallery_image_size', 'woocommerce_single' );
-				$src            = wp_get_attachment_image_src( $attachment_id, $image_size );
-				$props['src']   = esc_url( $src[0] ?? '' );
-				$props['src_w'] = esc_attr( $src[1] ?? '' );
-				$props['src_h'] = esc_attr( $src[2] ?? '' );
-
-				$image_size_class = $image_size;
-				if ( is_array( $image_size_class ) ) {
-					$image_size_class = implode( 'x', $image_size_class );
-				}
-				$props['class']  = "wp-post-image wvg-post-image attachment-$image_size_class size-$image_size_class ";
-				$props['srcset'] = wp_get_attachment_image_srcset( $attachment_id, $image_size );
-				$props['sizes']  = wp_get_attachment_image_sizes( $attachment_id, $image_size );
-
-				$props['extra_params'] = wc_implode_html_attributes( apply_filters( 'woo_variation_gallery_image_extra_params', array(), $props, $attachment_id, $product_id ) );
-			}
-
-			return apply_filters( 'woo_variation_gallery_get_image_props', $props, $attachment_id, $product_id );
-		}
-
 		public function get_video_info( $url ): array {
 			$videos = array(
 				'type'      => false,
@@ -667,10 +537,189 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			return apply_filters( 'woo_variation_gallery_get_embed_url', $video_info['embed_url'], $video_info );
 		}
 
-		public function get_product_gallery_images_html( $image_id ): string {
-			$image = $this->get_product_attachment_props( $image_id );
+		// 6.2
+		public function get_html_attribute( $html, $tag, $attributes ) {
+			$processor = new WP_HTML_Tag_Processor( $html );
 
-			$has_video = isset( $image['video_link'] ) && '' !== trim( $image['video_link'] );
+			if ( $processor->next_tag( $tag ) ) {
+				$attribute_value = $processor->get_attribute( $attributes );
+
+				if ( is_null( $attribute_value ) ) {
+					return '';
+				}
+
+				return $attribute_value;
+			}
+
+			return '';
+		}
+
+		public function get_data_with_markup( $attachment_id, $product_id = 0, $image_index = 0 ) {
+			$image_data       = $this->get_product_attachment_props( $attachment_id, $product_id, $image_index );
+			$image_markup     = $this->get_product_gallery_images_html( $image_data );
+			$thumbnail_markup = $this->get_product_gallery_thumbnail_html( $image_data );
+
+			return apply_filters( 'woo_variation_gallery_get_data_with_markup', array(
+				'data'             => $image_data,
+				'gallery_markup'   => $image_markup,
+				'thumbnail_markup' => $thumbnail_markup,
+			), $image_data );
+		}
+
+
+		public function get_product( $product_id = 0 ) {
+			if ( $product_id > 0 ) {
+				$product     = wc_get_product( $product_id );
+				$has_product = ( $product instanceof WC_Product );
+
+				return $has_product ? $product : null;
+			}
+
+			$has_product = array_key_exists( 'product', $GLOBALS );
+			$product     = $has_product ? $GLOBALS['product'] : null;
+
+			return $has_product ? $product : null;
+		}
+
+		public function get_thumbnail_columns( $product_id = 0 ): int {
+			$product = $this->get_product( $product_id );
+
+			$wc_columns = apply_filters( 'woocommerce_product_thumbnails_columns', 4 );
+
+			return absint( woo_variation_gallery()->get_option( 'thumbnails_columns', apply_filters( 'woo_variation_gallery_default_thumbnails_columns', absint( $wc_columns ), $product ) ) );
+		}
+
+		public function get_product_attachment_props( $attachment_id, $product_id = 0, $image_index = 0 ) {
+			$attachment    = get_post( $attachment_id );
+			$no_attachment = is_null( $attachment );
+
+			$data = array(
+				'image_id'       => $attachment_id,
+				'product_id'     => $product_id,
+				'has_video'      => false,
+				'images'         => array(
+					array(
+						'src'       => '',
+						'srcset'    => '',
+						'full'      => '',
+						'thumbnail' => '',
+					),
+				),
+				'videos'         => array(),
+				'image_html'     => '',
+				'thumbnail_html' => '',
+				'video_html'     => '',
+			);
+
+			if ( $no_attachment ) {
+				return apply_filters( 'woo_variation_gallery_get_image_props', $data, $no_attachment );
+			}
+
+			$product = $this->get_product( $product_id );
+
+			$product_id  = is_null( $product ) ? 0 : $product->get_id();
+			$has_product = $product_id > 0;
+
+			$attachment_alt_text = trim( wp_strip_all_tags( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) );
+			$image_alt_text      = '' === $attachment_alt_text && $has_product ? sprintf( esc_html__( '%1$s - Image %2$s', 'woocommerce' ), $product->get_title(), ( $image_index + 1 ) ) : $attachment_alt_text;
+			$thumbnail_text      = '' === $attachment_alt_text && $has_product ? sprintf( esc_html__( '%1$s - Thumbnail Image %2$s', 'woocommerce' ), $product->get_title(), ( $image_index + 1 ) ) : $attachment_alt_text;
+
+			$gallery_thumbnail = wc_get_image_size( 'gallery_thumbnail' );
+			$thumbnail_size    = apply_filters( 'woocommerce_gallery_thumbnail_size', array( $gallery_thumbnail['width'], $gallery_thumbnail['height'] ) );
+			$image_size        = apply_filters( 'woocommerce_gallery_image_size', 'woocommerce_single' );
+			$full_size         = apply_filters( 'woocommerce_gallery_full_size', apply_filters( 'woocommerce_product_thumbnails_large_size', 'full' ) );
+			$thumbnail_html    = wp_get_attachment_image( $attachment_id, $thumbnail_size, false, array(
+				'alt' => $thumbnail_text,
+			) );
+			$full_src          = wp_get_attachment_image_src( $attachment_id, $full_size );
+
+			$image_size_class = $image_size;
+			if ( is_array( $image_size_class ) ) {
+				$image_size_class = implode( 'x', $image_size_class );
+			}
+			$image_class = sprintf( 'wp-post-image wvg-post-image attachment-%1$s size-%1$s', $image_size_class );
+
+			/**
+			 * Filters the attributes for the image markup.
+			 *
+			 * @param array{
+			 *     title: string,
+			 *     data-caption: string,
+			 *     data-src: string,
+			 *     data-large_image: string,
+			 *     data-large_image_width: numeric,
+			 *     data-large_image_height: numeric,
+			 *     class: string,
+			 *     alt: string,
+			 *     loading: string,
+			 * } $image_attributes Attributes for the image markup.
+			 *
+			 * @since 3.3.2
+			 *
+			 */
+			$image_params = apply_filters(
+				'woocommerce_gallery_image_html_attachment_image_params',
+				array(
+					'title'                   => _wp_specialchars( get_post_field( 'post_title', $attachment_id ), ENT_QUOTES, 'UTF-8', true ),
+					'data-caption'            => _wp_specialchars( get_post_field( 'post_excerpt', $attachment_id ), ENT_QUOTES, 'UTF-8', true ),
+					'data-src'                => isset( $full_src[0] ) ? esc_url( $full_src[0] ) : '',
+					'data-large_image'        => isset( $full_src[0] ) ? esc_url( $full_src[0] ) : '',
+					'data-large_image_width'  => isset( $full_src[1] ) ? esc_attr( $full_src[1] ) : '',
+					'data-large_image_height' => isset( $full_src[2] ) ? esc_attr( $full_src[2] ) : '',
+					'class'                   => esc_attr( $image_class ),
+					'alt'                     => esc_attr( $image_alt_text ),
+					'loading'                 => 'lazy',
+				),
+				$attachment_id,
+				$image_size,
+				true
+			);
+
+			if ( isset( $image_params['title'] ) ) {
+				unset( $image_params['title'] );
+			}
+
+			if ( $image_index === 0 ) {
+				unset( $image_params['loading'] );
+			}
+
+			$image_html = wp_get_attachment_image(
+				$attachment_id,
+				$image_size,
+				false,
+				$image_params
+			);
+
+			$image_src     = $this->get_html_attribute( $image_html, 'img', 'src' );
+			$image_srcset  = $this->get_html_attribute( $image_html, 'img', 'srcset' );
+			$thumbnail_src = $this->get_html_attribute( $thumbnail_html, 'img', 'src' );
+
+			// @TODO: Add Archive Image
+			$images = array(
+				'src'       => esc_url_raw( $image_src ),
+				'srcset'    => esc_html( $image_srcset ),
+				'full'      => isset( $full_src[0] ) ? esc_url_raw( $full_src[0] ) : '',
+				'thumbnail' => esc_url_raw( $thumbnail_src ),
+			);
+
+			$data = array(
+				'image_id'       => $attachment_id,
+				'product_id'     => $product_id,
+				'has_video'      => false,
+				'images'         => $images,
+				'videos'         => array(),
+				'image_html'     => $image_html,
+				'thumbnail_html' => $thumbnail_html,
+				'video_html'     => '',
+			);
+
+			return apply_filters( 'woo_variation_gallery_get_image_props', $data, true );
+		}
+
+		public function get_product_gallery_images_html( $data ): string {
+			$image = $data['image_html'];
+
+			$has_video = $data['has_video'];
 
 			$classes = array( 'wvg-gallery-image' );
 
@@ -678,47 +727,37 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 				$classes[] = 'wvg-gallery-video-slider';
 			}
 
-			$classes = apply_filters( 'woo_variation_gallery_slider_image_html_class', $classes, $image_id, $image );
+			$classes = apply_filters( 'woo_variation_gallery_slider_image_html_class', $classes, $data );
 
-			$template = '<div class="wvg-single-gallery-image-container"><img loading="lazy" width="%d" height="%d" src="%s" class="%s" alt="%s" title="%s" data-caption="%s" data-src="%s" data-large_image="%s" data-large_image_width="%d" data-large_image_height="%d" srcset="%s" sizes="%s" %s /></div>';
+			$template = '<div class="wvg-single-gallery-image-container">%s</div>';
 
-			$inner_html = sprintf( $template,
-				esc_attr( $image['src_w'] ),
-				esc_attr( $image['src_h'] ),
-				esc_url( $image['src'] ),
-				esc_attr( $image['class'] ),
-				esc_attr( $image['alt'] ),
-				esc_attr( $image['title'] ),
-				esc_attr( $image['caption'] ),
-				esc_url( $image['full_src'] ),
-				esc_url( $image['full_src'] ),
-				esc_attr( $image['full_src_w'] ),
-				esc_attr( $image['full_src_h'] ),
-				esc_attr( $image['srcset'] ),
-				esc_attr( $image['sizes'] ),
-				$image['extra_params'] );
+			$inner_html = sprintf( $template, $image );
 
-			if ( $has_video && $image['video_embed_type'] === 'iframe' ) {
-				$template   = '<div class="wvg-single-gallery-iframe-container" style="--_video_ratio: %s"><iframe src="%s" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>';
-				$inner_html = sprintf( $template, $image['video_ratio'], $image['video_embed_url'] );
+			if ( $has_video ) {
+				$videos       = $data['videos'];
+				$video_type   = $videos['type'];
+				$video_markup = $data['video_html'];
+
+				if ( 'iframe' === $video_type ) {
+					$template   = '<div class="wvg-single-gallery-iframe-container" style="--_video_ratio: %s">%s</div>';
+					$inner_html = sprintf( $template, $videos['video_ratio'], $video_markup );
+				}
+
+				if ( 'video' === $video_type ) {
+					$template   = '<div class="wvg-single-gallery-video-container" style="--_video_ratio: %s">%s</div>';
+					$inner_html = sprintf( $template, $videos['video_ratio'], $video_markup );
+				}
 			}
 
-			if ( $has_video && $image['video_embed_type'] === 'video' ) {
-				$template   = '<div class="wvg-single-gallery-video-container" style="--_video_ratio: %s"><video preload="auto" controls controlsList="nodownload" src="%s"></video></div>';
-				$inner_html = sprintf( $template, $image['video_ratio'], $image['video_link'] );
-			}
+			$inner_html = apply_filters( 'woo_variation_gallery_image_inner_html', $inner_html, $data, $template );
 
-			$inner_html = apply_filters( 'woo_variation_gallery_image_inner_html', $inner_html, $image, $template, $image_id );
-
-			return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
+			return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '">' . $inner_html . '</div>';
 		}
 
-		public function get_product_gallery_thumbnail_html( $image_id ) {
-			$image = $this->get_product_attachment_props( $image_id );
+		public function get_product_gallery_thumbnail_html( $data ): string {
+			$image = $data['thumbnail_html'];
 
-			// If require thumbnail
-
-			$has_video = isset( $image['video_link'] ) && '' !== trim( $image['video_link'] );
+			$has_video = $data['has_video'];
 
 			$classes = array( 'wvg-gallery-thumbnail-image' );
 
@@ -726,88 +765,14 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 				$classes[] = 'wvg-gallery-video-thumbnail';
 			}
 
-			$classes = apply_filters( 'woo_variation_gallery_thumbnail_image_html_class', $classes, $image_id, $image );
+			$classes = apply_filters( 'woo_variation_gallery_thumbnail_image_html_class', $classes, $data );
 
-			$template   = '<img width="%d" height="%d" src="%s" class="%s" alt="%s" title="%s" />';
-			$inner_html = sprintf( $template, esc_attr( $image['gallery_thumbnail_src_w'] ), esc_attr( $image['gallery_thumbnail_src_h'] ), esc_url( $image['gallery_thumbnail_src'] ), esc_attr( $image['gallery_thumbnail_class'] ), esc_attr( $image['alt'] ), esc_attr( $image['title'] ) );
-			$inner_html = apply_filters( 'woo_variation_gallery_thumbnail_image_inner_html', $inner_html, $image, $template, $image_id );
-
-
-			return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
-		}
-
-		public function get_gallery_image_html( $product, $attachment_id, $options = array() ) {
-			$defaults = array( 'is_main_thumbnail' => false, 'has_only_thumbnail' => false );
-			$options  = wp_parse_args( $options, $defaults );
-
-			$image             = $this->get_product_attachment_props( $attachment_id );
-			$post_thumbnail_id = $product->get_image_id();
-
-			$remove_featured_image = wc_string_to_bool( woo_variation_gallery()->get_option( 'remove_featured_image', 'no' ) );
-
-			if ( $remove_featured_image && absint( $attachment_id ) === absint( $post_thumbnail_id ) ) {
-				return '';
-			}
-
-			$has_video = isset( $image['video_link'] ) && '' !== trim( $image['video_link'] );
-
-			$classes = array( 'wvg-gallery-image' );
-			if ( $has_video ) {
-				$classes[] = 'wvg-gallery-video-slider';
-			}
-			$classes = apply_filters( 'woo_variation_gallery_slider_image_html_class', $classes, $attachment_id, $image );
+			$template   = '<div class="wvg-gallery-thumbnail-image-container">%s</div>';
+			$inner_html = sprintf( $template, $image );
+			$inner_html = apply_filters( 'woo_variation_gallery_thumbnail_image_inner_html', $inner_html, $data, $template );
 
 
-			$template = '<div class="wvg-single-gallery-image-container"><img loading="lazy" width="%d" height="%d" src="%s" class="%s" alt="%s" title="%s" data-caption="%s" data-src="%s" data-large_image="%s" data-large_image_width="%d" data-large_image_height="%d" srcset="%s" sizes="%s" %s /></div>';
-
-			$inner_html = sprintf( $template,
-				esc_attr( $image['src_w'] ),
-				esc_attr( $image['src_h'] ),
-				esc_url( $image['src'] ),
-				esc_attr( $image['class'] ),
-				esc_attr( $image['alt'] ),
-				esc_attr( $image['title'] ),
-				esc_attr( $image['caption'] ),
-				esc_url( $image['full_src'] ),
-				esc_url( $image['full_src'] ),
-				esc_attr( $image['full_src_w'] ),
-				esc_attr( $image['full_src_h'] ),
-				esc_attr( $image['srcset'] ),
-				esc_attr( $image['sizes'] ),
-				$image['extra_params'] );
-
-			$has_video = isset( $image['video_link'] ) && '' !== trim( $image['video_link'] );
-
-			if ( ! $options['has_only_thumbnail'] ) {
-				if ( $has_video && $image['video_embed_type'] === 'iframe' ) {
-					$template   = '<div class="wvg-single-gallery-iframe-container" style="--_video_ratio: %s"><iframe src="%s" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>';
-					$inner_html = sprintf( $template, $image['video_ratio'], $image['video_embed_url'] );
-				}
-
-				if ( $has_video && $image['video_embed_type'] === 'video' ) {
-					$template   = '<div class="wvg-single-gallery-video-container" style="--_video_ratio: %s"><video preload="auto" controls controlsList="nodownload" src="%s"></video></div>';
-					$inner_html = sprintf( $template, $image['video_ratio'], $image['video_link'] );
-				}
-			}
-
-			$inner_html = apply_filters( 'woo_variation_gallery_image_inner_html', $inner_html, $image, $template, $attachment_id, $options );
-
-			// If require thumbnail
-			if ( ! $options['is_main_thumbnail'] ) {
-				$classes = array( 'wvg-gallery-thumbnail-image' );
-
-				if ( $has_video ) {
-					$classes[] = 'wvg-gallery-video-thumbnail';
-				}
-
-				$classes = apply_filters( 'woo_variation_gallery_thumbnail_image_html_class', $classes, $attachment_id, $image );
-
-				$template   = '<img width="%d" height="%d" src="%s" class="%s" alt="%s" title="%s" />';
-				$inner_html = sprintf( $template, esc_attr( $image['gallery_thumbnail_src_w'] ), esc_attr( $image['gallery_thumbnail_src_h'] ), esc_url( $image['gallery_thumbnail_src'] ), esc_attr( $image['gallery_thumbnail_class'] ), esc_attr( $image['alt'] ), esc_attr( $image['title'] ) );
-				$inner_html = apply_filters( 'woo_variation_gallery_thumbnail_image_inner_html', $inner_html, $image, $template, $attachment_id, $options );
-			}
-
-			return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
+			return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '">' . $inner_html . '</div>';
 		}
 
 		public function get_available_variation( $product_id, $variation_id ) {
@@ -830,8 +795,9 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			$has_images     = $data['has_image'];
 
 			$images = array();
-			foreach ( $gallery_images as $gallery_image ) {
-				$images[] = apply_filters( 'woo_variation_gallery_get_default_gallery_image', $this->get_product_attachment_props( $gallery_image, $product_id ), $product_id );
+			foreach ( $gallery_images as $gallery_image_index => $gallery_image ) {
+				$data     = $this->get_data_with_markup( $gallery_image, $product_id, $gallery_image_index );
+				$images[] = apply_filters( 'woo_variation_gallery_get_default_gallery_image', $data );
 			}
 
 			// @TODO: Setting For Show default gallery if no variation image is available or show placeholder.
@@ -839,7 +805,8 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 
 			if ( ! $has_images ) {
 				$placeholder_image_id = absint( get_option( 'woocommerce_placeholder_image', 0 ) );
-				$images[]             = apply_filters( 'woo_variation_gallery_get_default_gallery_placeholder_image', $this->get_product_attachment_props( $placeholder_image_id, $product_id ), $product_id );
+				$data                 = $this->get_data_with_markup( $placeholder_image_id, $product_id );
+				$images[]             = apply_filters( 'woo_variation_gallery_get_default_gallery_placeholder_image', $data );
 			}
 
 			return apply_filters( 'woo_variation_gallery_get_default_gallery_images', $images, $product_id );
@@ -859,10 +826,9 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			$default_gallery_visibility            = woo_variation_gallery()->get_option( 'product_image_visibility', $gallery_visibility_old );
 			$default_gallery_visibility_conditions = array( 'hide_from_all_gallery', 'hide_from_variation_gallery' );
 
-
 			foreach ( $available_variations as $i => $variation ) {
-				foreach ( $variation['variation_gallery_images'] as $image ) {
-					$image_id = absint( $image['image_id'] );
+				foreach ( $variation['variation_gallery_images'] as $image_index => $image ) {
+					$image_id = absint( $image['data']['image_id'] );
 
 					if ( $product_feature_image_id === $image_id && in_array( $default_gallery_visibility, $default_gallery_visibility_conditions, true ) ) {
 						continue;
@@ -881,7 +847,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 		}
 
 		// Ajax Response
-		public function handle_get_default_gallery() {
+		public function handle_get_default_gallery(): void {
 			ob_start();
 
 			if ( empty( $_POST ) || empty( $_POST['product_id'] ) ) {
@@ -896,7 +862,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 		}
 
 		// Ajax Response
-		public function handle_get_variation_gallery() {
+		public function handle_get_variation_gallery(): void {
 			ob_start();
 
 			if ( empty( $_POST ) || empty( $_POST['product_id'] ) ) {
@@ -939,7 +905,8 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 
 		public function slider_template_js() {
 			ob_start();
-			require_once dirname( __FILE__ ) . '/slider-template-js.php';
+			$template = woo_variation_gallery()->template_path( '/slider-template.php' );
+			require_once $template;
 			$data = ob_get_clean();
 			echo apply_filters( 'woo_variation_gallery_slider_template_js', $data );
 		}
@@ -953,11 +920,11 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 				return $old_template;
 			}
 
-			if ( $template_name == 'single-product/product-image.php' ) {
+			if ( $template_name === 'single-product/product-image.php' ) {
 				$template = woo_variation_gallery()->template_path( '/product-images.php' );
 			}
 
-			if ( $template_name == 'single-product/product-thumbnails.php' ) {
+			if ( $template_name === 'single-product/product-thumbnails.php' ) {
 				$template = woo_variation_gallery()->template_path( '/product-thumbnails.php' );
 			}
 
@@ -973,11 +940,11 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 				return $old_template;
 			}
 
-			if ( $slug == 'single-product/product-image' ) {
+			if ( $slug === 'single-product/product-image' ) {
 				$template = woo_variation_gallery()->template_path( '/product-images.php' );
 			}
 
-			if ( $slug == 'single-product/product-thumbnails' ) {
+			if ( $slug === 'single-product/product-thumbnails' ) {
 				$template = woo_variation_gallery()->template_path( '/product-thumbnails.php' );
 			}
 

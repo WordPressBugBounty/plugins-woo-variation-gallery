@@ -66,7 +66,9 @@ $has_post_thumbnail = has_post_thumbnail();
 // 1. Has Product Image and Has Product Gallery:
 // 		- Show Product Image
 // 		- Show Product Gallery
-// If Settings: Not to show product image. Show 1st gallery image as product image, if only one image, do not show any gallery.
+// If Settings: Not to show product image.
+// Show 1st gallery image as product image,
+// if only one image, do not show any gallery.
 
 
 // 2. Has Product Image no Has Product Gallery:
@@ -113,8 +115,6 @@ $has_post_thumbnail = has_post_thumbnail();
 // 		- Show Product Image
 // 		- No Product Gallery
 // If Settings: Not to show product image. Show placeholder image.
-
-
 
 // 6. No Product Image and Has Product Gallery:
 // 		- Show Product Image from Product Gallery 1st, If only one gallery image then show as product image.
