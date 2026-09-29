@@ -2,7 +2,7 @@
  * Variation Gallery for WooCommerce
  *
  * Author: Emran Ahmed ( emran.bd.08@gmail.com )
- * Date: 9/17/2026, 4:26:19 PM
+ * Date: 9/29/2026, 6:08:47 PM
  * Released under the GPLv3 license.
  */
 /******/ (function() { // webpackBootstrap
@@ -14,30 +14,25 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "WooVariationGalleryAdmin": function() { return /* binding */ WooVariationGalleryAdmin; }
+/* harmony export */   WooVariationGalleryAdmin: function() { return /* binding */ WooVariationGalleryAdmin; }
 /* harmony export */ });
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
+function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 /*global woo_variation_gallery_admin */
 var WooVariationGalleryAdmin = function ($) {
   var WooVariationGalleryAdmin = /*#__PURE__*/function () {
     function WooVariationGalleryAdmin() {
       _classCallCheck(this, WooVariationGalleryAdmin);
     }
-
-    _createClass(WooVariationGalleryAdmin, null, [{
+    return _createClass(WooVariationGalleryAdmin, null, [{
       key: "GWPAdmin",
       value: function GWPAdmin() {
         if ($().gwp_deactivate_popup) {
@@ -51,96 +46,71 @@ var WooVariationGalleryAdmin = function ($) {
         var $progress = $('#migration-progress-text');
         var $progressSpinner = $('#progress-spinner');
         var doneText = $progress.data('done-text');
-
         var checkMigrationStatus = /*#__PURE__*/function () {
-          var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-            var _yield$wp$apiFetch, total, processed, is_complete, done;
-
-            return _regeneratorRuntime().wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    _context.next = 2;
-                    return wp.apiFetch({
-                      path: '/woo-variation-gallery/v1/migration-progress'
-                    });
-
-                  case 2:
-                    _yield$wp$apiFetch = _context.sent;
-                    total = _yield$wp$apiFetch.total;
-                    processed = _yield$wp$apiFetch.processed;
-                    is_complete = _yield$wp$apiFetch.is_complete;
-                    done = _yield$wp$apiFetch.done;
-
-                    if (is_complete > 0) {
-                      clearInterval(intervalId);
-                      $progressSpinner.removeClass('is-active').css('display', 'none');
-                      $progress.data('is-running', 0);
-                    }
-
-                    $progress.text("".concat(done).concat(doneText));
-
-                  case 9:
-                  case "end":
-                    return _context.stop();
-                }
+          var _ref = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
+            var progress;
+            return _regenerator().w(function (_context) {
+              while (1) switch (_context.n) {
+                case 0:
+                  _context.n = 1;
+                  return wp.apiFetch({
+                    path: '/woo-variation-gallery/v1/migration-progress'
+                  });
+                case 1:
+                  progress = _context.v;
+                  if (Number(progress) >= 100) {
+                    clearInterval(intervalId);
+                    $progressSpinner.removeClass('is-active').css('display', 'none');
+                    $progress.data('is-running', 0);
+                  }
+                  $progress.text("".concat(progress).concat(doneText));
+                case 2:
+                  return _context.a(2);
               }
             }, _callee);
           }));
-
           return function checkMigrationStatus() {
             return _ref.apply(this, arguments);
           };
         }();
-
         $('.woo-variation-gallery-migration-start').on('click', /*#__PURE__*/function () {
-          var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(event) {
+          var _ref2 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(event) {
             var confirmText, startText, actionId, agreeToMigrate;
-            return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-              while (1) {
-                switch (_context2.prev = _context2.next) {
-                  case 0:
-                    event.preventDefault();
-                    confirmText = $(this).data('confirm-message');
-                    startText = $(this).data('started');
-                    actionId = $(this).data('action');
-                    agreeToMigrate = confirm(confirmText);
-
-                    if (agreeToMigrate) {
-                      _context2.next = 7;
-                      break;
-                    }
-
-                    return _context2.abrupt("return");
-
-                  case 7:
-                    $(this).prop('disabled', true);
-                    $progress.text(startText);
-                    $progressSpinner.addClass('is-active').css('display', 'inline-block');
-                    $progress.data('is-running', 1);
-                    _context2.next = 13;
-                    return wp.apiFetch({
-                      path: "/wc/v3/system_status/tools/".concat(actionId),
-                      method: 'PUT'
-                    });
-
-                  case 13:
-                    intervalId = setInterval(checkMigrationStatus, 2000);
-
-                  case 14:
-                  case "end":
-                    return _context2.stop();
-                }
+            return _regenerator().w(function (_context2) {
+              while (1) switch (_context2.n) {
+                case 0:
+                  event.preventDefault();
+                  confirmText = $(this).data('confirm-message');
+                  startText = $(this).data('started');
+                  actionId = $(this).data('action');
+                  agreeToMigrate = confirm(confirmText);
+                  if (agreeToMigrate) {
+                    _context2.n = 1;
+                    break;
+                  }
+                  return _context2.a(2);
+                case 1:
+                  $(this).prop('disabled', true);
+                  $progress.text(startText);
+                  $progressSpinner.addClass('is-active').css('display', 'inline-block');
+                  $progress.data('is-running', 1);
+                  _context2.n = 2;
+                  return wp.apiFetch({
+                    path: "/wc/v3/system_status/tools/".concat(actionId),
+                    method: 'PUT'
+                  });
+                case 2:
+                  intervalId = setInterval(checkMigrationStatus, 2000);
+                case 3:
+                  return _context2.a(2);
               }
             }, _callee2, this);
           }));
-
           return function (_x) {
             return _ref2.apply(this, arguments);
           };
         }());
-
-        if ($progress.data('is-running') > 0) {
+        if (Number($progress.data('is-running')) > 0) {
           intervalId = setInterval(checkMigrationStatus, 2000);
         }
       }
@@ -148,6 +118,7 @@ var WooVariationGalleryAdmin = function ($) {
       key: "HandleDiv",
       value: function HandleDiv() {
         // Meta-Boxes - Open/close
+
         $(document.body).on('click', '.woo-variation-gallery-wrapper .handle-div', function () {
           $(this).closest('.woo-variation-gallery-postbox').toggleClass('closed');
           var ariaExpandedValue = !$(this).closest('.woo-variation-gallery-postbox').hasClass('closed');
@@ -172,27 +143,24 @@ var WooVariationGalleryAdmin = function ($) {
       key: "AddImage",
       value: function AddImage(event) {
         var _this = this;
-
         event.preventDefault();
         event.stopPropagation();
         var frame;
         var product_variation_id = $(this).data('product_variation_id');
         var loop = $(this).data('product_variation_loop');
-
         if (typeof wp !== 'undefined' && wp.media && wp.media.editor) {
           // If the media frame already exists, reopen it.
           if (frame) {
             frame.open();
             return;
-          } // Create the media frame.
+          }
 
-
+          // Create the media frame.
           frame = wp.media({
             title: woo_variation_gallery_admin.choose_image,
             button: {
               text: woo_variation_gallery_admin.add_image
             },
-
             /*states : [
                 new wp.media.controller.Library({
                     title      : woo_variation_gallery_admin.choose_image,
@@ -202,23 +170,22 @@ var WooVariationGalleryAdmin = function ($) {
             ],*/
             library: {
               type: ['image'] // [ 'video', 'image' ]
-
-            } // multiple : true
+            }
+            // multiple : true
             // multiple : 'add'
+          });
 
-          }); // When an image is selected, run a callback.
-
+          // When an image is selected, run a callback.
           frame.on('select', function () {
             var images = frame.state().get('selection').toJSON();
             var html = images.map(function (image) {
               if (image.type === 'image') {
                 var _thumbnail$url;
-
                 var id = image.id,
-                    _image$sizes = image.sizes;
-                _image$sizes = _image$sizes === void 0 ? {} : _image$sizes;
-                var thumbnail = _image$sizes.thumbnail,
-                    url = image.url;
+                  _image$sizes = image.sizes,
+                  _image$sizes2 = _image$sizes === void 0 ? {} : _image$sizes,
+                  thumbnail = _image$sizes2.thumbnail,
+                  url = image.url;
                 var imageUrl = (_thumbnail$url = thumbnail === null || thumbnail === void 0 ? void 0 : thumbnail.url) !== null && _thumbnail$url !== void 0 ? _thumbnail$url : url;
                 var template = wp.template('woo-variation-gallery-image');
                 return template({
@@ -229,16 +196,17 @@ var WooVariationGalleryAdmin = function ($) {
                 });
               }
             }).join('');
-            $(_this).parent().prev().find('.woo-variation-gallery-images').append(html); // Variation Changed
+            $(_this).parent().prev().find('.woo-variation-gallery-images').append(html);
 
+            // Variation Changed
             WooVariationGalleryAdmin.Sortable();
             WooVariationGalleryAdmin.VariationChanged(_this);
-
             _.delay(function () {
               WooVariationGalleryAdmin.ProNotice(_this);
             }, 5);
-          }); // Finally, open the modal.
+          });
 
+          // Finally, open the modal.
           frame.open();
         }
       }
@@ -247,8 +215,9 @@ var WooVariationGalleryAdmin = function ($) {
       value: function VariationChanged($el) {
         $($el).closest('.woocommerce_variation').addClass('variation-needs-update');
         $('button.cancel-variation-changes, button.save-variation-changes').removeAttr('disabled');
-        $('#variable_product_options').trigger('woocommerce_variations_input_changed'); // Dokan Support
+        $('#variable_product_options').trigger('woocommerce_variations_input_changed');
 
+        // Dokan Support
         $($el).closest('.dokan-product-variation-itmes').addClass('variation-needs-update');
         $('.dokan-product-variation-wrapper').trigger('dokan_variations_input_changed');
         $(document).trigger('woo_variation_gallery_admin_variation_changed', this);
@@ -270,12 +239,11 @@ var WooVariationGalleryAdmin = function ($) {
       key: "RemoveImage",
       value: function RemoveImage(event) {
         var _this2 = this;
-
         event.preventDefault();
-        event.stopPropagation(); // Variation Changed
+        event.stopPropagation();
 
+        // Variation Changed
         WooVariationGalleryAdmin.VariationChanged(this);
-
         _.delay(function () {
           WooVariationGalleryAdmin.ProNotice(_this2);
           $(_this2).parent().remove();
@@ -306,13 +274,9 @@ var WooVariationGalleryAdmin = function ($) {
         });
       }
     }]);
-
-    return WooVariationGalleryAdmin;
   }();
-
   return WooVariationGalleryAdmin;
 }(jQuery);
-
 
 
 /***/ })
@@ -374,14 +338,10 @@ var WooVariationGalleryAdmin = function ($) {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 !function() {
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _interopRequireWildcard(e, t) { if ("function" == typeof WeakMap) var r = new WeakMap(), n = new WeakMap(); return (_interopRequireWildcard = function _interopRequireWildcard(e, t) { if (!t && e && e.__esModule) return e; var o, i, f = { __proto__: null, "default": e }; if (null === e || "object" != _typeof(e) && "function" != typeof e) return f; if (o = t ? n : r) { if (o.has(e)) return o.get(e); o.set(e, f); } for (var _t in e) "default" !== _t && {}.hasOwnProperty.call(e, _t) && ((i = (o = Object.defineProperty) && Object.getOwnPropertyDescriptor(e, _t)) && (i.get || i.set) ? o(f, _t, i) : f[_t] = e[_t]); return f; })(e, t); }
 jQuery(function ($) {
   Promise.resolve().then(function () {
     return _interopRequireWildcard(__webpack_require__("./src/js/WooVariationGalleryAdmin.js"));
@@ -389,6 +349,7 @@ jQuery(function ($) {
     var WooVariationGalleryAdmin = _ref.WooVariationGalleryAdmin;
     // WooVariationGalleryAdmin.ImageUploader();
     // WooVariationGalleryAdmin.Sortable();
+
     // WooVariationGalleryAdmin.GWPAdmin();
     WooVariationGalleryAdmin.HandleDiv();
     WooVariationGalleryAdmin.ImageUploader();
@@ -399,12 +360,15 @@ jQuery(function ($) {
     });
     $('#variable_product_options').on('woocommerce_variations_added', function () {
       WooVariationGalleryAdmin.ImageUploader();
-      WooVariationGalleryAdmin.Sortable(); // WooVariationGalleryAdmin.HandleDiv();
-    }); // Dokan Pro Support
+      WooVariationGalleryAdmin.Sortable();
+      // WooVariationGalleryAdmin.HandleDiv();
+    });
 
+    // Dokan Pro Support
     $('.dokan-product-variation-wrapper').on('dokan_variations_loaded dokan_variations_added', function () {
       WooVariationGalleryAdmin.ImageUploader();
-      WooVariationGalleryAdmin.Sortable(); //WooVariationGalleryAdmin.HandleDiv();
+      WooVariationGalleryAdmin.Sortable();
+      //WooVariationGalleryAdmin.HandleDiv();
     });
     $(document).trigger('woo_variation_gallery_admin_loaded');
   });

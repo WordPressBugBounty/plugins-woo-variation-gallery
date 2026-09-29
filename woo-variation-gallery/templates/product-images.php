@@ -12,7 +12,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 11.1.0
+ * @version 10.5.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -39,6 +39,7 @@ $slider_js_options = array(
 	'slidesToScroll' => 1,
 	'arrows'         => wc_string_to_bool( woo_variation_gallery()->get_option( 'slider_arrow', 'yes' ) ),
 	'adaptiveHeight' => true,
+	// 'lazyLoad'       => 'progressive',
 	'rtl'            => is_rtl(),
 	'prevArrow'      => '<i class="wvg-slider-prev-arrow dashicons dashicons-arrow-left-alt2"></i>',
 	'nextArrow'      => '<i class="wvg-slider-next-arrow dashicons dashicons-arrow-right-alt2"></i>',

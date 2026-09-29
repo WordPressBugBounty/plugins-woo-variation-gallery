@@ -402,6 +402,8 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 				array_unshift( $gallery_image_ids, $product_image_id );
 			}
 
+            _prime_post_caches( $gallery_image_ids );
+
 			// NON Variation Products.
 			if ( ! $product->is_type( $this->get_variable_product_type() ) ) {
 				$options['images']              = array_unique( $gallery_image_ids );
@@ -582,14 +584,22 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 		}
 
 		public function get_thumbnail_columns( $product_id = 0 ): int {
+
 			$product = $this->get_product( $product_id );
 
 			$wc_columns = apply_filters( 'woocommerce_product_thumbnails_columns', 4 );
-
 			return absint( woo_variation_gallery()->get_option( 'thumbnails_columns', apply_filters( 'woo_variation_gallery_default_thumbnails_columns', absint( $wc_columns ), $product ) ) );
 		}
 
 		public function get_product_attachment_props( $attachment_id, $product_id = 0, $image_index = 0 ) {
+
+            // Memoization
+            static $memoize_props = array();
+
+            if ( !empty($memoize_props[$attachment_id]) ) {
+                return $memoize_props[$attachment_id];
+            }
+
 			$attachment    = get_post( $attachment_id );
 			$no_attachment = is_null( $attachment );
 
@@ -617,7 +627,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 
 			$product = $this->get_product( $product_id );
 
-			$product_id  = is_null( $product ) ? 0 : $product->get_id();
+			$product_id = is_null( $product ) ? 0 : $product->get_id();
 			$has_product = $product_id > 0;
 
 			$attachment_alt_text = trim( wp_strip_all_tags( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) );
@@ -712,6 +722,8 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 				'thumbnail_html' => $thumbnail_html,
 				'video_html'     => '',
 			);
+
+            $memoize_props[$attachment_id] = $data;
 
 			return apply_filters( 'woo_variation_gallery_get_image_props', $data, true );
 		}
@@ -903,7 +915,8 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			return $styles;
 		}
 
-		public function slider_template_js() {
+		public function slider_template_js(): void
+        {
 			ob_start();
 			$template = woo_variation_gallery()->template_path( '/slider-template.php' );
 			require_once $template;

@@ -2,7 +2,7 @@
  * Variation Gallery for WooCommerce
  *
  * Author: Emran Ahmed ( emran.bd.08@gmail.com )
- * Date: 9/17/2026, 4:26:19 PM
+ * Date: 9/29/2026, 6:08:47 PM
  * Released under the GPLv3 license.
  */
 /******/ (function() { // webpackBootstrap
@@ -11,41 +11,36 @@
 /***/ "./src/js/WooVariationGallery.js":
 /***/ (function() {
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 // ================================================================
 // WooCommerce Variation Gallery
 // ================================================================
-
 /*global wc_add_to_cart_variation_params, woo_variation_gallery_options */
-;
 
+;
 (function (window) {
   'use strict';
 
   var Plugin = function ($) {
     return /*#__PURE__*/function () {
-      function _class2(element, options, name) {
-        _classCallCheck(this, _class2);
-
+      function _class(element, options, name) {
+        _classCallCheck(this, _class);
         _defineProperty(this, "defaults", {});
-
         // Assign
         this.name = name;
-        this.element = element; // this._element = $(element)
-
+        this.element = element;
+        // this._element = $(element)
         this.$element = $(element);
-        this.settings = $.extend(true, {}, this.defaults, options); //this.$product             = this.$element.closest('.product');
-        // let wrapper               = woo_variation_gallery_options.wrapper || '.product';
+        this.settings = $.extend(true, {}, this.defaults, options);
 
+        //this.$product             = this.$element.closest('.product');
+        // let wrapper               = woo_variation_gallery_options.wrapper || '.product';
         this.$wrapper = this.$element.closest('.product');
         this.$variations_form = this.$wrapper.find('.variations_form');
         this.$attributeFields = this.$variations_form.find('.variations select');
@@ -55,44 +50,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.thumbnail_columns = this.$element.data('thumbnail_columns');
         this.product_id = this.$variations_form.data('product_id');
         this.is_variation_product = this.$variations_form.length > 0;
-        this.initial_load = true; // Temp variable
+        this.initial_load = true;
 
-        this.is_vertical = !!woo_variation_gallery_options.is_vertical; // Call
+        // Temp variable
+        this.is_vertical = !!woo_variation_gallery_options.is_vertical;
 
+        // Call
         this.$element.addClass('wvg-loaded');
         this.defaultDimension();
         this.defaultGallery();
-
         if (!!woo_variation_gallery_options.enable_gallery_preload) {
           this.initVariationImagePreload();
         }
-
         this.initEvents();
         this.initVariationGallery();
-
         if (!this.is_variation_product) {
           this.imagesLoaded();
         }
-
         if (this.is_variation_product) {
           this.initSlick();
           this.initZoom();
           this.initPhotoswipe();
         }
-
         $(document).trigger('woo_variation_gallery_loaded', [this]);
       }
-
-      _createClass(_class2, [{
+      return _createClass(_class, [{
         key: "init",
         value: function init() {
           var _this = this;
-
           return _.debounce(function () {
             _this.initSlick();
-
             _this.initZoom();
-
             _this.initPhotoswipe();
           }, 500);
         }
@@ -105,11 +93,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           this.$attributeFields.each(function () {
             var attribute_name = $(this).data('attribute_name') || $(this).attr('name');
             var value = $(this).val() || '';
-
             if (value.length > 0) {
               chosen++;
             }
-
             count++;
             data[attribute_name] = value;
           });
@@ -123,7 +109,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: "defaultDimension",
         value: function defaultDimension() {
           var _this2 = this;
-
           // console.log(this.$element.height(), this.$element.width());
           this.$element.css('min-height', this.$element.height()).css('min-width', this.$element.width());
           $(window).on('resize.wvg', _.debounce(function (event) {
@@ -142,8 +127,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }, {
         key: "dimension",
-        value: function dimension() {//this.$element.css('min-height', '0px');
+        value: function dimension() {
+
+          //this.$element.css('min-height', '0px');
           //this.$element.css('min-width', '0px');
+
           //return _.debounce(() => {
           //this.$element.css('min-height', this.$slider.height() + 'px');
           //this.$element.css('min-width', this.$slider.width() + 'px');
@@ -153,26 +141,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: "initEvents",
         value: function initEvents() {
           var _this3 = this;
-
           this.$element.on('woo_variation_gallery_slider_slick_init', function (event, gallery) {
             if (woo_variation_gallery_options.is_vertical) {
               //$(window).off('resize.wvg');
-              $(window).on('resize', _this3.enableThumbnailPositionDebounce()); //$(window).on('resize', this.thumbnailHeightDebounce());
+
+              $(window).on('resize', _this3.enableThumbnailPositionDebounce());
+              //$(window).on('resize', this.thumbnailHeightDebounce());
+
               //this.$slider.on('setPosition', this.enableThumbnailPositionDebounce());
-
               _this3.$slider.on('setPosition', _this3.thumbnailHeightDebounce());
-
               _this3.$slider.on('afterChange', function () {
                 _this3.thumbnailHeight();
               });
             }
-
             if (woo_variation_gallery_options.enable_thumbnail_slide) {
               var thumbnails = _this3.$thumbnail.find('.wvg-gallery-thumbnail-image').length;
-
               if (parseInt(woo_variation_gallery_options.gallery_thumbnails_columns) < thumbnails) {
                 _this3.$thumbnail.find('.wvg-gallery-thumbnail-image').removeClass('current-thumbnail');
-
                 _this3.initThumbnailSlick();
               } else {
                 _this3.$slider.slick('slickSetOption', 'asNavFor', null, false);
@@ -190,52 +175,53 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: "initSlick",
         value: function initSlick() {
           var _this4 = this;
-
           if (this.$slider.is('.slick-initialized')) {
             this.$slider.slick('unslick');
           }
-
           this.$slider.off('init');
           this.$slider.off('beforeChange');
           this.$slider.off('afterChange');
-          this.$element.trigger('woo_variation_gallery_before_init', [this]); // Slider
+          this.$element.trigger('woo_variation_gallery_before_init', [this]);
+
+          // Slider
 
           this.$slider.on('init', function (event) {
             if (_this4.initial_load) {
-              _this4.initial_load = false; // this.$element.css('min-height', this.$slider.height() + 'px');
+              _this4.initial_load = false;
+              // this.$element.css('min-height', this.$slider.height() + 'px');
               //_.delay(() => {
               //    this.$slider.slick('setPosition');
               //}, 2000)
             }
           }).on('beforeChange', function (event, slick, currentSlide, nextSlide) {
             // this.stopVideo(this.$slider)
-            _this4.$thumbnail.find('.wvg-gallery-thumbnail-image').not('.slick-slide').removeClass('current-thumbnail');
 
+            _this4.$thumbnail.find('.wvg-gallery-thumbnail-image').not('.slick-slide').removeClass('current-thumbnail');
             _this4.$thumbnail.find('.wvg-gallery-thumbnail-image').not('.slick-slide').eq(nextSlide).addClass('current-thumbnail');
           }).on('afterChange', function (event, slick, currentSlide) {
             _this4.stopVideo(_this4.$slider);
-
             _this4.initZoomForTarget(currentSlide);
-          }).slick(); // Thumbnails
+          }).slick();
+
+          // Thumbnails
 
           this.$thumbnail.find('.wvg-gallery-thumbnail-image').not('.slick-slide').first().addClass('current-thumbnail');
           this.$thumbnail.find('.wvg-gallery-thumbnail-image').not('.slick-slide').each(function (index, el) {
             $(el).find('div, img').on('click', function (event) {
               event.preventDefault();
               event.stopPropagation();
-
               _this4.$slider.slick('slickGoTo', index);
             });
           });
-
           _.delay(function () {
             _this4.$element.trigger('woo_variation_gallery_slider_slick_init', [_this4]);
           }, 1);
-
           _.delay(function () {
             // console.log(this.$element.height(), this.$element.width());
+
             //    this.$element.css('min-height', this.$element.height())
             //    this.$element.css('min-width', this.$element.width())
+
             _this4.removeLoadingClass();
           }, 100);
         }
@@ -245,33 +231,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           if (!woo_variation_gallery_options.enable_gallery_zoom) {
             return;
           }
-
           var galleryWidth = parseInt(this.$target.width()),
-              zoomEnabled = false,
-              zoomTarget = this.$slider.slick('getSlick').$slides.eq(currentSlide);
+            zoomEnabled = false,
+            zoomTarget = this.$slider.slick('getSlick').$slides.eq(currentSlide);
           $(zoomTarget).each(function (index, target) {
             var image = $(target).find('img');
-
             if (parseInt(image.data('large_image_width')) > galleryWidth) {
               zoomEnabled = true;
               return false;
             }
-          }); // If zoom not included.
+          });
 
+          // If zoom not included.
           if (!$().zoom) {
             return;
-          } // But only zoom if the img is larger than its container.
+          }
 
-
+          // But only zoom if the img is larger than its container.
           if (zoomEnabled) {
             var zoom_options = $.extend({
               touch: false
             }, wc_single_product_params.zoom_options);
-
             if ('ontouchstart' in document.documentElement) {
               zoom_options.on = 'click';
             }
-
             zoomTarget.trigger('zoom.destroy');
             zoomTarget.zoom(zoom_options);
           }
@@ -286,11 +269,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: "initPhotoswipe",
         value: function initPhotoswipe() {
           var _this5 = this;
-
           if (!woo_variation_gallery_options.enable_gallery_lightbox) {
             return;
           }
-
           this.$element.off('click', '.woo-variation-gallery-trigger');
           this.$element.off('click', '.wvg-gallery-image a');
           this.$element.on('click', '.woo-variation-gallery-trigger', function (event) {
@@ -304,21 +285,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: "openPhotoswipe",
         value: function openPhotoswipe(event) {
           var _this6 = this;
-
           event.preventDefault();
-
           if (typeof PhotoSwipe === 'undefined') {
             return false;
           }
-
           var pswpElement = $('.pswp')[0],
-              items = this.getGalleryItems();
+            items = this.getGalleryItems();
           var options = $.extend({
             index: this.$slider.slick('slickCurrentSlide')
-          }, wc_single_product_params.photoswipe_options); // Initializes and opens PhotoSwipe.
+          }, wc_single_product_params.photoswipe_options);
 
-          var photoswipe = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options); // Gallery starts closing
+          // Initializes and opens PhotoSwipe.
 
+          var photoswipe = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+
+          // Gallery starts closing
           photoswipe.listen('close', function () {
             _this6.stopVideo(pswpElement);
           });
@@ -333,17 +314,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           $(element).find('iframe, video').each(function () {
             var tag = $(this).prop('tagName').toLowerCase();
             var player = $(this)[0];
-
             if (tag === 'video') {
               player.pause();
             }
-
             if (tag === 'iframe') {
               // Safari 16.4 fix
               if (player['contentWindow'] === null) {
                 return;
               }
-
               var src = $(this).attr('src');
               var ytcommand = {
                 'event': 'command',
@@ -353,16 +331,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               var vcommand = {
                 'method': 'pause',
                 'value': 'true'
-              }; // https://gist.github.com/nickchauhan/0cf83516379ac7d545698af40b3d6ece
+              };
+
+              // https://gist.github.com/nickchauhan/0cf83516379ac7d545698af40b3d6ece
 
               var url = new URL(src);
               var searchParams = new URLSearchParams(url.search);
-              player.contentWindow.postMessage(JSON.stringify(ytcommand), '*'); // Vimeo Video running on background
+              player.contentWindow.postMessage(JSON.stringify(ytcommand), '*');
 
+              // Vimeo Video running on background
               if (!searchParams.has('background')) {
                 player.contentWindow.postMessage(JSON.stringify(vcommand), '*');
-              } //   $(this).attr('src', src);
+              }
 
+              //   $(this).attr('src', src);
             }
           });
         }
@@ -372,7 +354,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           if (woo_variation_gallery_options.preloader_disable) {
             return true;
           }
-
           this.$element.addClass('loading-gallery');
         }
       }, {
@@ -384,19 +365,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: "getGalleryItems",
         value: function getGalleryItems() {
           var $slides = this.$slider.slick('getSlick').$slides,
-              items = [];
-
+            items = [];
           if ($slides.length > 0) {
             $slides.each(function (i, el) {
               var img = $(el).find('img, iframe, video');
               var tag = $(img).prop('tagName').toLowerCase();
               var src, item;
-
               switch (tag) {
                 case 'img':
                   var large_image_src = img.attr('data-large_image'),
-                      large_image_w = img.attr('data-large_image_width'),
-                      large_image_h = img.attr('data-large_image_height');
+                    large_image_w = img.attr('data-large_image_width'),
+                    large_image_h = img.attr('data-large_image_height');
                   item = {
                     src: large_image_src,
                     w: large_image_w,
@@ -404,14 +383,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     title: img.attr('data-caption') ? img.attr('data-caption') : img.attr('title')
                   };
                   break;
-
                 case 'iframe':
                   src = img.attr('src');
                   item = {
                     html: "<iframe loading=\"lazy\" class=\"wvg-lightbox-iframe\" src=\"".concat(src, "\" style=\"width: 100%; height: 100%; margin: 0;padding: 0; background-color: #000000\" frameborder=\"0\" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>")
                   };
                   break;
-
                 case 'video':
                   src = img.attr('src');
                   item = {
@@ -419,11 +396,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   };
                   break;
               }
-
               items.push(item);
             });
           }
-
           return items;
         }
       }, {
@@ -431,26 +406,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         value: function destroySlick() {
           this.$slider.html('');
           this.$thumbnail.html('');
-
           if (this.$slider.is('.slick-initialized')) {
             this.$slider.slick('unslick');
           }
-
           this.$element.trigger('woo_variation_gallery_slick_destroy', [this]);
         }
       }, {
         key: "defaultGallery",
         value: function defaultGallery() {
           var _this7 = this;
-
           if (this.is_variation_product) {
             if (this.$element.defaultXHR) {
               this.$element.defaultXHR.abort();
             }
-
             this.$element.defaultXHR = $.ajax({
               global: false,
-
               /*headers : {
               'Cache-Control' : 'max-age=86400',
               'Pragma'        : 'cache'  //  backwards compatibility with HTTP/1.0 caches
@@ -465,13 +435,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               success: function success(data) {
                 if (data) {
                   _this7.$element.data('woo_variation_gallery_default', data);
-
                   _this7.$element.trigger('woo_variation_default_gallery_loaded', [_this7, data]);
                 } else {
                   _this7.$element.data('woo_variation_gallery_default', []);
-
                   _this7.$element.trigger('woo_variation_default_gallery_loaded', [_this7, []]);
-
                   console.error("Variation Gallery not available on variation id ".concat(_this7.product_id, "."));
                 }
               }
@@ -482,12 +449,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: "initVariationImagePreload",
         value: function initVariationImagePreload() {
           var _this8 = this;
-
           if (this.is_variation_product) {
             if (this.$element.imagesXHR) {
               this.$element.imagesXHR.abort();
             }
-
             this.$element.defaultXHR = $.ajax({
               global: false,
               url: wc_add_to_cart_variation_params.wc_ajax_url.toString().replace('%%endpoint%%', 'get_variation_gallery'),
@@ -500,13 +465,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   if (images.length > 1) {
                     _this8.imagePreload(images);
                   }
-
                   _this8.$element.data('woo_variation_gallery_variation_images', images);
-
                   _this8.$element.trigger('woo_variation_gallery_variation_images', [_this8, images]);
                 } else {
                   _this8.$element.data('woo_variation_gallery_variation_images', []);
-
                   console.error("Variation Gallery variations images not available on variation id ".concat(_this8.product_id, "."));
                 }
               }
@@ -520,31 +482,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             try {
               // Note: this won't work when chrome devtool is open and 'disable cache' is enabled within the network panel
               var _img = new Image();
-
               var _gallery = new Image();
-
               var _full = new Image();
-
               var _thumbnail = new Image();
-
               var data = variation_data[i].data;
               var image = data.images;
               var video = data.videos;
               var has_video = data.has_video;
               _img.src = image.src;
-
               if (image.srcset.length > 0) {
                 _img.srcset = image.srcset;
               }
-
               _full.src = image.full;
               _thumbnail.src = image.thumbnail;
-
               if (has_video && video.url && video.type === 'video') {
                 var req = new XMLHttpRequest();
                 req.open('GET', video.url, true);
                 req.responseType = 'blob';
-
                 req.onload = function () {
                   // Onload is triggered even on 404
                   // so we need to check the status code
@@ -556,10 +510,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     // video.src = vid;
                   }
                 };
-
-                req.onerror = function () {// Error
+                req.onerror = function () {
+                  // Error
                 };
-
                 req.send();
               }
             } catch (e) {
@@ -587,19 +540,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: "initVariationGallery",
         value: function initVariationGallery() {
           var _this9 = this;
-
           // show_variation, found_variation
+
           this.$variations_form.off('reset_image.wvg');
           this.$variations_form.off('click.wvg', '.reset_variations');
           this.$variations_form.off('show_variation.wvg');
-          this.$variations_form.off('hide_variation.wvg'); // this.$variations_form.off('found_variation.wvg');
+          this.$variations_form.off('hide_variation.wvg');
+          // this.$variations_form.off('found_variation.wvg');
+
           // Show Gallery
           // console.log(this.$variations_form)
-
           this.$variations_form.on('show_variation.wvg', function (event, variation) {
             _this9.showVariationImage(variation);
           });
-
           if (woo_variation_gallery_options.gallery_reset_on_variation_change) {
             this.$variations_form.on('hide_variation.wvg', function () {
               _this9.resetVariationImage();
@@ -613,23 +566,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         key: "galleryReset",
         value: function galleryReset() {
-          var _this10 = this;
-
+          var _this0 = this;
           var $default_gallery = this.$element.data('woo_variation_gallery_default');
-
           if ($default_gallery && $default_gallery.length > 0) {
             this.galleryInit($default_gallery);
           } else {
             _.delay(function () {
-              _this10.removeLoadingClass();
+              _this0.removeLoadingClass();
             }, 100);
           }
         }
       }, {
         key: "galleryInit",
         value: function galleryInit(images) {
-          var _this11 = this;
-
+          var _this1 = this;
           var hasGallery = images.length > 1;
           this.$element.trigger('before_woo_variation_gallery_init', [this, images]);
           this.destroySlick();
@@ -641,7 +591,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             var template = wp.template('woo-variation-gallery-thumbnail-template');
             return template(image);
           }).join('');
-
           if (hasGallery) {
             this.$target.addClass('woo-variation-gallery-has-product-thumbnail');
             this.$target.removeClass('woo-variation-gallery-no-product-thumbnail');
@@ -649,53 +598,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             this.$target.addClass('woo-variation-gallery-no-product-thumbnail');
             this.$target.removeClass('woo-variation-gallery-has-product-thumbnail');
           }
-
           this.$slider.html(slider_inner_html);
-
           if (hasGallery) {
             this.$thumbnail.html(thumbnail_inner_html);
           } else {
             this.$thumbnail.html('');
-          } //this.$element.trigger('woo_variation_gallery_init', [this, images]);
+          }
 
+          //this.$element.trigger('woo_variation_gallery_init', [this, images]);
 
           _.delay(function () {
-            _this11.imagesLoaded();
-          }, 1); //this.$element.trigger('after_woo_variation_gallery_init', [this, images]);
+            _this1.imagesLoaded();
+          }, 1);
 
+          //this.$element.trigger('after_woo_variation_gallery_init', [this, images]);
         }
       }, {
         key: "imagesLoaded",
         value: function imagesLoaded() {
-          var _this12 = this;
-
+          var _this10 = this;
           // Some Script Add Custom imagesLoaded Function
           if (!$().imagesLoaded.done) {
             this.$element.trigger('woo_variation_gallery_image_loading', [this]);
             this.$element.trigger('woo_variation_gallery_image_loaded', [this]);
             return;
           }
-
           this.$element.imagesLoaded().progress(function (instance, image) {
-            _this12.$element.trigger('woo_variation_gallery_image_loading', [_this12]);
+            _this10.$element.trigger('woo_variation_gallery_image_loading', [_this10]);
           }).done(function (instance) {
-            _this12.$element.trigger('woo_variation_gallery_image_loaded', [_this12]);
+            _this10.$element.trigger('woo_variation_gallery_image_loaded', [_this10]);
           });
         }
       }, {
         key: "initThumbnailSlick",
         value: function initThumbnailSlick() {
-          var _this13 = this;
-
+          var _this11 = this;
           if (this.$thumbnail.hasClass('slick-initialized')) {
             this.$thumbnail.slick('unslick');
           }
-
           this.$thumbnail.off('init');
           this.$thumbnail.on('init', function () {}).slick();
-
           _.delay(function () {
-            _this13.$element.trigger('woo_variation_gallery_thumbnail_slick_init', [_this13]);
+            _this11.$element.trigger('woo_variation_gallery_thumbnail_slick_init', [_this11]);
           }, 1);
         }
       }, {
@@ -711,7 +655,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           } else {
             this.$thumbnail.height('auto');
           }
-
           if (this.$thumbnail.hasClass('slick-initialized')) {
             this.$thumbnail.slick('setPosition');
           }
@@ -719,18 +662,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         key: "thumbnailHeightDebounce",
         value: function thumbnailHeightDebounce(event) {
-          var _this14 = this;
-
+          var _this12 = this;
           return _.debounce(function () {
-            _this14.thumbnailHeight();
+            _this12.thumbnailHeight();
           }, 401);
         }
       }, {
         key: "enableThumbnailPosition",
         value: function enableThumbnailPosition() {
-          if (!woo_variation_gallery_options.is_mobile) {//    return;
+          if (!woo_variation_gallery_options.is_mobile) {
+            //    return;
           }
-
           if (woo_variation_gallery_options.is_vertical) {
             //console.log('enableThumbnailPosition...')
             if (window.matchMedia('(max-width: 768px)').matches || window.matchMedia('(max-width: 480px)').matches) {
@@ -749,10 +691,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         key: "enableThumbnailPositionDebounce",
         value: function enableThumbnailPositionDebounce(event) {
-          var _this15 = this;
-
+          var _this13 = this;
           return _.debounce(function () {
-            _this15.enableThumbnailPosition();
+            _this13.enableThumbnailPosition();
           }, 400);
         }
       }, {
@@ -761,65 +702,53 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           this.$element.removeData(this.name);
         }
       }]);
-
-      return _class2;
     }();
   }(jQuery);
-
   var jQueryPlugin = function ($) {
     return function (PluginName, ClassName) {
       $.fn[PluginName] = function (options) {
-        var _this16 = this;
-
+        var _this14 = this;
         for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
           args[_key - 1] = arguments[_key];
         }
-
         return this.each(function (index, element) {
           var $element = $(element);
           var data = $element.data(PluginName);
-
           if (!data) {
             data = new ClassName($element, $.extend({}, options), PluginName);
             $element.data(PluginName, data);
           }
-
           if (typeof options === 'string') {
             if (_typeof(data[options]) === 'object') {
               return data[options];
             }
-
             if (typeof data[options] === 'function') {
               var _data;
-
               return (_data = data)[options].apply(_data, args);
             }
           }
-
-          return _this16;
+          return _this14;
         });
-      }; // Constructor
+      };
 
+      // Constructor
+      $.fn[PluginName].Constructor = ClassName;
 
-      $.fn[PluginName].Constructor = ClassName; // Short Hand
-
+      // Short Hand
       $[PluginName] = function (options) {
         var _$;
-
         for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
           args[_key2 - 1] = arguments[_key2];
         }
-
         return (_$ = $({}))[PluginName].apply(_$, [options].concat(args));
-      }; // No Conflict
+      };
 
-
+      // No Conflict
       $.fn[PluginName].noConflict = function () {
         return $.fn[PluginName];
       };
     };
   }(jQuery);
-
   jQueryPlugin('WooVariationGallery', Plugin);
 })(window);
 
@@ -832,28 +761,42 @@ jQuery(function ($) {
   try {
     $(document).on('woo_variation_gallery_init', function () {
       $('.woo-variation-gallery-wrapper:not(.wvg-loaded)').WooVariationGallery();
-    }) // For Single Product
+    })
+
+    // For Single Product
     .trigger('woo_variation_gallery_init');
   } catch (err) {
     // If failed (conflict?) log the error but don't stop other scripts breaking.
     window.console.log(err);
-  } // Ajax and Variation Product
+  }
 
-
+  // Ajax and Variation Product
   $(document).on('wc_variation_form', '.variations_form', function () {
     $(document).trigger('woo_variation_gallery_init');
-  }); // YITH QuickView
+  });
 
+  // YITH QuickView
   $(document).on('qv_loader_stop', function () {
     $('.woo-variation-gallery-wrapper:not(.woo-variation-gallery-product-type-variable):not(.wvg-loaded)').WooVariationGallery();
-  }); // Elementor
+  });
 
+  // Elementor
   if (window.elementorFrontend && window.elementorFrontend.hooks) {
     elementorFrontend.hooks.addAction('frontend/element_ready/woocommerce-product-images.default', function ($scope) {
       $(document).trigger('woo_variation_gallery_init');
     });
   }
 }); // end of jquery main wrapper
+
+/***/ }),
+
+/***/ "./src/scss/backend.scss":
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
@@ -868,16 +811,6 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ "./src/scss/slider.scss":
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/scss/backend.scss":
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

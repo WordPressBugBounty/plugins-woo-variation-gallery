@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Emran Ahmed <emran.bd.08@gmail.com>\n"
-"POT-Creation-Date: 2026-09-17 10:26+0000\n"
+"POT-Creation-Date: 2026-09-29 12:08+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -155,104 +155,60 @@ msgstr ""
 msgid "This will migrate from \"Additional Variation Images Gallery for WooCommerce\" to \"WooCommerce Variation gallery\"."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migrate.php:70
-msgid "Migrate from \"WooCommerce Additional Variation Images\" plugin"
-msgstr ""
-
-#: ../includes/class-woo-variation-gallery-migrate.php:71, ../includes/class-woo-variation-gallery-migrate.php:78, ../includes/class-woo-variation-gallery-migrate.php:85, ../includes/class-woo-variation-gallery-migrate.php:92, ../includes/class-woo-variation-gallery-migrate.php:99
-msgid "Start migration"
-msgstr ""
-
-#: ../includes/class-woo-variation-gallery-migrate.php:72
-msgid "This will migrate from \"WooCommerce Additional Variation Images\" to \"Additional Variation Images Gallery for WooCommerce\"."
-msgstr ""
-
-#: ../includes/class-woo-variation-gallery-migrate.php:77
-msgid "Migrate from \"WooThumbs for WooCommerce by Iconic\" plugin"
-msgstr ""
-
-#: ../includes/class-woo-variation-gallery-migrate.php:79
-msgid "This will migrate from \"WooThumbs for WooCommerce by Iconic\" to \"Additional Variation Images Gallery for WooCommerce\"."
-msgstr ""
-
-#: ../includes/class-woo-variation-gallery-migrate.php:84
-msgid "Migrate from \"Smart Variations Images for WooCommerce\" plugin"
-msgstr ""
-
-#: ../includes/class-woo-variation-gallery-migrate.php:86
-msgid "This will migrate from \"Smart Variations Images for WooCommerce\" to \"Additional Variation Images Gallery for WooCommerce\"."
-msgstr ""
-
-#: ../includes/class-woo-variation-gallery-migrate.php:91
-msgid "Migrate from \"Ajaxy Woocommerce Multiple Variation Image\" plugin"
-msgstr ""
-
-#: ../includes/class-woo-variation-gallery-migrate.php:93
-msgid "This will migrate from \"Ajaxy Woocommerce Multiple Variation Image\" to \"Additional Variation Images Gallery for WooCommerce\"."
-msgstr ""
-
-#: ../includes/class-woo-variation-gallery-migrate.php:98
-msgid "Migrate from \"Variation Images Gallery for WooCommerce by RadiusTheme\" plugin"
-msgstr ""
-
-#: ../includes/class-woo-variation-gallery-migrate.php:100
-msgid "This will migrate from \"Variation Images Gallery for WooCommerce by RadiusTheme\" to \"Additional Variation Images Gallery for WooCommerce\"."
-msgstr ""
-
-#: ../includes/class-woo-variation-gallery-migrate.php:134, ../includes/class-woo-variation-gallery-migrate.php:140, ../includes/class-woo-variation-gallery-migrate.php:146, ../includes/class-woo-variation-gallery-migrate.php:152, ../includes/class-woo-variation-gallery-migrate.php:158, ../includes/class-woo-variation-gallery-migrate.php:164
+#: ../includes/class-woo-variation-gallery-migrate.php:93, ../includes/class-woo-variation-gallery-migrate.php:99, ../includes/class-woo-variation-gallery-migrate.php:105, ../includes/class-woo-variation-gallery-migrate.php:111, ../includes/class-woo-variation-gallery-migrate.php:117, ../includes/class-woo-variation-gallery-migrate.php:123
 msgid "Variation product migration has been scheduled to run in the background."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration-queue.php:64
+#: ../includes/class-woo-variation-gallery-migration-queue.php:57
 msgid "Cancelled migration job."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration-queue.php:75
+#: ../includes/class-woo-variation-gallery-migration-queue.php:69
 msgid "Cancel migration"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration-queue.php:77, ../includes/class-woo-variation-gallery-migration-queue.php:87
+#: ../includes/class-woo-variation-gallery-migration-queue.php:71, ../includes/class-woo-variation-gallery-migration-queue.php:82
 msgid "Variation Gallery Migration is running in the background. Depending on the amount of variation product in your store this may take a while."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration-queue.php:123
-msgid "Total %d Products is queued"
+#: ../includes/class-woo-variation-gallery-migration-queue.php:117
+msgid "Total %d Variation Products Found"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration-queue.php:131
-msgid "Adding Variation Product %d to queue for %s"
+#: ../includes/class-woo-variation-gallery-migration-queue.php:128
+msgid "Adding Variation Products to Queue"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration-worker.php:124
-msgid "No variation product ID Found."
+#: ../includes/class-woo-variation-gallery-migration-worker.php:137
+msgid "No Variation Product IDs Found."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration-worker.php:130
+#: ../includes/class-woo-variation-gallery-migration-worker.php:143
 msgid "No migrate_from Found."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration-worker.php:140
-msgid "No variation product Found."
+#: ../includes/class-woo-variation-gallery-migration-worker.php:157
+msgid "Variation Product Not Found in ID: %d"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration-worker.php:151
-msgid "No Images Available for Variation %d."
+#: ../includes/class-woo-variation-gallery-migration-worker.php:166
+msgid "No Migratable Images Available for Variation: %d."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration-worker.php:156
-msgid "Start: migration for variation product ID: %d. From: %s"
+#: ../includes/class-woo-variation-gallery-migration-worker.php:170
+msgid "Start Migration For Variation ID: %d. From: %s"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration-worker.php:164
-msgid "Image IDs"
+#: ../includes/class-woo-variation-gallery-migration-worker.php:176
+msgid "Available Image IDs: "
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration-worker.php:199
-msgid "--- Migration completed of all variation product image. ---"
+#: ../includes/class-woo-variation-gallery-migration-worker.php:209
+msgid "--- Migration Done. ---"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-migration-worker.php:213
-msgid "Migration process killed."
+#: ../includes/class-woo-variation-gallery-migration-worker.php:225
+msgid "Previous Migration Process Killed."
 msgstr ""
 
 #: ../includes/class-woo-variation-gallery-rest-api.php:72

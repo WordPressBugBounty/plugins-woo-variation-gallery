@@ -2,7 +2,7 @@
  * Variation Gallery for WooCommerce
  *
  * Author: Emran Ahmed ( emran.bd.08@gmail.com )
- * Date: 9/17/2026, 4:26:19 PM
+ * Date: 9/29/2026, 6:08:47 PM
  * Released under the GPLv3 license.
  */
 @charset "UTF-8";
@@ -67,7 +67,6 @@
   float: left;
   height: 100%;
   min-height: 1px;
-  display: none;
 }
 [dir=rtl] .slick-slide {
   float: right;
@@ -76,6 +75,9 @@
   display: block;
 }
 .slick-slide.slick-loading img {
+  display: none;
+}
+.slick-slide {
   display: none;
 }
 .slick-slide.dragging img {

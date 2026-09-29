@@ -2,7 +2,7 @@
  * Variation Gallery for WooCommerce
  *
  * Author: Emran Ahmed ( emran.bd.08@gmail.com )
- * Date: 9/17/2026, 4:26:19 PM
+ * Date: 9/29/2026, 6:08:47 PM
  * Released under the GPLv3 license.
  */
 .rtl .woo-variation-gallery-images li {
@@ -77,10 +77,6 @@
 }
 .woo-variation-gallery-wrapper .woo-variation-gallery-images {
   *zoom: 1;
-  margin: 0;
-  /*display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;*/
 }
 .woo-variation-gallery-wrapper .woo-variation-gallery-images::before, .woo-variation-gallery-wrapper .woo-variation-gallery-images::after {
   content: " ";
@@ -88,6 +84,12 @@
 }
 .woo-variation-gallery-wrapper .woo-variation-gallery-images::after {
   clear: both;
+}
+.woo-variation-gallery-wrapper .woo-variation-gallery-images {
+  margin: 0;
+  /*display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;*/
 }
 .woo-variation-gallery-wrapper .woo-variation-gallery-images li {
   float: left;

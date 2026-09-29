@@ -66,41 +66,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Migrate', false ) ):
 				return $tools;
 			}
 
-			$tools['woo_variation_gallery_wc_avi_migrate'] = array(
-				'name'     => esc_html__( 'Migrate from "WooCommerce Additional Variation Images" plugin', 'woo-variation-gallery' ),
-				'button'   => esc_html__( 'Start migration', 'woo-variation-gallery' ),
-				'desc'     => esc_html__( 'This will migrate from "WooCommerce Additional Variation Images" to "Additional Variation Images Gallery for WooCommerce".', 'woo-variation-gallery' ),
-				'callback' => array( $this, 'wc_avi_migration_queue' ),
-			);
-
-			$tools['woo_variation_gallery_woothumbs_migrate'] = array(
-				'name'     => esc_html__( 'Migrate from "WooThumbs for WooCommerce by Iconic" plugin', 'woo-variation-gallery' ),
-				'button'   => esc_html__( 'Start migration', 'woo-variation-gallery' ),
-				'desc'     => esc_html__( 'This will migrate from "WooThumbs for WooCommerce by Iconic" to "Additional Variation Images Gallery for WooCommerce".', 'woo-variation-gallery' ),
-				'callback' => array( $this, 'woothumbs_migration_queue' ),
-			);
-
-			$tools['woo_variation_gallery_smart_variations_images_migrate'] = array(
-				'name'     => esc_html__( 'Migrate from "Smart Variations Images for WooCommerce" plugin', 'woo-variation-gallery' ),
-				'button'   => esc_html__( 'Start migration', 'woo-variation-gallery' ),
-				'desc'     => esc_html__( 'This will migrate from "Smart Variations Images for WooCommerce" to "Additional Variation Images Gallery for WooCommerce".', 'woo-variation-gallery' ),
-				'callback' => array( $this, 'smart_variations_images_migration_queue' ),
-			);
-
-			$tools['woo_variation_gallery_avmi_migrate'] = array(
-				'name'     => esc_html__( 'Migrate from "Ajaxy Woocommerce Multiple Variation Image" plugin', 'woo-variation-gallery' ),
-				'button'   => esc_html__( 'Start migration', 'woo-variation-gallery' ),
-				'desc'     => esc_html__( 'This will migrate from "Ajaxy Woocommerce Multiple Variation Image" to "Additional Variation Images Gallery for WooCommerce".', 'woo-variation-gallery' ),
-				'callback' => array( $this, 'avmi_migration_queue' ),
-			);
-
-			$tools['woo_variation_gallery_rtwpvg_migrate'] = array(
-				'name'     => esc_html__( 'Migrate from "Variation Images Gallery for WooCommerce by RadiusTheme" plugin', 'woo-variation-gallery' ),
-				'button'   => esc_html__( 'Start migration', 'woo-variation-gallery' ),
-				'desc'     => esc_html__( 'This will migrate from "Variation Images Gallery for WooCommerce by RadiusTheme" to "Additional Variation Images Gallery for WooCommerce".', 'woo-variation-gallery' ),
-				'callback' => array( $this, 'rtwpvg_migration_queue' ),
-			);
-
 			return apply_filters( 'woo_variation_gallery_add_to_migration_list', $tools, $this );
 		}
 
@@ -119,13 +84,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Migrate', false ) ):
 		}
 
 		public function get_progress(): int {
-			$status = $this->get_worker()->get_status();
-
-			if ( $status['is_complete'] > 0 ) {
-				return 100;
-			}
-
-			return round( ( $status['processed'] / $status['total'] ) * 100 );
+			return $this->get_worker()->get_progress();
 		}
 
 		public function wc_avi_migration_queue(): string {
