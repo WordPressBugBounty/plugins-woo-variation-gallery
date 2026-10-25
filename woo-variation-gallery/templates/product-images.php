@@ -12,7 +12,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 10.5.0
+ * @version 11.1.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -126,32 +126,25 @@ do_action( 'woo_variation_product_gallery_start', $product ); ?>
 		echo esc_attr( $gallery_thumbnail_position_small_device ) ?> woo-variation-gallery-product-type-<?php
 		echo esc_attr( $product_type ) ?>">
 
-			<div class="woo-variation-gallery-container preload-style-<?php
-			echo esc_attr( woo_variation_gallery()->get_option( 'preload_style', 'blur' ) ) ?>">
+			<div class="woo-variation-gallery-container preload-style-<?php echo esc_attr( woo_variation_gallery()->get_option( 'preload_style', 'blur' ) ) ?>">
 
 				<div class="woo-variation-gallery-slider-wrapper">
+					<?php do_action( 'woo_variation_product_gallery_slider_start', $product ); ?>
 
 					<?php
-					do_action( 'woo_variation_product_gallery_slider_start', $product ); ?>
-
-					<?php
-					if ( $has_product_image && wc_string_to_bool( woo_variation_gallery()->get_option( 'lightbox', 'yes' ) ) ): ?>
-						<a href="#" class="woo-variation-gallery-trigger woo-variation-gallery-trigger-position-<?php
-						echo esc_attr( woo_variation_gallery()->get_option( 'zoom_position', 'top-right' ) ) ?>">
-							<?php
-							echo wp_kses_post( $zoom_icon_markup ); ?>
+					if ( $has_product_image && wc_string_to_bool( woo_variation_gallery()->get_option( 'lightbox', 'yes' ) ) ){ ?>
+						<a href="#" class="woo-variation-gallery-trigger woo-variation-gallery-trigger-position-<?php echo esc_attr( woo_variation_gallery()->get_option( 'zoom_position', 'top-right' ) ) ?>">
+							<?php echo wp_kses_post( $zoom_icon_markup ); ?>
 						</a>
-					<?php
-					endif; ?>
+					<?php } ?>
 
-					<div class="woo-variation-gallery-slider" data-slick='<?php
-					echo wc_esc_json( wp_json_encode( $gallery_slider_js_options ) ); // WPCS: XSS ok. ?>'>
+					<div class="woo-variation-gallery-slider" data-slick='<?php echo wc_esc_json( wp_json_encode( $gallery_slider_js_options ) ); // WPCS: XSS ok. ?>'>
 						<?php
 						// Main  Image
 						if ( $has_product_image ) {
 							foreach ( $gallery_images as $gallery_image_index => $gallery_image ) {
 								$image_data = woo_variation_gallery()->get_frontend()->get_product_attachment_props( $gallery_image, $product_id, $gallery_image_index );
-								echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->get_product_gallery_images_html( $image_data ), $product_gallery_data );
+								echo woo_variation_gallery()->get_frontend()->get_product_gallery_images_html( $image_data );
 							}
 						} else {
 							echo sprintf( '<div class="wvg-gallery-image wvg-gallery-image-placeholder"><div class="wvg-single-gallery-image-container"><img src="%s" alt="%s" class="wp-post-image" /></div></div>',
@@ -161,24 +154,23 @@ do_action( 'woo_variation_product_gallery_start', $product ); ?>
 						?>
 					</div>
 
-					<?php
-					do_action( 'woo_variation_product_gallery_slider_end', $product ); ?>
+					<?php do_action( 'woo_variation_product_gallery_slider_end', $product ); ?>
 				</div> <!-- .woo-variation-gallery-slider-wrapper -->
 
 				<div class="woo-variation-gallery-thumbnail-wrapper">
-					<div class="woo-variation-gallery-thumbnail-slider woo-variation-gallery-thumbnail-columns-<?php
-					echo esc_attr( $columns ) ?>" data-slick='<?php
-					echo wc_esc_json( wp_json_encode( $thumbnail_slider_js_options ) ); // WPCS: XSS ok. ?>'>
+                    <?php do_action( 'woo_variation_product_gallery_thumbnail_start', $product ); ?>
+					<div class="woo-variation-gallery-thumbnail-slider woo-variation-gallery-thumbnail-columns-<?php echo esc_attr( $columns ) ?>" data-slick='<?php echo wc_esc_json( wp_json_encode( $thumbnail_slider_js_options ) ); // WPCS: XSS ok. ?>'>
 						<?php
 						if ( $has_product_gallery ) {
 							// Gallery Image
 							foreach ( $gallery_images as $gallery_image_index => $gallery_image ) {
 								$image_data = woo_variation_gallery()->get_frontend()->get_product_attachment_props( $gallery_image, $product_id, $gallery_image_index );
-								echo apply_filters( 'woocommerce_single_product_image_thumbnail_html', woo_variation_gallery()->get_frontend()->get_product_gallery_thumbnail_html( $image_data ), $product_gallery_data );
+								echo  woo_variation_gallery()->get_frontend()->get_product_gallery_thumbnail_html( $image_data );
 							}
 						}
 						?>
 					</div>
+                    <?php do_action( 'woo_variation_product_gallery_thumbnail_end', $product ); ?>
 				</div> <!-- .woo-variation-gallery-thumbnail-wrapper -->
 			</div> <!-- .woo-variation-gallery-container -->
 		</div> <!-- .woo-variation-gallery-wrapper -->

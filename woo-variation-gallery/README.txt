@@ -2,11 +2,11 @@
 Contributors: EmranAhmed, getwooplugins, storepress
 Tags: variation image gallery, additional variation image gallery, product variation image gallery, extra product variation image, woocommerce variation images gallery
 Requires PHP: 7.4
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 Requires at least: 5.7
 Tested up to: 7.1
 WC requires at least: 5.8
-WC tested up to: 11.1
+WC tested up to: 11.2
 License: GPL-2.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -376,6 +376,11 @@ After a successful migration, WooCommerce's built-in Variation Gallery will mana
 4. Adding images to a variation's gallery.
 
 == Changelog ==
+
+= 1.4.2 - 25-10-2026 =
+* Update: Gallery template
+* Fix: Filter `woocommerce_single_product_image_thumbnail_html` issue
+* Add: Options to show default gallery with variation gallery by maximum variation gallery image attached
 
 = 1.4.1 - 29-09-2026 =
 * Update: Memoize gallery data for speed optimization.

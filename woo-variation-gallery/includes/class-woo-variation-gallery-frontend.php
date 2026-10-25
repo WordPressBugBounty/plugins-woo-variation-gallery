@@ -241,7 +241,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			wp_add_inline_style( 'woo-variation-gallery', $css );
 		}
 
-		public function clean_css( $inline_css ) {
+		public function clean_css( $inline_css ): string {
 			$inline_css = str_ireplace( array(
 				'<style type="text/css">',
 				'<style>',
@@ -337,8 +337,13 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			// Add default gallery to variation gallery.
 			$include_default_gallery = wc_string_to_bool( woo_variation_gallery()->get_option( 'include_default_gallery', 'no' ) );
 
-			if ( $include_default_gallery ) {
-				$gallery_images = array_unique( array_merge( $gallery_images, $product_gallery_images ) );
+            $max_variation_image_count = absint( woo_variation_gallery()->get_option( 'include_default_gallery_max_variation_image_count', 0 ) );
+
+            if ( $include_default_gallery ) {
+                // 0 Means Always Include Default gallery with variation gallery.
+                if( 0 === $max_variation_image_count || count( $variation_gallery_images ) <= $max_variation_image_count) {
+                    $gallery_images   = array_unique( array_merge( $gallery_images, $product_gallery_images ) );
+                }
 			}
 
 			// Hide default image from gallery and ajax.
@@ -438,9 +443,15 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 				// Add default gallery to variation gallery.
 				$include_default_gallery = wc_string_to_bool( woo_variation_gallery()->get_option( 'include_default_gallery', 'no' ) );
 
-				if ( $include_default_gallery ) {
-					$options['images'] = array_unique( array_merge( $options['images'], $gallery_image_ids ) );
-				}
+                $max_variation_image_count = absint( woo_variation_gallery()->get_option( 'include_default_gallery_max_variation_image_count', 0 ) );
+
+                if ( $include_default_gallery  ) {
+
+                    // 0 Means Always Include Default gallery with variation gallery.
+                    if( 0 === $max_variation_image_count || count( $variation_gallery_ids ) <= $max_variation_image_count) {
+                        $options['images'] = array_unique( array_merge( $options['images'], $gallery_image_ids ) );
+                    }
+                }
 			}
 
 			// Hide default image from gallery and ajax.
@@ -568,7 +579,6 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			), $image_data );
 		}
 
-
 		public function get_product( $product_id = 0 ) {
 			if ( $product_id > 0 ) {
 				$product     = wc_get_product( $product_id );
@@ -622,7 +632,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			);
 
 			if ( $no_attachment ) {
-				return apply_filters( 'woo_variation_gallery_get_image_props', $data, $no_attachment );
+				return apply_filters( 'woo_variation_gallery_get_image_props', $data, true );
 			}
 
 			$product = $this->get_product( $product_id );
@@ -678,11 +688,11 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 					'data-large_image_height' => isset( $full_src[2] ) ? esc_attr( $full_src[2] ) : '',
 					'class'                   => esc_attr( $image_class ),
 					'alt'                     => esc_attr( $image_alt_text ),
-					'loading'                 => 'lazy',
+					'loading'                 => 'lazy', // Defers loading of off-screen or below-the-fold images until the user scrolls near the designated viewport threshold.
 				),
 				$attachment_id,
 				$image_size,
-				true
+                $image_index === 0
 			);
 
 			if ( isset( $image_params['title'] ) ) {
@@ -763,7 +773,12 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 
 			$inner_html = apply_filters( 'woo_variation_gallery_image_inner_html', $inner_html, $data, $template );
 
-			return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '">' . $inner_html . '</div>';
+            $wrapper_class = implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) );
+            $html = sprintf('<div class="%s">%s</div>', esc_attr($wrapper_class), $inner_html);
+
+            $attachment_id = $data['image_id'];
+
+            return apply_filters( 'woocommerce_single_product_image_thumbnail_html', $html, $attachment_id );
 		}
 
 		public function get_product_gallery_thumbnail_html( $data ): string {
@@ -783,8 +798,12 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			$inner_html = sprintf( $template, $image );
 			$inner_html = apply_filters( 'woo_variation_gallery_thumbnail_image_inner_html', $inner_html, $data, $template );
 
+            $wrapper_class = implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) );
+            $html = sprintf('<div class="%s">%s</div>', esc_attr($wrapper_class), $inner_html);
 
-			return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '">' . $inner_html . '</div>';
+            $attachment_id = $data['image_id'];
+
+			return apply_filters( 'woocommerce_single_product_image_thumbnail_html', $html, $attachment_id );
 		}
 
 		public function get_available_variation( $product_id, $variation_id ) {
