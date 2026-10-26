@@ -66,6 +66,8 @@ $gallery_thumbnail_position_small_device = sanitize_textarea_field( woo_variatio
 
 
 //
+$thumbnail_center = wc_string_to_bool( woo_variation_gallery()->get_option( 'thumbnail_center_mode', 'yes' ) );
+
 $thumbnail_js_options = array(
 	'slidesToShow'   => $columns,
 	'slidesToScroll' => $columns,
@@ -73,7 +75,7 @@ $thumbnail_js_options = array(
 	// 'dots'=>true,
 	'arrows'         => wc_string_to_bool( woo_variation_gallery()->get_option( 'thumbnail_arrow', 'yes' ) ),
 	'asNavFor'       => '.woo-variation-gallery-slider',
-	'centerMode'     => true,
+	'centerMode'     => $thumbnail_center,
 	'infinite'       => true,
 	'centerPadding'  => '0px',
 	'vertical'       => in_array( $gallery_thumbnail_position, array( 'left', 'right' ) ),

@@ -498,6 +498,15 @@ if (!class_exists('Woo_Variation_Gallery_Settings', false)):
                 ),
 
                 array(
+                    'title' => esc_html__('Show Thumbnail Center', 'woo-variation-gallery'),
+                    'type' => 'checkbox',
+                    'default' => 'yes',
+                    'desc' => esc_html__('Show Thumbnail In Always Center', 'woo-variation-gallery'),
+                    'id' => 'thumbnail_center_mode',
+                    'is_new' => true,
+                ),
+
+                array(
                     'title' => esc_html__('Zoom Icon Display Position', 'woo-variation-gallery'),
                     'id' => 'zoom_position',
                     'default' => 'top-right',

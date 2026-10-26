@@ -119,7 +119,18 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Compatibility' ) ) :
 			$this->kalium_theme_compatibility();
 			$this->avada_theme_compatibility();
 			$this->oxygen_theme_compatibility();
+			$this->salient_theme_compatibility();
 		}
+
+        public function salient_theme_compatibility()
+        {
+            if ( defined( 'NECTAR_FRAMEWORK_DIRECTORY' ) ) {
+                add_filter('woo_variation_gallery_get_image_css_classes', function() {
+                    $main_image_classes = array('wp-post-image', 'wvg-post-image');
+                    return implode(' ', $main_image_classes);
+                });
+            }
+        }
 
 		public function set_default_width_based_on_theme( $width ) {
 			// Twenty twenty three

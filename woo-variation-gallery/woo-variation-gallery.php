@@ -4,10 +4,10 @@
  * Plugin URI: https://wordpress.org/plugins/woo-variation-gallery/
  * Description: Allows inserting multiple images for per variation to let visitors see a different images when WooCommerce product variations are switched.
  * Author: Emran Ahmed
- * Version: 1.4.2
+ * Version: 1.4.3
  * Domain Path: /languages
  * Requires PHP: 7.4
- * Requires at least: 5.7
+ * Requires at least: 6.4
  * Tested up to: 7.1
  * WC requires at least: 5.8
  * WC tested up to: 11.2
@@ -25,7 +25,7 @@ if ( ! defined( 'WOO_VARIATION_GALLERY_PLUGIN_FILE' ) ) {
 }
 
 if ( ! defined( 'WOO_VARIATION_GALLERY_PLUGIN_VERSION' ) ) {
-	define( 'WOO_VARIATION_GALLERY_PLUGIN_VERSION', '1.4.2' );
+	define( 'WOO_VARIATION_GALLERY_PLUGIN_VERSION', '1.4.3' );
 }
 
 if ( ! defined( 'WOO_VARIATION_GALLERY_MINIMUM_COMPATIBLE_PRO_PLUGIN_VERSION' ) ) {
